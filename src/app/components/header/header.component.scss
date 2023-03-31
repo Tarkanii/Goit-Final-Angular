@@ -1,0 +1,26 @@
+@import '../../../scss/mixins';
+
+.header {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.container {
+  padding-top: 14px;
+  padding-bottom: 14px;
+
+  @include tablet {
+    padding-top: 19px;
+    padding-bottom: 19px;
+  }
+}
+
+.icon {
+  width: 100px;
+
+  @include tablet {
+    width: 140px;
+  }
+}
+
+
+
