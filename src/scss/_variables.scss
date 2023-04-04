@@ -1,5 +1,6 @@
 :root {
   --accent-color: #FF6B08;
+  --error-color: #FF2C0C;
   --font: 'Montserrat', sans-serif;
 
   --background-color: #F1F2F7;
@@ -8,7 +9,9 @@
 
   --main-text-color: #181C27;
   --secondary-text-color: rgba(24, 28, 39, 0.6);
+  --input-border-color: rgba(24, 28, 39, 0.2);
 
+  --accent-buttons-text-color: #FFFFFF;
   --secondary-button-color: #A6A6A6;
   --project-card-text-color: #FFFFFF;
   --project-card-violet: #8C72DF;

@@ -11,3 +11,11 @@
    @content; 
   }
 }
+
+@mixin resolution-2x($size) {
+  @media screen and (min-device-pixel-ratio: 2) and (min-width: $size ),
+  screen and (min-resolution: 192dpi) and (min-width: $size ),
+  screen and (min-resolution: 2dppx) and (min-width: $size ) {
+   @content; 
+  }
+}

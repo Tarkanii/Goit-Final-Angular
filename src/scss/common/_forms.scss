@@ -1,0 +1,58 @@
+.form-field {
+  position: relative;
+  width: 100%;
+  color: var(--secondary-text-color);
+
+  & .form-label {
+    font-size: 16px;
+    position: absolute;
+    left: 8px;
+    bottom: 8px;
+    transition: color linear 200ms, font-size linear 200ms, bottom linear 200ms, left linear 200ms;
+
+    @include tablet {
+      font-size: 18px;
+    }
+  }
+
+  &.float-label .form-label {
+    font-size: 12px;
+    left: 0;
+    bottom: 40px;
+  }
+
+  & .form-label:has( + .form-input.ng-invalid.ng-touched) {
+    color: var(--error-color);
+  }
+
+  & .form-input.ng-invalid.ng-touched + .hint-container {
+    color: var(--error-color);
+  }
+
+  & .form-input {
+    color: var(--main-text-color);
+    font-family: var(--font);
+    font-size: 16px;
+    font-weight: 400;
+    width: 100%;
+    padding: 0 8px 8px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid var(--input-border-color);
+    transition: border linear 200ms;
+
+    &.ng-touched.ng-invalid {
+      border-bottom: 1px solid var(--error-color);
+    }
+
+    @include tablet {
+      font-size: 18px;
+    }
+  }
+
+  & .hint-container {
+    position: absolute;
+    font-size: 12px;
+    top: 35px;
+  }
+}

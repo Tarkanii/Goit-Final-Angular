@@ -1,0 +1,18 @@
+{
+  "LABELS": {
+    "ENTER": "Enter",
+    "REGISTRATION": "Registration",
+    "NO_ACCOUNT": "No account?"
+  },
+  "FORM": {
+    "EMAIL": "E-mail",
+    "PASSWORD": "Password",
+    "ERRORS": {
+      "REQUIRED_FIELD": "Required field"
+    }
+  },
+  "BUTTONS": {
+    "ENTER": "Enter",
+    "REGISTER": "Register"
+  }
+}

@@ -6,6 +6,7 @@ import { TasksPageComponent } from './pages/tasks-page/tasks-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { HeaderComponent } from './header/header.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -19,10 +20,12 @@ import { HeaderComponent } from './header/header.component';
     HeaderComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule,
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    LoginPageComponent
   ]
 })
 export class ComponentsModule { }
