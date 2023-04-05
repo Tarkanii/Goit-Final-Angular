@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { FormsService } from 'src/app/services/forms.service';
 
 @Component({
   selector: 'app-login-page',
@@ -9,19 +10,23 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 export class LoginPageComponent implements OnInit {
 
   public loginForm: FormGroup;
+  public passwordMinLength: number = this.formsService.passwordMinLength;
 
-  constructor(private formBuilder: FormBuilder) { 
+  constructor(
+    private formBuilder: FormBuilder,
+    private formsService: FormsService
+  ) { 
     this.loginForm = this.formBuilder.group({
-      login: ['', Validators.required],
-      password: ['', Validators.required]
+      email: ['', this.formsService.emailValidator],
+      password: ['', this.formsService.passwordValidator]
     });
   }
 
   ngOnInit(): void {
   }
   
-  public get loginControl(): AbstractControl | null {
-    return this.loginForm.get('login');
+  public get emailControl(): AbstractControl | null {
+    return this.loginForm.get('email');
   }
 
   public get passwordControl(): AbstractControl | null {

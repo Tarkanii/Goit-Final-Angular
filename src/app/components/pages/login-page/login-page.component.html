@@ -5,9 +5,10 @@
       <form action="#" [formGroup]="loginForm" class="auth-form">
         <div class="form-field">
           <label class="form-label" for="email">{{ 'FORM.EMAIL' | translate }}</label>
-          <input class="form-input" id="email" appInput formControlName="login">
+          <input class="form-input" id="email" appInput formControlName="email">
           <div class="hint-container">
-            <p class="hint" *ngIf="loginControl?.errors?.['required'] && loginControl?.touched">{{ 'FORM.ERRORS.REQUIRED_FIELD' | translate }}</p>
+            <p class="hint" *ngIf="emailControl?.errors?.['required'] && emailControl?.touched">{{ 'FORM.ERRORS.REQUIRED_FIELD' | translate }}</p>
+            <p class="hint" *ngIf="emailControl?.errors?.['invalid'] && emailControl?.touched">{{ 'FORM.ERRORS.INVALID_EMAIL' | translate }}</p>
           </div>
         </div>
         <div class="form-field">
@@ -15,6 +16,7 @@
           <input class="form-input" id="password" appInput formControlName="password">
           <div class="hint-container">
             <p class="hint" *ngIf="passwordControl?.errors?.['required'] && passwordControl?.touched">{{ 'FORM.ERRORS.REQUIRED_FIELD' | translate }}</p>
+            <p class="hint" *ngIf="passwordControl?.errors?.['minLength'] && passwordControl?.touched">{{ 'FORM.ERRORS.MIN_LENGTH_PASSWORD' | translate: { amount: passwordMinLength } }}</p>
           </div>
         </div>
       </form>

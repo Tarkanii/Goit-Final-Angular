@@ -2,13 +2,20 @@
   "LABELS": {
     "ENTER": "Enter",
     "REGISTRATION": "Registration",
-    "NO_ACCOUNT": "No account?"
+    "NO_ACCOUNT": "No account?",
+    "HAVE_ACCOUNT_QUESTION": "Do you have an account?",
+    "LOGIN": "Log in"
   },
   "FORM": {
     "EMAIL": "E-mail",
     "PASSWORD": "Password",
+    "REPEAT_PASSWORD": "Repeat Password",
     "ERRORS": {
-      "REQUIRED_FIELD": "Required field"
+      "REQUIRED_FIELD": "Required field",
+      "INVALID_EMAIL": "Invalid e-mail",
+      "WRONG_PASSWORD": "Wrong password",
+      "MIN_LENGTH_PASSWORD": "Password should be at least {{amount}} charactes",
+      "PASSWORD_DOESNT_MATCH": "Passwords do not match"
     }
   },
   "BUTTONS": {
