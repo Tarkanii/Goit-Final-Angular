@@ -1,1 +1,35 @@
-<p>register-page works!</p>
+<div class="auth-page-container">
+  <div class="auth-form-container">
+    <div class="container">
+      <h1 class="auth-form-title">{{ 'LABELS.REGISTRATION' | translate }}</h1>
+      <form action="#" [formGroup]="registerForm" class="auth-form">
+        <div class="form-field">
+          <label class="form-label" for="email">{{ 'FORM.EMAIL' | translate }}</label>
+          <input class="form-input" id="email" appInput formControlName="email">
+          <div class="hint-container">
+            <p class="hint" *ngIf="emailControl?.errors?.['required'] && emailControl?.touched">{{ 'FORM.ERRORS.REQUIRED_FIELD' | translate }}</p>
+            <p class="hint" *ngIf="emailControl?.errors?.['invalid'] && emailControl?.touched">{{ 'FORM.ERRORS.INVALID_EMAIL' | translate }}</p>
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="password">{{ 'FORM.PASSWORD' | translate }}</label>
+          <input class="form-input" id="password" appInput formControlName="password">
+          <div class="hint-container">
+            <p class="hint" *ngIf="passwordControl?.errors?.['required'] && passwordControl?.touched">{{ 'FORM.ERRORS.REQUIRED_FIELD' | translate }}</p>
+            <p class="hint" *ngIf="passwordControl?.errors?.['minLength'] && passwordControl?.touched">{{ 'FORM.ERRORS.MIN_LENGTH_PASSWORD' | translate: { amount: passwordMinLength } }}</p>
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="repeat-password">{{ 'FORM.REPEAT_PASSWORD' | translate }}</label>
+          <input class="form-input" id="repeat-password" appInput formControlName="repeatPassword">
+          <div class="hint-container">
+            <p class="hint" *ngIf="repeatPasswordControl?.errors?.['required'] && repeatPasswordControl?.touched">{{ 'FORM.ERRORS.REQUIRED_FIELD' | translate }}</p>
+            <p class="hint" *ngIf="repeatPasswordControl?.errors?.['mismatch'] && repeatPasswordControl?.touched">{{ 'FORM.ERRORS.PASSWORD_DOESNT_MATCH' | translate }}</p>
+          </div>
+        </div>
+      </form>
+      <button class="accent-text-button" (click)="register()">{{ 'BUTTONS.REGISTER' | translate }}</button>
+      <p class="secondary-text redirect-label">{{ 'LABELS.HAVE_ACCOUNT_QUESTION' | translate }} <a routerLink="/login" class="secondary-text">{{ 'LABELS.LOGIN' | translate }}</a></p>
+    </div>
+  </div>
+</div>
