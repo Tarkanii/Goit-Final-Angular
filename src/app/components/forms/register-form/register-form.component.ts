@@ -3,11 +3,11 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn 
 import { FormsService } from 'src/app/services/forms.service';
 
 @Component({
-  selector: 'app-register-page',
-  templateUrl: './register-page.component.html',
-  styleUrls: ['./register-page.component.scss']
+  selector: 'app-register-form',
+  templateUrl: './register-form.component.html',
+  styleUrls: ['./register-form.component.scss']
 })
-export class RegisterPageComponent implements OnInit {
+export class RegisterFormComponent implements OnInit {
 
   public registerForm: FormGroup;
   public passwordMinLength: number = this.formsService.passwordMinLength;

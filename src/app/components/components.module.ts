@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { ProjectsPageComponent } from './pages/projects-page/projects-page.component';
 import { SprintsPageComponent } from './pages/sprints-page/sprints-page.component';
 import { TasksPageComponent } from './pages/tasks-page/tasks-page.component';
-import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { LoginFormComponent } from './forms/login-form/login-form.component';
+import { RegisterFormComponent } from './forms/register-form/register-form.component';
 import { HeaderComponent } from './header/header.component';
 import { SharedModule } from '../shared/shared.module';
+import { AuthPageComponent } from './pages/auth-page/auth-page.component';
 
 
 
@@ -15,17 +16,17 @@ import { SharedModule } from '../shared/shared.module';
     ProjectsPageComponent,
     SprintsPageComponent,
     TasksPageComponent,
-    LoginPageComponent,
-    RegisterPageComponent,
-    HeaderComponent
+    LoginFormComponent,
+    RegisterFormComponent,
+    HeaderComponent,
+    AuthPageComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
   ],
   exports: [
-    HeaderComponent,
-    LoginPageComponent
+    HeaderComponent
   ]
 })
 export class ComponentsModule { }
