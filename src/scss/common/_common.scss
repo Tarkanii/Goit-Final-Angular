@@ -1,0 +1,47 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font);
+  font-weight: 400;
+  background-color: var(--background-color);
+  color: var(--main-text-color);
+  letter-spacing: 0.04em;
+}
+
+button:hover {
+  cursor: pointer;
+  transform: scale(1.03);
+  transition: transform linear 200ms;
+}
+
+.container {
+  max-width: $mobile;
+  padding: 0 15px;
+  margin: 0 auto;
+
+  @include tablet {
+    max-width: $tablet;
+  }
+  @include desktop {
+    max-width: $desktop;
+  }
+}
+
+.accent-text-button {
+  font-family: var(--font);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--accent-buttons-text-color);
+  padding: 11px 44px;
+  margin-bottom: 20px;
+  border-radius: 25px;
+  border: none;
+  background-color: var(--accent-color);
+  box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
+}
+
+.secondary-text {
+  color: var(--secondary-text-color);
+}

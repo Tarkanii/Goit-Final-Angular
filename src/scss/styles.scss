@@ -2,20 +2,5 @@
 @import "./variables";
 @import "./mixins";
 
-
-body {
-  font-family: var(--font);
-}
-
-.container {
-  max-width: $mobile;
-  padding: 0 15px;
-  margin: 0 auto;
-
-  @include tablet {
-    max-width: $tablet;
-  }
-  @include desktop {
-    max-width: $desktop;
-  }
-}
+@import "./common/common";
+@import "./common/forms";
