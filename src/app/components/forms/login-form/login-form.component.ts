@@ -3,11 +3,11 @@ import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { FormsService } from 'src/app/services/forms.service';
 
 @Component({
-  selector: 'app-login-page',
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  selector: 'app-login-form',
+  templateUrl: './login-form.component.html',
+  styleUrls: ['./login-form.component.scss']
 })
-export class LoginPageComponent implements OnInit {
+export class LoginFormComponent implements OnInit {
 
   public loginForm: FormGroup;
   public passwordMinLength: number = this.formsService.passwordMinLength;
