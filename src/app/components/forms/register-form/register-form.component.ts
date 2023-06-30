@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 import { FormsService } from 'src/app/services/forms.service';
 
 @Component({
@@ -9,21 +11,36 @@ import { FormsService } from 'src/app/services/forms.service';
 })
 export class RegisterFormComponent implements OnInit {
 
-  public registerForm: FormGroup;
+  public registerForm!: FormGroup;
   public passwordMinLength: number = this.formsService.passwordMinLength;
+
+  private unsubscribe$: Subject<void> = new Subject();
 
   constructor(
     private formBuilder: FormBuilder,
     private formsService: FormsService
-  ) { 
+  ) { }
+
+  ngOnInit(): void {
+    this.formsService.validationRulesObtained$
+      .pipe(filter(Boolean), takeUntil(this.unsubscribe$))
+      .subscribe(() => {
+        this.passwordMinLength = this.formsService.passwordMinLength;
+        this.initRegisterForm();
+      })
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
+  private initRegisterForm(): void {
     this.registerForm = this.formBuilder.group({
       email: ['', this.formsService.emailValidator],
       password: ['', this.formsService.passwordValidator],
       repeatPassword: ['', this.repeatPasswordValidator],
     });
-  }
-
-  ngOnInit(): void {
   }
 
   // Getters
