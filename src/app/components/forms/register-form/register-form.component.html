@@ -1,6 +1,6 @@
 <div class="container">
   <h1 class="auth-form-title">{{ 'LABELS.REGISTRATION' | translate }}</h1>
-  <form action="#" [formGroup]="registerForm" class="auth-form">
+  <form action="#" *ngIf="registerForm" [formGroup]="registerForm" class="auth-form">
     <div class="form-field">
       <label class="form-label" for="email">{{ 'FORM.EMAIL' | translate }}</label>
       <input class="form-input" id="email" appInput formControlName="email">
@@ -11,15 +11,18 @@
     </div>
     <div class="form-field">
       <label class="form-label" for="password">{{ 'FORM.PASSWORD' | translate }}</label>
-      <input class="form-input" id="password" appInput formControlName="password">
+      <input class="form-input" id="password" type="password" appInput formControlName="password">
       <div class="hint-container">
         <p class="hint" *ngIf="passwordControl?.errors?.['required'] && passwordControl?.touched">{{ 'FORM.ERRORS.REQUIRED_FIELD' | translate }}</p>
         <p class="hint" *ngIf="passwordControl?.errors?.['minLength'] && passwordControl?.touched">{{ 'FORM.ERRORS.MIN_LENGTH_PASSWORD' | translate: { amount: passwordMinLength } }}</p>
+        <p class="hint" *ngIf="passwordControl?.errors?.['containNumbers'] && passwordControl?.touched">{{ 'FORM.ERRORS.PASSWORD_MUST_CONTAIN_NUMBERS' | translate }}</p>
+        <p class="hint" *ngIf="passwordControl?.errors?.['containCapitals'] && passwordControl?.touched">{{ 'FORM.ERRORS.PASSWORD_MUST_CONTAIN_CAPITALS' | translate }}</p>
+        <p class="hint" *ngIf="passwordControl?.errors?.['containSpecSymbols'] && passwordControl?.touched">{{ 'FORM.ERRORS.PASSWORD_MUST_CONTAIN_SPEC_SYMBOLS' | translate }}</p>
       </div>
     </div>
     <div class="form-field">
       <label class="form-label" for="repeat-password">{{ 'FORM.REPEAT_PASSWORD' | translate }}</label>
-      <input class="form-input" id="repeat-password" appInput formControlName="repeatPassword">
+      <input class="form-input" id="repeat-password" type="password" appInput formControlName="repeatPassword">
       <div class="hint-container">
         <p class="hint" *ngIf="repeatPasswordControl?.errors?.['required'] && repeatPasswordControl?.touched">{{ 'FORM.ERRORS.REQUIRED_FIELD' | translate }}</p>
         <p class="hint" *ngIf="repeatPasswordControl?.errors?.['mismatch'] && repeatPasswordControl?.touched">{{ 'FORM.ERRORS.PASSWORD_DOESNT_MATCH' | translate }}</p>

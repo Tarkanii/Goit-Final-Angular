@@ -15,6 +15,9 @@
       "INVALID_EMAIL": "Invalid e-mail",
       "WRONG_PASSWORD": "Wrong password",
       "MIN_LENGTH_PASSWORD": "Password should be at least {{amount}} charactes",
+      "PASSWORD_MUST_CONTAIN_NUMBERS": "Password should contain numbers",
+      "PASSWORD_MUST_CONTAIN_CAPITALS": "Password should contain english capital letters",
+      "PASSWORD_MUST_CONTAIN_SPEC_SYMBOLS": "Password should contain special symbols",
       "PASSWORD_DOESNT_MATCH": "Passwords do not match"
     }
   },
