@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { FormsService } from 'src/app/services/forms.service';
+import { loginAction } from 'src/app/store/user/user.actions';
 
 @Component({
   selector: 'app-login-form',
@@ -16,6 +18,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject();
 
   constructor(
+    private store: Store,
     private formBuilder: FormBuilder,
     private formsService: FormsService
   ) {
@@ -51,10 +54,14 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     return this.loginForm.get('password');
   }
 
+  // Submitting login form
+
   public submit(): void {
-    console.log('form', this.loginForm.value);
     this.loginForm.markAllAsTouched();
     this.loginForm.updateValueAndValidity();
+
+    if (this.loginForm.invalid) return;
+    this.store.dispatch(loginAction(this.loginForm?.value));
   }
 
 }

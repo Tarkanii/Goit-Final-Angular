@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { FormsService } from 'src/app/services/forms.service';
+import { registerAction } from 'src/app/store/user/user.actions';
 
 @Component({
-  selector: 'app-register-form',
+  selector: '[app-register-form]',
   templateUrl: './register-form.component.html',
   styleUrls: ['./register-form.component.scss']
 })
@@ -17,6 +19,7 @@ export class RegisterFormComponent implements OnInit {
   private unsubscribe$: Subject<void> = new Subject();
 
   constructor(
+    private store: Store,
     private formBuilder: FormBuilder,
     private formsService: FormsService
   ) { }
@@ -72,11 +75,14 @@ export class RegisterFormComponent implements OnInit {
   // Register
 
   public register(): void {
-    console.log('form:', this.registerForm?.value);
     this.registerForm.markAllAsTouched();
-    for ( const control in this.registerForm.controls ) {
+    for (const control in this.registerForm.controls) {
       this.registerForm.get(control)?.updateValueAndValidity();
     }
+
+    if (this.registerForm.invalid) return;
+    const { email, password } = this.registerForm?.value;
+    this.store.dispatch(registerAction({ email, password }));
   }
 
 }

@@ -3,7 +3,7 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { RequestsService } from './requests.service';
-import { IPasswordRules, IValidationRules } from '../shared/interfaces/validation';
+import { IPasswordRules, IValidationResponse, IValidationRules } from '../shared/interfaces/validation';
 
 @Injectable({
   providedIn: 'root'
@@ -66,7 +66,7 @@ export class FormsService {
   private getValidationRules(): void {
     this.requestsService.getValidationRules()
       .pipe(
-        map((result: { data: IValidationRules }) => result.data),
+        map(({ data }: IValidationResponse) => data),
         take(1)
         )
       .subscribe(({ password, email }: IValidationRules) => {
