@@ -1,0 +1,18 @@
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+$goit-final-primary: mat.define-palette(mat.$indigo-palette);
+$goit-final-accent: mat.define-palette(mat.$pink-palette);
+
+$goit-final-theme: mat.define-light-theme((
+  color: (
+    primary: $goit-final-primary,
+    accent: $goit-final-accent
+  )
+));
+
+@include mat.all-component-themes($goit-final-theme);
+
+
+

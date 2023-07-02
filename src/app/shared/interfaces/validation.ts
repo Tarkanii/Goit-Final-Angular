@@ -9,3 +9,7 @@ export interface IPasswordRules {
   contain_capitals: boolean,
   contain_special_symbols: boolean
 }
+
+export interface IValidationResponse {
+  data: IValidationRules
+}

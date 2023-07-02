@@ -3,7 +3,7 @@
   <form action="#" *ngIf="registerForm" [formGroup]="registerForm" class="auth-form">
     <div class="form-field">
       <label class="form-label" for="email">{{ 'FORM.EMAIL' | translate }}</label>
-      <input class="form-input" id="email" appInput formControlName="email">
+      <input class="form-input" id="email" appInput [email]="true" formControlName="email">
       <div class="hint-container">
         <p class="hint" *ngIf="emailControl?.errors?.['required'] && emailControl?.touched">{{ 'FORM.ERRORS.REQUIRED_FIELD' | translate }}</p>
         <p class="hint" *ngIf="emailControl?.errors?.['invalid'] && emailControl?.touched">{{ 'FORM.ERRORS.INVALID_EMAIL' | translate }}</p>

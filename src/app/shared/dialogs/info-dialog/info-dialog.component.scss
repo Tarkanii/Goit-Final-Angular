@@ -1,0 +1,15 @@
+.message-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.message {
+  font-size: 18px;
+}
+
+.button {
+  margin-top: 10px;
+}

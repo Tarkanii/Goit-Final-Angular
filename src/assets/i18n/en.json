@@ -21,8 +21,20 @@
       "PASSWORD_DOESNT_MATCH": "Passwords do not match"
     }
   },
+  "AUTH": {
+    "REGISTER": {
+      "SUCCESS": "Account {{email}} successfully registered!",
+      "ALREADY_EXIST": "Account {{email}} already exist"
+    },
+    "LOGIN": {
+      "SUCCESS": "Account {{email}} successfully logged in!",
+      "WRONG_EMAIL_OR_PASSWORD": "Wrong email or/and password"
+    }
+  },
   "BUTTONS": {
     "ENTER": "Enter",
-    "REGISTER": "Register"
+    "REGISTER": "Register",
+    "LOG_IN": "Log in",
+    "GOT_IT": "Got it"
   }
 }
