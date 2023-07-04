@@ -10,8 +10,6 @@ import { ILoginResponseBody, IRegisterResponseBody } from "src/app/shared/interf
 import { MatDialog } from "@angular/material/dialog";
 import { InfoDialogComponent } from "src/app/shared/dialogs/info-dialog/info-dialog.component";
 import { Router } from "@angular/router";
-import { Store, select } from "@ngrx/store";
-import { IStore, IUserState } from "src/app/shared/interfaces/store";
 
 
 @Injectable()
