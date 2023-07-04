@@ -1,4 +1,5 @@
 import { createAction, props } from "@ngrx/store";
+import { IUserState } from "src/app/shared/interfaces/store";
 import { IAuthRequestBody, IUser } from "src/app/shared/interfaces/user";
 
 // Register actions
@@ -13,3 +14,6 @@ export const loginOnSuccess = createAction('[User] Successful Login Request', pr
 
 // Logout actions
 export const logoutAction = createAction('[User] Logout');
+
+// State action
+export const setUserStateAction = createAction('[User] Set State', props<IUserState>());
