@@ -41,7 +41,10 @@ export class UserEffects {
       ofType(userActions.loginAction),
       mergeMap(({ type, ...body }) => {
         return this.requestService.login(body).pipe(
-          map(({ user }: ILoginResponseBody) => userActions.loginOnSuccess({ email: user.email, token: user.token })),
+          map(({ user }: ILoginResponseBody) => {
+            this.requestService.setToken(user.token);
+            return userActions.loginOnSuccess({ email: user.email, token: user.token })
+          }),
           catchError(({ error }: HttpErrorResponse) => of(userActions.loginOnError({ email: body.email, message: error.message })))
         )
       })
@@ -51,7 +54,10 @@ export class UserEffects {
   private logout$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(userActions.logoutAction),
-      mergeMap(({ token }) => this.requestService.logout(token))
+      mergeMap(() => {
+        this.router.navigate(['auth/login']);
+        return this.requestService.logout();
+      })
     )
   }, { dispatch: false })
 

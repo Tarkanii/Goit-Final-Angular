@@ -1,5 +1,14 @@
 <div class="header">
   <div class="container" >
-    <img class="icon" src="../../../assets/icons/logo.svg" alt="logo">
+    <a href="/">
+      <img class="icon" src="../../../assets/icons/logo.svg" alt="logo">
+    </a>
+    <div class="user-info-container" *ngIf="username$ && token$ | async">
+      <p class="username">{{ username$ | async }}</p>
+      <button class="button-logout" (click)="logout()">
+        <div class="button-icon"></div>
+        <span class="button-text">{{ 'BUTTONS.LOG_OUT' | translate }}</span>
+      </button>
+    </div>
   </div>
 </div>

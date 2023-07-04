@@ -10,7 +10,13 @@ import { IAuthRequestBody, ILoginResponseBody, IRegisterResponseBody } from '../
 })
 export class RequestsService {
 
+  private token: string = '';
+
   constructor( private http: HttpClient) { }
+
+  public setToken(token: string): void {
+    this.token = token;
+  }
 
   public getValidationRules(): Observable<IValidationResponse> {
     return this.http.get<IValidationResponse>(`${environment.backend_url}/api/validation`);
@@ -24,9 +30,9 @@ export class RequestsService {
     return this.http.post<ILoginResponseBody>(`${environment.backend_url}/api/auth/login`, body);
   }
 
-  public logout(token: string): Observable<void> {
+  public logout(): Observable<void> {
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}` 
+      'Authorization': `Bearer ${this.token}` 
     })
     
     return this.http.get<void>(`${environment.backend_url}/api/auth/logout`, { headers });

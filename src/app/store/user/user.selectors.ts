@@ -7,3 +7,8 @@ export const tokenSelector = createSelector(
   selectorFeature,
   (state: IUserState) => state.token
 )
+
+export const emailSelector = createSelector(
+  selectorFeature,
+  (state: IUserState) => state.email
+)
