@@ -11,4 +11,5 @@ export const loginAction = createAction('[User] Login Request', props<IAuthReque
 export const loginOnError = createAction('[User] Error Login Request', props<{ email: string, message: string }>());
 export const loginOnSuccess = createAction('[User] Successful Login Request', props<IUser>());
 
-export const logoutAction = createAction('[User] Logout', props<{ token: string }>());
+// Logout actions
+export const logoutAction = createAction('[User] Logout');
