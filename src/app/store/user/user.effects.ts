@@ -53,7 +53,7 @@ export class UserEffects {
     return this.actions$.pipe(
       ofType(userActions.logoutAction),
       mergeMap(() => {
-        this.router.navigate(['auth/login']);
+        this.router.navigateByUrl('/auth/login');
         return this.requestService.logout();
       })
     )
@@ -77,12 +77,12 @@ export class UserEffects {
             email: email,
             message,
             button,
-            callback: type.includes('Login') ? null : () => this.router.navigate([link])
+            callback: type.includes('Login') ? null : () => this.router.navigateByUrl(link)
           },
           autoFocus: false
         });
 
-        type.includes('Login') && this.router.navigate([link]);
+        type.includes('Login') && this.router.navigateByUrl(link);
       })
     )
   }, { dispatch: false })
