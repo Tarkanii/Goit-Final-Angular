@@ -1,0 +1,7 @@
+<div class="overlay" (click)="closeSidebar()" [ngClass]="{ open }"></div>
+<div class="sidebar" [ngClass]="{ open }">
+  <button class="close-button" (click)="closeSidebar()"></button>
+  <div class="container">
+    <ng-content></ng-content>
+  </div>
+</div>

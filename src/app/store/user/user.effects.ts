@@ -1,15 +1,15 @@
 import { Injectable } from "@angular/core";
 import { HttpErrorResponse } from "@angular/common/http";
+import { MatDialog } from "@angular/material/dialog";
+import { Router } from "@angular/router";
 import { of } from 'rxjs';
-import { catchError, map, mergeMap } from "rxjs/operators";
+import { catchError, exhaustMap, map, mergeMap } from "rxjs/operators";
 import { createEffect, ofType } from "@ngrx/effects";
 import { Actions } from "@ngrx/effects";
 import * as userActions from './user.actions';
 import { RequestsService } from "src/app/services/requests.service";
 import { ILoginResponseBody, IRegisterResponseBody } from "src/app/shared/interfaces/user";
-import { MatDialog } from "@angular/material/dialog";
 import { InfoDialogComponent } from "src/app/shared/dialogs/info-dialog/info-dialog.component";
-import { Router } from "@angular/router";
 
 
 @Injectable()
@@ -25,7 +25,7 @@ export class UserEffects {
   private register$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(userActions.registerAction),
-      mergeMap(({ type, ...body }) => {
+      exhaustMap(({ type, ...body }) => {
         return this.requestService.register(body).pipe(
           map(({ user }: IRegisterResponseBody) => userActions.registerOnSuccess({ email: user.email })),
           catchError(({ error }: HttpErrorResponse) => of(userActions.registerOnError({ email: body.email, message: error.message })))
@@ -37,7 +37,7 @@ export class UserEffects {
   private login$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(userActions.loginAction),
-      mergeMap(({ type, ...body }) => {
+      exhaustMap(({ type, ...body }) => {
         return this.requestService.login(body).pipe(
           map(({ user }: ILoginResponseBody) => {
             this.requestService.setToken(user.token);

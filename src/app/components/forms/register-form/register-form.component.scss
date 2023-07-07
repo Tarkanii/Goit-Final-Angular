@@ -11,23 +11,19 @@
   }
 }
 
-.auth-form-title {
-  font-size: 26px;
-  font-weight: 500;
-  padding-bottom: 30px;
+.form-title {
+  margin-bottom: 30px;
 
   @include tablet {
-    padding-bottom: 53px;
-    font-size: 36px;
+    margin-bottom: 53px;
   }
 
   @include desktop {
-    padding-bottom: 47px;
+    margin-bottom: 47px;
   }
 }
 
-.auth-form {
-  width: 100%;
+.form {
   margin-bottom: 40px;
 
   & .form-field:not(:last-child) {

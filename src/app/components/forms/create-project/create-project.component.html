@@ -1,1 +1,20 @@
-<p>create-project works!</p>
+<div class="container">
+  <h1 class="form-title">{{ 'LABELS.CREATING' | translate: { object: 'project' } }}</h1>
+  <form action="#" [formGroup]="createProjectForm" class="form">
+    <div class="form-field">
+      <label class="form-label" for="name">{{ 'FORM.PROJECT_NAME' | translate }}</label>
+      <input class="form-input" id="name" appInput formControlName="name">
+      <div class="hint-container">
+        <p class="hint" *ngIf="nameControl?.errors?.['required'] && nameControl?.touched">{{ 'FORM.ERRORS.REQUIRED_FIELD' | translate }}</p>
+      </div>
+    </div>
+    <div class="form-field">
+      <label class="form-label" for="description">{{ 'FORM.DESCRIPTION' | translate }}</label>
+      <input class="form-input" id="description" appInput formControlName="description">
+    </div>
+  </form>
+  <div class="buttons-container">
+    <button class="accent-text-button" (click)="submit()">{{ 'BUTTONS.READY' | translate }}</button>
+    <button class="secondary-button" (click)="cancelProjectCreating()">{{ 'BUTTONS.CANCEL' | translate }}</button>
+  </div>
+</div>

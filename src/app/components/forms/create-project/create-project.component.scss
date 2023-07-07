@@ -1,0 +1,34 @@
+@import '../../../../scss/mixins';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+
+  @include tablet {
+    margin-bottom: 60px;
+  }
+
+  & .form-field:not(:last-child) {
+    margin-bottom: 57px;
+  }
+
+  &-title {
+    margin-bottom: 30px;
+
+    @include tablet {
+      margin-bottom: 50px;
+    }
+  }
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & .accent-text-button {
+    margin-bottom: 20px;
+  }
+}
