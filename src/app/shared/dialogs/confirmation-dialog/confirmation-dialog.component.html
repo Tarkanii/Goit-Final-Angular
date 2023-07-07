@@ -1,0 +1,5 @@
+<p class="question" [innerHTML]="data.question |  translate"></p>
+<div class="buttons-container">
+  <button class="button secondary-button" (click)="onClick(false)">{{ "BUTTONS.NO" | translate }}</button>
+  <button class="button accent-text-button" (click)="onClick(true)">{{ "BUTTONS.YES" | translate }}</button>
+</div>

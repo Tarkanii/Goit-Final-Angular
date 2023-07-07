@@ -100,7 +100,7 @@ export class UserEffects {
           data: {
             type: 'auth',
             email,
-            message: `${base}.${this.convertMessageFromBackend(message)}`,
+            message: `${base}.${this.requestService.convertMessageFromBackend(message)}`,
           },
           autoFocus: false
         })
@@ -108,8 +108,4 @@ export class UserEffects {
     )
   }, { dispatch: false })
 
-  private convertMessageFromBackend(message: string): string {
-    return message.toUpperCase().split(' ').join('_');
-  }
-  
 }
