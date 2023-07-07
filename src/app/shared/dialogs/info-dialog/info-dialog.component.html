@@ -1,4 +1,5 @@
 <div class="message-container">
   <p class="message" *ngIf="data.type === 'auth'">{{ data.message | translate: { email: data.email } }}</p>
+  <p class="message" *ngIf="!data.type">{{ data.message | translate: { name: data.name } }}</p>
   <button class="button accent-text-button" mat-dialog-close>{{ (data.button ?? 'BUTTONS.GOT_IT') | translate }}</button>  
 </div>

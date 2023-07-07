@@ -12,6 +12,7 @@ import { ChartTableComponent } from './dialogs/chart-table/chart-table.component
 import { InputDirective } from './directives/custom-input.directive';
 import { AppRoutingModule } from '../routing/app-routing.module';
 import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
+import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
 
 
 @NgModule({
@@ -22,13 +23,16 @@ import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component
     AddButtonComponent,
     ChartTableComponent,
     InputDirective,
-    InfoDialogComponent
+    InfoDialogComponent,
+    ConfirmationDialogComponent
   ],
   exports: [
     InputDirective,
     TranslateModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AddButtonComponent,
+    ProjectComponent
   ],
   imports: [
     CommonModule,

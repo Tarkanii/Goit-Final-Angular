@@ -1,1 +1,4 @@
-<p>add-button works!</p>
+<div class="add-button-container" [ngClass]="{ main: mainButton }">
+  <button class="add-button" (click)="onClick()"></button>
+  <p class="add-button-label">{{ "LABELS.CREATE" | translate: { object: addType } }}</p>
+</div>

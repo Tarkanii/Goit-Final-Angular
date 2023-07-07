@@ -1,1 +1,18 @@
-<p>projects-page works!</p>
+<div class="container">
+  <div class="header">
+    <h1 class="title">Projects</h1>
+    <div class="button-container">
+      <app-add-button (buttonClick)="onClick()" [mainButton]="true"></app-add-button>
+    </div>
+  </div>
+  <div class="projects-grid">
+    <app-project
+      *ngFor="let project of projects$ | async"
+      class="project-card" 
+      [name]="project.name" 
+      [description]="project.description"
+      [id]="project._id"
+      >
+    </app-project>
+  </div>
+</div>
