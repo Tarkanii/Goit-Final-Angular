@@ -1,6 +1,6 @@
 <div class="container">
-  <h1 class="auth-form-title">{{ 'LABELS.ENTER' | translate }}</h1>
-  <form action="#" *ngIf="loginForm" [formGroup]="loginForm" class="auth-form">
+  <h1 class="form-title">{{ 'LABELS.ENTER' | translate }}</h1>
+  <form action="#" *ngIf="loginForm" [formGroup]="loginForm" class="form">
     <div class="form-field">
       <label class="form-label" for="email">{{ 'FORM.EMAIL' | translate }}</label>
       <input class="form-input" id="email" appInput [email]="true" formControlName="email">

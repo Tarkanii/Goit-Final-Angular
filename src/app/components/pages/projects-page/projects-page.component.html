@@ -16,3 +16,6 @@
     </app-project>
   </div>
 </div>
+<app-form-sidebar [open]="sidebarOpen$ | async">
+  <app-create-project *ngIf="sidebarOpen$ | async"></app-create-project>
+</app-form-sidebar>

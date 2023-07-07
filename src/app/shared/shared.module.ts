@@ -13,6 +13,7 @@ import { InputDirective } from './directives/custom-input.directive';
 import { AppRoutingModule } from '../routing/app-routing.module';
 import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
 import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
+import { FormSidebarComponent } from './components/form-sidebar/form-sidebar.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confi
     ChartTableComponent,
     InputDirective,
     InfoDialogComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    FormSidebarComponent
   ],
   exports: [
     InputDirective,
@@ -32,7 +34,8 @@ import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confi
     ReactiveFormsModule,
     AppRoutingModule,
     AddButtonComponent,
-    ProjectComponent
+    ProjectComponent,
+    FormSidebarComponent
   ],
   imports: [
     CommonModule,

@@ -10,3 +10,12 @@ export const getProjectsActionOnError = createAction('[Projects] Get Projects Er
 export const deleteProjectAction = createAction('[Projects] Delete Project', props<{ id: string, name: string }>());
 export const deleteProjectActionOnSuccess = createAction('[Projects] Delete Project Success', props<{ name: string }>());
 export const deleteProjectActionOnError = createAction('[Projects] Delete Project Error', props<{ message: string }>());
+
+// Adding project actions
+export const addProjectAction = createAction('[Projects] Add Project', props<{ name: string, description: string }>());
+export const addProjectActionOnSuccess = createAction('[Projects] Add Project Success', props<{ name: string, project: IProject }>());
+export const addProjectActionOnError = createAction('[Projects] Add Project Error', props<{ message: string }>());
+
+// Add project form actions
+export const openAddProjectFormAction = createAction('[Projects] Open Form');
+export const closeAddProjectFormAction = createAction('[Projects] Close Form');

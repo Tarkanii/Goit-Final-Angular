@@ -53,18 +53,25 @@ button {
   text-decoration: underline;
 }
 
+.close-button {
+  height: 18px;
+  width: 18px;
+  background-color: var(--main-text-color);
+  -webkit-mask: url('../../assets/icons/close.svg') center/18px no-repeat;
+  mask: url('../../assets/icons/close.svg') center/18px no-repeat;
+}
+
 .delete-button {
   height: 30px;
   width: 30px;
   -webkit-mask: url('../../assets/icons/delete.svg') center/30px 30px no-repeat;
-  mask: url('../../assets/icons/delete.svg') center no-repeat;
-
+  mask: url('../../assets/icons/delete.svg') center/30px 30px no-repeat;
 
   @include tablet {
     height: 34px;
     width: 34px;
     -webkit-mask: url('../../assets/icons/delete.svg') center/34px 34px no-repeat;
-    mask: url('../../assets/icons/delete.svg') center no-repeat;
+    mask: url('../../assets/icons/delete.svg') center/34px 34px no-repeat;
   }
 }
 

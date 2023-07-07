@@ -8,11 +8,13 @@ import { RegisterFormComponent } from './forms/register-form/register-form.compo
 import { HeaderComponent } from './header/header.component';
 import { SharedModule } from '../shared/shared.module';
 import { AuthPageComponent } from './pages/auth-page/auth-page.component';
+import { CreateProjectComponent } from './forms/create-project/create-project.component';
 
 
 
 @NgModule({
   declarations: [
+    CreateProjectComponent,
     ProjectsPageComponent,
     SprintsPageComponent,
     TasksPageComponent,

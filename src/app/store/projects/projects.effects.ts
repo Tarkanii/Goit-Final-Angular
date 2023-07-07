@@ -41,16 +41,28 @@ export class ProjectEffects {
     )
   })
 
+  private addProject$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(actions.addProjectAction),
+      switchMap(({ type, ...body }) => this.requestService.addProject(body).pipe(
+        map(({ project }: { project: IProject }) => actions.addProjectActionOnSuccess({ name: project.name, project })),
+        catchError(({ error }: HttpErrorResponse) => of(actions.addProjectActionOnError({ message: error.message })))
+      ))
+    )
+  })
+
   private openDialogOnSuccess$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(
-        actions.deleteProjectActionOnSuccess
+        actions.deleteProjectActionOnSuccess,
+        actions.addProjectActionOnSuccess,
       ),
-      map(({ name }) => {
+      map(({ type, name }) => {
+        const key = type.includes('Add') ? 'ADD' : 'DELETE'
         this.dialog.open(InfoDialogComponent, {
           width: '450px',
           data: {
-            message: `PROJECTS.SUCCESS`,
+            message: `PROJECTS.SUCCESS.${key}`,
             name
           }
         })
@@ -74,5 +86,14 @@ export class ProjectEffects {
       })
     )
   }, { dispatch: false })
+
+  private closeAddProjectForm$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(
+        actions.addProjectActionOnSuccess
+      ),
+      map(() => actions.closeAddProjectFormAction())
+    )
+  })
 
 }
