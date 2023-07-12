@@ -7,6 +7,7 @@ import { NgControl } from '@angular/forms';
 export class InputDirective {
 
   @Input() public email: boolean = false;
+  @Input() public text: boolean = false;
   private spaceRegExp = new RegExp('[\ ]', 'g')
 
   constructor(
@@ -22,6 +23,11 @@ export class InputDirective {
     if (this.email) {
       this.ngControl.control?.setValue(this.getNewValue(this.spaceRegExp));
     }
+
+    if (this.text) {
+      this.ngControl.control?.setValue(this.ngControl.control?.value?.trim());
+    }
+
     if (this.ngControl.control?.value) return;
 
     this.element.nativeElement.parentElement?.classList.remove('float-label');

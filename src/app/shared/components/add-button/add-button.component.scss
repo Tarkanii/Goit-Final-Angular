@@ -20,6 +20,7 @@
 
       @include desktop {
         display: inline;
+        text-wrap: nowrap;
       }
 
     }
@@ -27,8 +28,8 @@
 }
 
 .add-button {
-  height: 44px;
-  width: 44px;
+  min-height: 44px;
+  min-width: 44px;
   background: var(--accent-color) url('../../../../assets/icons/plus.svg') center no-repeat;
   border-radius: 50%;
   box-shadow: 0px 0px 2px var(--accent-color);

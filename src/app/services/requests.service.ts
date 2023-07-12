@@ -44,6 +44,10 @@ export class RequestsService {
     return this.http.post<{ project: IProject }>(`${environment.backend_url}/api/projects/`, body, { headers: this.autharizationHeader });
   }
 
+  public changeProject(id: string, body: { name?: string, description?: string }): Observable<{ project: IProject }> {
+    return this.http.put<{ project: IProject }>(`${environment.backend_url}/api/projects/${id}`, body, { headers: this.autharizationHeader });
+  }
+
   public deleteProject(id: string): Observable<void> {
     return this.http.delete<void>(`${environment.backend_url}/api/projects/${id}`, { headers: this.autharizationHeader });
   }

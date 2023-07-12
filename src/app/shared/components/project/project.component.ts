@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { filter, take } from 'rxjs';
 import { deleteProjectAction } from 'src/app/store/projects/projects.actions';
 import { ConfirmationDialogComponent } from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,14 +20,15 @@ export class ProjectComponent implements OnInit {
 
   constructor(
     private store: Store,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
   }
 
   public delete(event: Event): void {
-    event.preventDefault();
+    event.stopPropagation();
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '450px',
       data: {
@@ -39,4 +41,7 @@ export class ProjectComponent implements OnInit {
       .subscribe(() => this.store.dispatch(deleteProjectAction({ id: this.id, name: this.name })))
   }
 
+  public navigateToProject(): void {
+    this.router.navigateByUrl(`projects/${this.id}/sprints`);
+  } 
 }

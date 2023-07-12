@@ -1,5 +1,9 @@
 @import '../../../../scss/mixins';
 
+a.secondary-text {
+  text-decoration: underline;
+}
+
 .container {
   display: flex;
   flex-direction: column;

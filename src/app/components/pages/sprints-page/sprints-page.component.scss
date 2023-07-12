@@ -1,0 +1,167 @@
+@import '../../../../scss/mixins';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%;
+  overflow: auto;
+  
+  @include tablet {
+    flex-direction: row;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+
+  @include tablet {
+    flex-direction: row;
+  }
+}
+
+.mobile-sidebar-container {
+  border-bottom: 1px solid var(--border-color);
+
+  @include tablet {
+    display: none;
+  }
+}
+
+.sidebar {
+  display: none;
+
+  @include tablet {
+    display: flex;
+  }
+}
+
+.project-information {
+  width: 100%;
+  padding-top: 30px;
+
+  @include tablet {
+    max-height: 100%;
+    overflow: auto;
+    padding-left: 20px;
+    padding-right: 10px;
+  }
+  
+  @include desktop {
+    padding-left: 70px;
+  }
+  
+  & .name {
+    font-size: 26px;
+    font-weight: 500;
+
+    @include tablet {
+      font-size: 36px;
+    }
+  }
+
+  & .redacting-button {
+    margin-left: 20px;
+    min-width: 20px;
+  }
+
+  & .description {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 30px;
+    
+    @include tablet {
+      font-size: 18px;
+    }
+
+    @include desktop {
+      max-width: 400px;
+    }
+  }
+
+  & .add-button {
+    position: fixed;
+    bottom: 20px;
+    right: 5%;
+    z-index: 1;
+
+    @include tablet {
+      position: relative;
+      bottom: unset;
+      right: unset;
+    }
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  & .name-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+    @include tablet {
+      margin-right: 10px;
+    }
+  }
+}
+
+.form {
+  max-width: 80%;
+}
+
+.sprints-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+  margin-top: 30px;
+
+  @include tablet {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+  }
+
+  @include desktop {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 30px;
+  }
+}
+
+.sprint-card {
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 1px 10px var(--border-color);
+  transition: transform linear 200ms;
+
+  &:hover {
+    transform: scale(1.03);
+    cursor: pointer;
+  }
+}
+
+.add-people-button {
+  display: flex;
+  flex-direction: row;
+  background: none;
+  
+  & .icon {
+    height: 20px;
+    width: 20px;
+    background: url('../../../../assets/icons/add-people.svg') center;
+    margin-right: 10px;
+  }
+
+  & .text {
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: underline;
+  }
+}

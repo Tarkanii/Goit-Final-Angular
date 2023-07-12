@@ -9,6 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import { SharedModule } from '../shared/shared.module';
 import { AuthPageComponent } from './pages/auth-page/auth-page.component';
 import { CreateProjectComponent } from './forms/create-project/create-project.component';
+import { FormSidebarComponent } from './form-sidebar/form-sidebar.component';
 
 
 
@@ -21,14 +22,17 @@ import { CreateProjectComponent } from './forms/create-project/create-project.co
     LoginFormComponent,
     RegisterFormComponent,
     HeaderComponent,
-    AuthPageComponent
+    AuthPageComponent,
+    FormSidebarComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    CreateProjectComponent,
+    FormSidebarComponent
   ]
 })
 export class ComponentsModule { }

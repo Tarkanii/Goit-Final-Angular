@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ISprint } from '../../interfaces/project';
 
 @Component({
   selector: 'app-sprint',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sprint.component.scss']
 })
 export class SprintComponent implements OnInit {
+  
+  @Input() public sprint!: ISprint;
+  public dateFormat: string = 'dd MMM y';
 
   constructor() { }
 

@@ -1,2 +1,5 @@
 <app-header></app-header>
+<app-form-sidebar [open]="addProjectFormOpen$ | async">
+  <app-create-project *ngIf="addProjectFormOpen$ | async"></app-create-project>
+</app-form-sidebar>
 <router-outlet></router-outlet>

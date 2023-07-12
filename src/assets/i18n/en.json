@@ -6,7 +6,11 @@
     "HAVE_ACCOUNT_QUESTION": "Do you have an account?",
     "LOGIN": "Log in",
     "CREATE": "Create a {{object}}",
-    "CREATING": "Creating a {{object}}"
+    "CREATING": "Creating a {{object}}",
+    "SHOW": "Show {{list}}",
+    "DURATION": "Duration",
+    "END_DATE": "End date",
+    "START_DATE": "Start date"
   },
   "FORM": {
     "EMAIL": "E-mail",
@@ -54,6 +58,7 @@
     "YES": "Yes",
     "NO": "No",
     "READY": "Ready",
-    "CANCEL": "Cancel"
+    "CANCEL": "Cancel",
+    "ADD_PEOPLE": "Add people"
   }
 }

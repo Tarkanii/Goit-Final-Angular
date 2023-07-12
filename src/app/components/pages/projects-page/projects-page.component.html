@@ -1,21 +1,16 @@
 <div class="container">
   <div class="header">
     <h1 class="title">Projects</h1>
-    <div class="button-container">
-      <app-add-button (buttonClick)="onClick()" [mainButton]="true"></app-add-button>
-    </div>
+    <app-add-button class="add-button" (buttonClick)="onClick()" [mainButton]="true"></app-add-button>
   </div>
-  <div class="projects-grid">
-    <app-project
-      *ngFor="let project of projects$ | async"
-      class="project-card" 
-      [name]="project.name" 
-      [description]="project.description"
-      [id]="project._id"
-      >
-    </app-project>
-  </div>
+  <ul class="projects-grid">
+    <li class="project-card" *ngFor="let project of projects$ | async">
+      <app-project
+        [name]="project.name" 
+        [description]="project.description"
+        [id]="project._id"
+        >
+      </app-project>
+    </li>
+  </ul>
 </div>
-<app-form-sidebar [open]="sidebarOpen$ | async">
-  <app-create-project *ngIf="sidebarOpen$ | async"></app-create-project>
-</app-form-sidebar>
