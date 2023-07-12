@@ -10,7 +10,14 @@ body {
   letter-spacing: 0.04em;
 }
 
+a {
+  text-decoration: none;
+  color: var(--main-text-color);
+}
+
 button {
+  font-family: var(--font);
+  padding: 0;
   border: none;
 
   &:hover {
@@ -34,7 +41,6 @@ button {
 }
 
 .accent-text-button {
-  font-family: var(--font);
   font-size: 18px;
   font-weight: 500;
   color: var(--accent-buttons-text-color);
@@ -46,9 +52,7 @@ button {
 
 .secondary-button {
   color: var(--secondary-text-color);
-  font-family: var(--font);
   font-size: 18px;
-  font-weight: 400;
   background: none;
   text-decoration: underline;
 }
@@ -73,6 +77,18 @@ button {
     -webkit-mask: url('../../assets/icons/delete.svg') center/34px 34px no-repeat;
     mask: url('../../assets/icons/delete.svg') center/34px 34px no-repeat;
   }
+}
+
+.secondary-delete-button {
+  height: 20px;
+  width: 20px;
+  background: url('../../assets/icons/delete.svg');
+}
+
+.redacting-button {
+  height: 20px;
+  width: 20px;
+  background: url('../../assets/icons/redacting.svg');
 }
 
 .mat-dialog-container {

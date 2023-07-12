@@ -22,7 +22,8 @@ export class ProjectEffects {
     return this.actions$.pipe(
       ofType(
         actions.getProjectsAction,
-        actions.deleteProjectActionOnSuccess
+        actions.deleteProjectActionOnSuccess,
+        actions.changeProjectActionOnSuccess
       ),
       switchMap(() => this.requestService.getProjects().pipe(
         map(({ projects }: { projects: IProject[] }) => actions.getProjectsActionOnSuccess({ projects })),
@@ -48,6 +49,18 @@ export class ProjectEffects {
         map(({ project }: { project: IProject }) => actions.addProjectActionOnSuccess({ name: project.name, project })),
         catchError(({ error }: HttpErrorResponse) => of(actions.addProjectActionOnError({ message: error.message })))
       ))
+    )
+  })
+
+  private changeProject$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(actions.changeProjectAction),
+      switchMap(({ type, id, ...body }) => {
+        return this.requestService.changeProject(id, body).pipe(
+          map(() => actions.changeProjectActionOnSuccess()),
+          catchError(({ error }: HttpErrorResponse) => of(actions.changeProjectActionOnError({ message: error.message })))
+        )
+      })
     )
   })
 

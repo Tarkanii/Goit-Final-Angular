@@ -1,1 +1,37 @@
-<p>sprints-page works!</p>
+<div class="mobile-sidebar-container">
+  <div class="container">
+    <app-sidebar></app-sidebar> 
+  </div>
+</div>
+
+<div class="main container">
+  <app-sidebar class="sidebar" [type]="'project'" [list]="projects$ | async"></app-sidebar>
+  <div class="project-information" *ngIf="project$ | async">
+    <div class="header">
+      <div class="name-container">
+        <h1 *ngIf="!changeNameForm" class="name">{{ (project$ | async)?.name }}</h1>
+        <form action="#" class="form" *ngIf="changeNameForm" (submit)="submitChangeNameForm($event)" [formGroup]="changeNameForm">
+          <div class="form-field">
+            <input 
+              type="text" class="form-input name"
+              (blur)="destroyChangeNameForm()" [placeholder]="(project$ | async)?.name"
+              formControlName="name"
+            >
+          </div>
+        </form>
+        <button *ngIf="!changeNameForm" class="redacting-button" (click)="initializeChangeNameForm()"></button>
+      </div>
+      <app-add-button class="add-button" addType="sprint" [mainButton]="true"></app-add-button>
+    </div>
+    <p class="description" *ngIf="(project$ | async)?.description">{{ (project$ | async)?.description }}</p>
+    <button class="add-people-button">
+      <div class="icon"></div>
+      <span class="text">{{ 'BUTTONS.ADD_PEOPLE' | translate }}</span>
+    </button>
+    <ul class="sprints-grid">
+      <li class="sprint-card" *ngFor="let sprint of (project$ | async)?.sprints">
+        <app-sprint [sprint]="sprint"></app-sprint>
+      </li>
+    </ul>
+  </div>
+</div>

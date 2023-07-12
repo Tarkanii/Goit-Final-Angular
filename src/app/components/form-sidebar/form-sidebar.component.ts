@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { IStore } from '../../interfaces/store';
+import { IStore } from '../../shared/interfaces/store';
 import { closeAddProjectFormAction } from 'src/app/store/projects/projects.actions';
 
 @Component({

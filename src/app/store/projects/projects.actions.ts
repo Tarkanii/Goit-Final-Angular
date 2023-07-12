@@ -16,6 +16,11 @@ export const addProjectAction = createAction('[Projects] Add Project', props<{ n
 export const addProjectActionOnSuccess = createAction('[Projects] Add Project Success', props<{ name: string, project: IProject }>());
 export const addProjectActionOnError = createAction('[Projects] Add Project Error', props<{ message: string }>());
 
+// Change project actions
+export const changeProjectAction = createAction('[Projects] Change Project', props<{ id: string, name?: string, description?: string }>());
+export const changeProjectActionOnSuccess = createAction('[Projects] Change Project Success');
+export const changeProjectActionOnError = createAction('[Projects] Change Project Error', props<{ message: string }>());
+
 // Add project form actions
 export const openAddProjectFormAction = createAction('[Projects] Open Form');
 export const closeAddProjectFormAction = createAction('[Projects] Close Form');

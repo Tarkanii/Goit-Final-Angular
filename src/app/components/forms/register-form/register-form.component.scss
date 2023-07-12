@@ -1,5 +1,9 @@
 @import '../../../../scss/mixins';
 
+a.secondary-text {
+  text-decoration: underline;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -24,6 +28,7 @@
 }
 
 .form {
+  width: 100%;
   margin-bottom: 40px;
 
   & .form-field:not(:last-child) {

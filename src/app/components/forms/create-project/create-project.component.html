@@ -3,14 +3,14 @@
   <form action="#" [formGroup]="createProjectForm" class="form">
     <div class="form-field">
       <label class="form-label" for="name">{{ 'FORM.PROJECT_NAME' | translate }}</label>
-      <input class="form-input" id="name" appInput formControlName="name">
+      <input class="form-input" id="name" appInput [text]="true" formControlName="name">
       <div class="hint-container">
         <p class="hint" *ngIf="nameControl?.errors?.['required'] && nameControl?.touched">{{ 'FORM.ERRORS.REQUIRED_FIELD' | translate }}</p>
       </div>
     </div>
     <div class="form-field">
       <label class="form-label" for="description">{{ 'FORM.DESCRIPTION' | translate }}</label>
-      <input class="form-input" id="description" appInput formControlName="description">
+      <input class="form-input" id="description" appInput formControlName="description" [text]="true">
     </div>
   </form>
   <div class="buttons-container">

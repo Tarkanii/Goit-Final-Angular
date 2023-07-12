@@ -1,0 +1,16 @@
+<button class="button" (click)="navigateTo('../')">
+  <div class="button-icon"></div>
+  <span class="button-text">{{ "LABELS.SHOW" | translate: { list: type + 's' } }}</span>
+</button>
+<ul class="list" #listTemplate>
+  <li class="object-wrapper" *ngFor="let object of list">
+    <a class="object" 
+      [ngClass]="{ project: type === 'project', current: (params$ | async)?.[type] === object._id }" 
+      [routerLink]="getLink(object._id)"
+      >
+      <div class="icon"></div>
+      <div class="name">{{ object.name }}</div>
+    </a>
+  </li>
+</ul>
+<app-add-button class="add-button-container" [addType]="type" (buttonClick)="openFormSidebar()"></app-add-button>

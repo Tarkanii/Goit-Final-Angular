@@ -1,0 +1,126 @@
+@import '../../../../scss/mixins';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 0;
+
+  @include tablet {
+    height: 100%;
+    max-width: 216px;
+    padding: 20px 0 50px;
+    border-right: 1px solid var(--border-color);
+  }
+
+  @include desktop {
+    max-width: 200px;
+  }
+}
+
+.button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: none;
+
+  &-icon {
+    width: 30px;
+    height: 14px;
+    margin-right: 20px;
+    background: url('./../../../../assets/icons/long-arrow.svg') no-repeat center;
+  }
+
+  &-text {
+    font-size: 14px;
+  }
+}
+
+.object-wrapper:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+.object {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  transition: transform linear 200ms;
+
+  &:hover {
+    transform: scale(1.03);
+  }
+
+  & .icon {
+    min-width: 36px;
+    min-height: 36px;
+    border-radius: 5px;
+    background: var(--project-card-text-color);
+    box-shadow: 0 1px 5px var(--border-color);
+    margin-right: 15px;
+    transition: box-shadow linear 200ms;
+  }
+  
+  & .name {
+    font-size: 14px;
+  }
+
+  &.current .name,
+  &:hover .name {
+    font-weight: 700;
+  }
+}
+
+.object-wrapper {
+  & .project .icon{
+    box-shadow: none;
+  }
+
+  &:nth-child(3n + 1) {
+    & .project .icon {
+      background-color: var(--project-card-violet);
+    }
+    
+    &:hover .project .icon,
+    & .project.current .icon {
+      box-shadow: 0 1px 5px var(--project-card-violet);
+    }
+  }
+
+  &:nth-child(3n + 2) {
+    & .project .icon {
+      background-color: var(--project-card-red);
+    }
+    
+    &:hover .project .icon,
+    & .project.current .icon {
+      box-shadow: 0 1px 5px var(--project-card-red);
+    }
+  }
+
+  &:nth-child(3n + 3) {
+    & .project .icon{
+      background-color: var(--project-card-green);
+    }
+    
+    &:hover .project .icon,
+    & .project.current .icon {
+      box-shadow: 0 1px 5px var(--project-card-green);
+    }
+  }
+
+}
+
+.list, .add-button-container {
+  display: none;
+
+  @include tablet {
+    display: block;
+  }
+}
+
+.list {
+  padding: 10px 5px;
+  max-height: 60%;
+  overflow-y: auto;
+}
