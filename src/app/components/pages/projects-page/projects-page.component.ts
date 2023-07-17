@@ -3,8 +3,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { IProject } from 'src/app/shared/interfaces/project';
 import { IStore } from 'src/app/shared/interfaces/store';
-import { getProjectsAction, openAddProjectFormAction } from 'src/app/store/projects/projects.actions';
-import { addProjectFormOpenSelector, projectsSelector } from 'src/app/store/projects/projects.selectors';
+import { getProjectsAction, openSidebarFormAction } from 'src/app/store/projects/projects.actions';
+import { sidebarFormOpenSelector, projectsSelector } from 'src/app/store/projects/projects.selectors';
 
 @Component({
   selector: 'app-projects-page',
@@ -14,7 +14,7 @@ import { addProjectFormOpenSelector, projectsSelector } from 'src/app/store/proj
 export class ProjectsPageComponent implements OnInit {
 
   public projects$: Observable<IProject[]> = this.store.select(projectsSelector);
-  public sidebarOpen$: Observable<boolean> = this.store.select(addProjectFormOpenSelector);
+  public sidebarOpen$: Observable<string | null> = this.store.select(sidebarFormOpenSelector);
 
   constructor(
     private store: Store<IStore>
@@ -25,7 +25,7 @@ export class ProjectsPageComponent implements OnInit {
   }
 
   public onClick(): void {
-    this.store.dispatch(openAddProjectFormAction());
+    this.store.dispatch(openSidebarFormAction({ form: 'project' }));
   }
 
 }

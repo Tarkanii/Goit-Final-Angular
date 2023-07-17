@@ -1,5 +1,8 @@
 <app-header></app-header>
-<app-form-sidebar [open]="addProjectFormOpen$ | async">
-  <app-create-project *ngIf="addProjectFormOpen$ | async"></app-create-project>
-</app-form-sidebar>
-<router-outlet></router-outlet>
+<div class="main">
+  <router-outlet></router-outlet>
+  <app-form-sidebar [open]="!!(sidebarFormOpen$ | async)">
+    <app-create-project *ngIf="(sidebarFormOpen$ | async) === 'project'"></app-create-project>
+    <app-create-sprint *ngIf="(sidebarFormOpen$ | async) === 'sprint'"></app-create-sprint>
+  </app-form-sidebar>
+</div>

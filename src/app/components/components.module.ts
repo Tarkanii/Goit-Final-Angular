@@ -10,11 +10,13 @@ import { SharedModule } from '../shared/shared.module';
 import { AuthPageComponent } from './pages/auth-page/auth-page.component';
 import { CreateProjectComponent } from './forms/create-project/create-project.component';
 import { FormSidebarComponent } from './form-sidebar/form-sidebar.component';
+import { CreateSprintComponent } from './forms/create-sprint/create-sprint.component';
 
 
 
 @NgModule({
   declarations: [
+    CreateSprintComponent,
     CreateProjectComponent,
     ProjectsPageComponent,
     SprintsPageComponent,
@@ -32,6 +34,7 @@ import { FormSidebarComponent } from './form-sidebar/form-sidebar.component';
   exports: [
     HeaderComponent,
     CreateProjectComponent,
+    CreateSprintComponent,
     FormSidebarComponent
   ]
 })

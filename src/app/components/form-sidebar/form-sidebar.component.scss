@@ -21,19 +21,25 @@
 
 .sidebar {
   position: fixed;
-  height: 0;
+  height: 100%;
   overflow-y: hidden;
+  transform: translateY(-100vh);
+  transition: transform linear 200ms;
   z-index: 2;
-  transition: height linear 200ms;
+
+  .close-button {
+    opacity: 0;
+  }
 
   &.open {
     position: absolute;
     top: 0;
     right: 0;
-    height: 100%;
     width: 100vw;
-    background-color: var(--dialog-background-color);
     padding: 63px 0 0 0;
+    transform: translateY(0);
+    background-color: var(--dialog-background-color);
+    overflow-y: auto;
 
     @include tablet {
       position: fixed;
@@ -45,11 +51,12 @@
       width: 570px;
       padding: 121px 50px 0;
     }
-  }
-}
 
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+    .close-button {
+      opacity: 1;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+  }
 }

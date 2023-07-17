@@ -7,7 +7,7 @@ import { IStore } from './shared/interfaces/store';
 import { setUserStateAction } from './store/user/user.actions';
 import { RequestsService } from './services/requests.service';
 import { getProjectsAction } from './store/projects/projects.actions';
-import { addProjectFormOpenSelector } from './store/projects/projects.selectors';
+import { sidebarFormOpenSelector } from './store/projects/projects.selectors';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +16,7 @@ import { addProjectFormOpenSelector } from './store/projects/projects.selectors'
 })
 export class AppComponent implements OnDestroy {
   
-  public addProjectFormOpen$: Observable<boolean> = this.store.select(addProjectFormOpenSelector);
+  public sidebarFormOpen$: Observable<string | null> = this.store.select(sidebarFormOpenSelector);
   private unsubscribe$: Subject<void> = new Subject();
 
   constructor(

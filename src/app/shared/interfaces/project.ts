@@ -12,3 +12,11 @@ export interface ISprint {
   endDate: string,
   duration: string
 }
+
+export interface ICreateSprintBody {
+  name: string,
+  startDate: string,
+  endDate: string,
+  duration: string,
+  project: string
+}

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { IValidationResponse } from '../shared/interfaces/validation';
 import { IAuthRequestBody, ILoginResponseBody, IRegisterResponseBody } from '../shared/interfaces/user';
-import { IProject } from '../shared/interfaces/project';
+import { ICreateSprintBody, IProject, ISprint } from '../shared/interfaces/project';
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +50,14 @@ export class RequestsService {
 
   public deleteProject(id: string): Observable<void> {
     return this.http.delete<void>(`${environment.backend_url}/api/projects/${id}`, { headers: this.autharizationHeader });
+  }
+
+  public addSprint(body: ICreateSprintBody): Observable<{ sprint: ISprint }> {
+    return this.http.post<{ sprint: ISprint }>(`${environment.backend_url}/api/sprints/`, body, { headers: this.autharizationHeader });
+  }
+
+  public deleteSprint(id: string): Observable<void> {
+    return this.http.delete<void>(`${environment.backend_url}/api/sprints/${id}`, { headers: this.autharizationHeader });
   }
 
   public convertMessageFromBackend(message: string): string {

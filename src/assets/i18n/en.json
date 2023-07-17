@@ -9,8 +9,10 @@
     "CREATING": "Creating a {{object}}",
     "SHOW": "Show {{list}}",
     "DURATION": "Duration",
+    "START_DATE": "Start date",
     "END_DATE": "End date",
-    "START_DATE": "Start date"
+    "WEEK_DAYS": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "San"],
+    "MONTHS": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
   },
   "FORM": {
     "EMAIL": "E-mail",
@@ -18,10 +20,20 @@
     "REPEAT_PASSWORD": "Repeat Password",
     "DESCRIPTION": "Description",
     "PROJECT_NAME": "Project name",
+    "SPRINT_NAME": "The name of the sprint",
+    "DURATION": "Duration (man hours)",
+    "START_DATE": "Start date",
+    "END_DATE": "End date",
     "ERRORS": {
       "REQUIRED_FIELD": "Required field",
       "INVALID_EMAIL": "Invalid e-mail",
       "WRONG_PASSWORD": "Wrong password",
+      "DATE_FORMAT": "Format of date yyyy-mm-dd",
+      "YEAR": "Year range {{currentYear}}-2050",
+      "MONTH": "Month range 1-12",
+      "REAL_DATE": "Date should be real",
+      "DIFFERENCE": "The end date should go after the start date",
+      "MIN_DURATION": "Duration shoud be more than 1 hour",
       "MIN_LENGTH_PASSWORD": "Password should be at least {{amount}} charactes",
       "PASSWORD_MUST_CONTAIN_NUMBERS": "Password should contain numbers",
       "PASSWORD_MUST_CONTAIN_CAPITALS": "Password should contain english capital letters",
@@ -45,8 +57,15 @@
       "PROJECT_NOT_FOUND": "Project not found"
     },
     "SUCCESS": {
-      "ADD":"{{name}} created successfully!",
-      "DELETE": "{{name}} deleted successfully!"
+      "ADD":"Project {{name}} created successfully!",
+      "DELETE": "Project {{name}} deleted successfully!"
+    }
+  },
+  "SPRINTS": {
+    "DELETE_CONFIRMATION": "Do you want to delete this sprint?<br>All the attached information will be removed as well",
+    "SUCCESS": {
+      "ADD":"Sprint {{name}} created successfully!",
+      "DELETE": "Sprint {{name}} deleted successfully!"
     }
   },
   "BUTTONS": {

@@ -12,5 +12,5 @@ export interface IUserState {
 
 export interface IProjectsState {
   projects: IProject[],
-  addProjectFormOpen: boolean 
+  formSidebar: 'project' | 'sprint' | 'task' | null
 }

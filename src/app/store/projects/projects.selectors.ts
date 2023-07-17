@@ -14,7 +14,7 @@ export const projectSelector = (id: string) => createSelector(
   (state: IProjectsState) => (state.projects.find((project: IProject) => project._id === id)),
 )
 
-export const addProjectFormOpenSelector = createSelector(
+export const sidebarFormOpenSelector = createSelector(
   selectorFeature,
-  (state: IProjectsState) => (state.addProjectFormOpen)
+  (state: IProjectsState) => (state.formSidebar)
 )
