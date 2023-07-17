@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { IStore } from '../../interfaces/store';
 import { Store } from '@ngrx/store';
-import { openAddProjectFormAction } from 'src/app/store/projects/projects.actions';
+import { openSidebarFormAction } from 'src/app/store/projects/projects.actions';
 
 @Component({
   selector: 'app-sidebar',
@@ -55,8 +55,6 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   public openFormSidebar(): void {
-    if (this.type === 'project') {
-      this.store.dispatch(openAddProjectFormAction());
-    }
+    this.store.dispatch(openSidebarFormAction({ form: this.type }));
   }
 }

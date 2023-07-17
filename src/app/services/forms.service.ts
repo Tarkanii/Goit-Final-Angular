@@ -16,6 +16,7 @@ export class FormsService {
   private numbersRegExp: RegExp = new RegExp('[0-9]');
   private capitalsRegExp: RegExp = new RegExp('[A-Z]');
   private specialSymbolsRegExp: RegExp = new RegExp('[\\W_]');
+  private dateRegExp: RegExp = new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}$');
   private passwordValidationRules!: IPasswordRules;
 
 
@@ -54,6 +55,25 @@ export class FormsService {
 
       if (contain_special_symbols && !this.specialSymbolsRegExp.test(control.value))
         return { containSpecSymbols: true };
+
+      return null;
+    }
+  }
+
+  public dateValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (!control?.value) return { required: true };
+
+      if (!this.dateRegExp.test(control.value)) return { format: true };
+
+      const [year, month, day] = control.value.split('-');
+      const currentDate = new Date();
+      if ( year < currentDate.getFullYear() || year > 2050 ) return { year: true };
+
+      if ( month < 1 || month > 12 ) return { month: true };
+
+      const amountOfDays = new Date(year, month, 0).getDate();
+      if ( day > amountOfDays || day < 1 ) return { day: true };
 
       return null;
     }

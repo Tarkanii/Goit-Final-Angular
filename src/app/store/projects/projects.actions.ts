@@ -22,5 +22,5 @@ export const changeProjectActionOnSuccess = createAction('[Projects] Change Proj
 export const changeProjectActionOnError = createAction('[Projects] Change Project Error', props<{ message: string }>());
 
 // Add project form actions
-export const openAddProjectFormAction = createAction('[Projects] Open Form');
-export const closeAddProjectFormAction = createAction('[Projects] Close Form');
+export const openSidebarFormAction = createAction('[Projects] Open Form', props<{ form: 'project' | 'sprint' | 'task' }>());
+export const closeSidebarFormAction = createAction('[Projects] Close Form');

@@ -42,6 +42,7 @@
 .project-information {
   width: 100%;
   padding-top: 30px;
+  padding-bottom: 80px;
 
   @include tablet {
     max-height: 100%;
@@ -109,7 +110,7 @@
     align-items: center;
     
     @include tablet {
-      margin-right: 10px;
+      margin-right: 20px;
     }
   }
 }

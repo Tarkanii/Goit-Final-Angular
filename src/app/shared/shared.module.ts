@@ -14,6 +14,8 @@ import { AppRoutingModule } from '../routing/app-routing.module';
 import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
 import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { AutofocusDirective } from './directives/autofocus.directive';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     InputDirective,
     InfoDialogComponent,
     ConfirmationDialogComponent,
-    SidebarComponent
+    SidebarComponent,
+    AutofocusDirective,
+    CalendarComponent
   ],
   exports: [
     InputDirective,
@@ -36,7 +40,9 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     AddButtonComponent,
     ProjectComponent,
     SidebarComponent,
-    SprintComponent
+    SprintComponent,
+    AutofocusDirective,
+    CalendarComponent
   ],
   imports: [
     CommonModule,

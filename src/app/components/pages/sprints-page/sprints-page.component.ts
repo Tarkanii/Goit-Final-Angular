@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { IProject } from 'src/app/shared/interfaces/project';
 import { IStore } from 'src/app/shared/interfaces/store';
-import { changeProjectAction } from 'src/app/store/projects/projects.actions';
+import { changeProjectAction, openSidebarFormAction } from 'src/app/store/projects/projects.actions';
 import { projectSelector, projectsSelector } from 'src/app/store/projects/projects.selectors';
 
 @Component({
@@ -58,6 +58,10 @@ export class SprintsPageComponent implements OnInit, OnDestroy {
       this.store.dispatch(changeProjectAction({ id: this.projectId, name: String(name.trim()) }));
     }
     this.destroyChangeNameForm();
+  }
+
+  public openSidebarForm(): void {
+    this.store.dispatch(openSidebarFormAction({ form: 'sprint' }));
   }
 
 }

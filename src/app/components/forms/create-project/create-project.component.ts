@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { IStore } from 'src/app/shared/interfaces/store';
-import { addProjectAction, closeAddProjectFormAction } from 'src/app/store/projects/projects.actions';
+import { addProjectAction, closeSidebarFormAction } from 'src/app/store/projects/projects.actions';
 
 @Component({
   selector: 'app-create-project',
@@ -48,8 +48,8 @@ export class CreateProjectComponent implements OnInit {
 
   // Cancel project creating
 
-  public cancelProjectCreating(): void {
-    this.store.dispatch(closeAddProjectFormAction());
+  public cancel(): void {
+    this.store.dispatch(closeSidebarFormAction());
   }
 
 }

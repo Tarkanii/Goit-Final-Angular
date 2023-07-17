@@ -1,0 +1,25 @@
+<div class="calendar-container">
+  <div class="header">
+    <h3 class="month">{{ 'LABELS.MONTHS.' + [currentMonth] | translate }} {{ currentYear }}</h3>
+    <div class="buttons-container">
+      <button id="previous" (click)="changeMonth('previous')"></button>
+      <button id="next" (click)="changeMonth('next')"></button>
+    </div>
+  </div>
+  <div class="main">
+    <ul class="week">
+      <li class="week-days" *ngFor="let day of ('LABELS.WEEK_DAYS' | translate)">{{ day }}</li>
+    </ul>
+    <ul class="days">
+      <li class="day" *ngFor="let day of daysList">
+        <button 
+          class="button" 
+          [ngClass]="{ inactive: day.inactive, selected: day.selected }"
+          (mouseup)="selectDate(day)"
+          (click)="selectDate(day)">
+          {{ day.value }}
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
