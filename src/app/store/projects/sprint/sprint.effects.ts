@@ -26,9 +26,19 @@ export class SprintEffects {
   private deleteSprint$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(actions.deleteSprintAction),
-      switchMap(({ type, ...body }) => this.requestsService.deleteSprint(body.id).pipe(
-        map(() => actions.deleteSprintActionOnSuccess({ name: body.name })),
+      switchMap(({ id, name }) => this.requestsService.deleteSprint(id).pipe(
+        map(() => actions.deleteSprintActionOnSuccess({ name })),
         catchError(({ error }: HttpErrorResponse) => of(actions.deleteSprintActionOnError({ message: error.message })))
+      )
+    ))
+  })
+
+  private changeSprint$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(actions.changeSprintAction),
+      switchMap(({ id, name }) => this.requestsService.changeSprint(id, name).pipe(
+        map(() => actions.changeSprintActionOnSuccess()),
+        catchError(({ error }: HttpErrorResponse) => of(actions.changeSprintActionOnError({ message: error.message })))
       )
     ))
   })

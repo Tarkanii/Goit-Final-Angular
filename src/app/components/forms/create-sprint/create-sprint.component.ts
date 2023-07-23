@@ -46,7 +46,7 @@ export class CreateSprintComponent implements OnInit, OnDestroy {
   public initForm(): void {
     this.createSprintForm = this.formBuilder.group({
       name: ['', Validators.required],
-      duration: ['', this.durationValidator()],
+      duration: ['', this.formsService.hoursValidator(1)],
       startDate: ['', this.formsService.dateValidator()],
       endDate: ['', [this.formsService.dateValidator(), this.endDateValidator()]]
     })
@@ -64,16 +64,6 @@ export class CreateSprintComponent implements OnInit, OnDestroy {
       const startDate = new Date(startDateControl.value).getTime();
       const endDate = new Date(control.value).getTime();
       if (startDate >= endDate) return { difference: true }
-
-      return null;
-    }
-  }
-
-  private durationValidator(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      if (!control?.value) return { required: true };
-
-      if (Number(control.value) < 1) return { min: true };
 
       return null;
     }

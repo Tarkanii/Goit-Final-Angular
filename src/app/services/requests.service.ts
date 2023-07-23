@@ -56,6 +56,10 @@ export class RequestsService {
     return this.http.post<{ sprint: ISprint }>(`${environment.backend_url}/api/sprints/`, body, { headers: this.autharizationHeader });
   }
 
+  public changeSprint(id: string, name: string): Observable<{ sprint: ISprint }> {
+    return this.http.patch<{ sprint: ISprint}>(`${environment.backend_url}/api/sprints/${id}/name`, { name }, { headers: this.autharizationHeader });
+  }
+
   public deleteSprint(id: string): Observable<void> {
     return this.http.delete<void>(`${environment.backend_url}/api/sprints/${id}`, { headers: this.autharizationHeader });
   }

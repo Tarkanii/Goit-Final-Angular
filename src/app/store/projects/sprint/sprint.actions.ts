@@ -9,4 +9,9 @@ export const addSprintActionOnError = createAction('[Sprint] Add Sprint Error', 
 // Delete sprint actions
 export const deleteSprintAction = createAction('[Sprint] Delete Sprint', props<{ id: string, name: string }>()); 
 export const deleteSprintActionOnSuccess = createAction('[Sprint] Delete Sprint Success', props<{ name: string }>()); 
-export const deleteSprintActionOnError = createAction('[Sprint] Delete Sprint Error', props<{ message: any }>()); 
+export const deleteSprintActionOnError = createAction('[Sprint] Delete Sprint Error', props<{ message: any }>());
+
+// Change sprint actions
+export const changeSprintAction = createAction('[Sprint] Change Sprint', props<{ id: string, name: string }>()); 
+export const changeSprintActionOnSuccess = createAction('[Sprint] Change Sprint Success');
+export const changeSprintActionOnError = createAction('[Sprint] Change Sprint Error', props<{ message: any }>());

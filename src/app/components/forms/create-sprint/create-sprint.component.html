@@ -28,7 +28,7 @@
           <p class="hint" *ngIf="getControl('startDate')?.errors?.['month']">{{ 'FORM.ERRORS.MONTH' | translate }}</p>
           <p class="hint" *ngIf="getControl('startDate')?.errors?.['day']">{{ 'FORM.ERRORS.REAL_DATE' | translate }}</p>
         </div>
-        <button class="arrow" [ngClass]="{ open: calendarOpen === 'start' }" 
+        <button class="arrow-button" [ngClass]="{ open: calendarOpen === 'start' }" 
           (click)="setCalendarOpen(calendarOpen === 'start' ? null : 'start')">
         </button>
         <app-calendar class="calendar" *ngIf="calendarOpen === 'start'"
@@ -47,7 +47,7 @@
           <p class="hint" *ngIf="getControl('endDate')?.errors?.['day']">{{ 'FORM.ERRORS.REAL_DATE' | translate }}</p>
           <p class="hint" *ngIf="mustShowDifferenceError()">{{ 'FORM.ERRORS.DIFFERENCE' | translate }}</p>
         </div>
-        <button class="arrow" [ngClass]="{ open: calendarOpen === 'end' }" 
+        <button class="arrow-button" [ngClass]="{ open: calendarOpen === 'end' }" 
           (click)="setCalendarOpen(calendarOpen === 'end' ? null : 'end')">
         </button>
         <app-calendar class="calendar" *ngIf="calendarOpen === 'end'"

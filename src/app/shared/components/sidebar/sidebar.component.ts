@@ -42,16 +42,24 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       )
   }
 
-  public navigateTo(url: string): void {
-    this.router.navigateByUrl(url);
+  public navigateBack(): void {
+    if (this.type === 'project') {
+      this.router.navigateByUrl('/');
+      return;
+    }
+ 
+    const projectPageUrl = this.router.url.split('sprints')[0] + 'sprints';
+    this.router.navigateByUrl(projectPageUrl);
   }
 
   public getLink(id: string): string {
     if (this.type === 'project') {
       return `/projects/${id}/sprints`;
+    } else {
+      const urlArray = this.router.url.split('/');
+      urlArray[urlArray.length - 2] = id;
+      return urlArray.join('/');
     }
-
-    return '../';
   }
 
   public openFormSidebar(): void {
