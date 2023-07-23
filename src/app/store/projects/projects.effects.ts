@@ -7,7 +7,7 @@ import { RequestsService } from "src/app/services/requests.service";
 import * as actions from "./projects.actions";
 import { IProject } from "src/app/shared/interfaces/project";
 import { InfoDialogComponent } from "src/app/shared/dialogs/info-dialog/info-dialog.component";
-import { addSprintActionOnSuccess, deleteSprintActionOnSuccess } from "./sprint/sprint.actions";
+import { addSprintActionOnSuccess, changeSprintActionOnSuccess, deleteSprintActionOnSuccess } from "./sprint/sprint.actions";
 
 
 @Injectable()
@@ -26,7 +26,8 @@ export class ProjectEffects {
         actions.deleteProjectActionOnSuccess,
         actions.changeProjectActionOnSuccess,
         addSprintActionOnSuccess,
-        deleteSprintActionOnSuccess
+        deleteSprintActionOnSuccess,
+        changeSprintActionOnSuccess
       ),
       switchMap(() => this.requestService.getProjects().pipe(
         map(({ projects }: { projects: IProject[] }) => actions.getProjectsActionOnSuccess({ projects })),

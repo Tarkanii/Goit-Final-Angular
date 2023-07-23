@@ -1,4 +1,4 @@
-<div class="sprint-container">
+<div class="sprint-container" (click)="navigateTo()">
   <h2 class="name">{{ sprint.name }}</h2>
   <div class="table">
     <div class="row">
@@ -14,5 +14,5 @@
       <p>{{ sprint.duration }}</p>
     </div>
   </div>
-  <button class="secondary-delete-button" (click)="delete()"></button>
+  <button class="secondary-delete-button" (click)="delete($event)"></button>
 </div>

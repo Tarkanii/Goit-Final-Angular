@@ -11,11 +11,13 @@ import { AuthPageComponent } from './pages/auth-page/auth-page.component';
 import { CreateProjectComponent } from './forms/create-project/create-project.component';
 import { FormSidebarComponent } from './form-sidebar/form-sidebar.component';
 import { CreateSprintComponent } from './forms/create-sprint/create-sprint.component';
+import { CreateTaskComponent } from './forms/create-task/create-task.component';
 
 
 
 @NgModule({
   declarations: [
+    CreateTaskComponent,
     CreateSprintComponent,
     CreateProjectComponent,
     ProjectsPageComponent,
@@ -35,6 +37,7 @@ import { CreateSprintComponent } from './forms/create-sprint/create-sprint.compo
     HeaderComponent,
     CreateProjectComponent,
     CreateSprintComponent,
+    CreateTaskComponent,
     FormSidebarComponent
   ]
 })

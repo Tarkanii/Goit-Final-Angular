@@ -1,0 +1,252 @@
+@import '../../../../scss/mixins';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%;
+  overflow: auto;
+  
+  @include tablet {
+    flex-direction: row;
+  }
+}
+
+.mobile-sidebar-container {
+  border-bottom: 1px solid var(--border-color);
+
+  @include tablet {
+    display: none;
+  }
+}
+
+.sidebar-container {
+  display: none;
+
+  @include tablet {
+    display: flex;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+
+  @include tablet {
+    flex-direction: row;
+  }
+}
+
+.sprint-information {
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 80px;
+
+  @include tablet {
+    max-height: 100%;
+    overflow: auto;
+  }
+  
+  & .name {
+    font-size: 26px;
+    font-weight: 500;
+
+    @include tablet {
+      font-size: 36px;
+    }
+  }
+
+  & .redacting-button {
+    margin-left: 20px;
+    min-width: 20px;
+  }
+
+  & .description {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 30px;
+    
+    @include tablet {
+      font-size: 18px;
+    }
+
+    @include desktop {
+      max-width: 400px;
+    }
+  }
+
+  & .add-button {
+    position: fixed;
+    bottom: 20px;
+    right: 5%;
+    z-index: 1;
+
+    @include tablet {
+      position: relative;
+      bottom: unset;
+      right: unset;
+    }
+  }
+}
+
+.sprint-switcher {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .index-container {
+    margin: 0 20px;
+
+    & .index {
+      font-size: 18px;
+    }
+
+    & .amount, & .divider {
+      color: var(--secondary-text-color);
+      font-size: 12px;
+    }
+
+    & .divider {
+      margin: 0 4px;
+    }
+  }
+
+  .back:hover, .forward:hover {
+    transform: scale(1.2);
+  }
+
+  .back {
+    width: 10px;
+    height: 14px;
+    background: url('../../../../assets/icons/left-arrow.svg') center no-repeat;
+  }
+
+  .forward {
+    width: 10px;
+    height: 14px;
+    background: url('../../../../assets/icons/right-arrow.svg') center no-repeat;
+  }
+}
+
+.sprint-actions-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  @include desktop {
+    justify-content: start;
+  }
+
+  & .date-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+
+    & .arrow-button {
+      margin-left: 10px;
+    }
+
+    & .calendar {
+      position: absolute;
+      top: 45px;
+      right: 0;
+    }
+
+
+    @include desktop {
+      margin-left: 40px;
+    }
+  }
+}
+
+.name-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+
+  @include tablet {
+    margin-bottom: 35px; 
+  }
+
+  & .name-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+    @include tablet {
+      margin-right: 20px;
+    }
+  }
+}
+
+.header {
+  @include tablet {
+    padding-left: 20px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+  }
+
+  @include desktop {
+    padding-left: 70px;
+    border-bottom: 1px solid var(--border-color);
+  }
+}
+
+.sections {
+  display: none;
+
+  @include desktop {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    
+    & li:not(:last-child) {
+      margin-right: 120px;
+    }
+  }
+}
+
+.chart-button {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: 1;
+
+  @include tablet {
+    left: unset;
+    bottom: 50px;
+    right: 50px;
+  }
+}
+
+.search-form {
+  
+  @include desktop {
+    max-width: 450px;
+    margin-bottom: 35px;
+  }
+
+  .form-label {
+    position: relative;
+
+    .search-button {
+      position: absolute;
+      top: 2px;
+      right: 10px;
+    }
+  }
+
+  .form-input {
+    padding-right: 30px;
+  }
+}

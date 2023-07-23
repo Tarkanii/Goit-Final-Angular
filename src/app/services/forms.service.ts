@@ -79,6 +79,16 @@ export class FormsService {
     }
   }
 
+  public hoursValidator(minHours: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (!control?.value) return { required: true };
+
+      if (Number(control.value) < minHours) return { min: true };
+
+      return null;
+    }
+  }
+
   public get passwordMinLength(): number {
     return this.passwordValidationRules?.min_length;
   }

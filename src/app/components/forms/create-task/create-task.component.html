@@ -1,1 +1,24 @@
-<p>create-task works!</p>
+<div class="container">
+  <h1 class="form-title">{{ 'LABELS.CREATING' | translate: { object: 'task' } }}</h1>
+  <form action="#" [formGroup]="createTaskForm" class="form">
+    <div class="form-field">
+      <label class="form-label" for="name">{{ 'FORM.TASK_NAME' | translate }}</label>
+      <input class="form-input" id="name" appInput [text]="true" formControlName="name">
+      <div class="hint-container">
+        <p class="hint" *ngIf="getControl('name')?.errors?.['required'] && getControl('name')?.touched">{{ 'FORM.ERRORS.REQUIRED_FIELD' | translate }}</p>
+      </div>
+    </div>
+    <div class="form-field">
+      <label class="form-label" for="hours">{{ 'FORM.SCHEDULED_HOURS' | translate }}</label>
+      <input class="form-input" id="hours" appInput formControlName="hours" [numberOnly]="true">
+      <div class="hint-container" *ngIf="getControl('hours')?.touched">
+        <p class="hint" *ngIf="getControl('hours')?.errors?.['required']">{{ 'FORM.ERRORS.REQUIRED_FIELD' | translate }}</p>
+        <p class="hint" *ngIf="getControl('hours')?.errors?.['min']">{{ 'FORM.ERRORS.MIN_VALUE' | translate: { min: minHoursValue } }}</p>
+      </div>
+    </div>
+  </form>
+  <div class="buttons-container">
+    <button class="accent-text-button" (click)="submit()">{{ 'BUTTONS.READY' | translate }}</button>
+    <button class="secondary-button" (click)="cancel()">{{ 'BUTTONS.CANCEL' | translate }}</button>
+  </div>
+</div>
