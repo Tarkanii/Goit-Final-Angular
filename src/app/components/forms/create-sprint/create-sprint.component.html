@@ -8,14 +8,6 @@
         <p class="hint" *ngIf="getControl('name')?.errors?.['required'] && getControl('name')?.touched">{{ 'FORM.ERRORS.REQUIRED_FIELD' | translate }}</p>
       </div>
     </div>
-    <div class="form-field">
-      <label class="form-label" for="duration">{{ 'FORM.DURATION' | translate }}</label>
-      <input class="form-input" id="duration" appInput [numberOnly]="true" formControlName="duration">
-      <div class="hint-container" *ngIf="getControl('duration')?.touched">
-        <p class="hint" *ngIf="getControl('duration')?.errors?.['required']">{{ 'FORM.ERRORS.REQUIRED_FIELD' | translate }}</p>
-        <p class="hint" *ngIf="getControl('duration')?.errors?.['min'] ">{{ 'FORM.ERRORS.MIN_DURATION' | translate }}</p>
-      </div>
-    </div>
     <div class="form-fields-set">
       <div class="form-field">
         <label class="form-label" for="startDate">{{ 'FORM.START_DATE' | translate }}</label>

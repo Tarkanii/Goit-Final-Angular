@@ -58,7 +58,7 @@ export class TaskComponent implements OnInit, OnChanges {
       return;
     }
 
-    this.store.dispatch(changeTaskSpentHoursAction({ id: this.task._id, date: this.getFormattedDate(), hours: newValue }));
+    this.store.dispatch(changeTaskSpentHoursAction({ id: this.task._id, date: this.getFormattedDate(), hours: Number(newValue) }));
   }
 
   private updateSpentHoursDayControl(): void {
