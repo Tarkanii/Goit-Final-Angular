@@ -8,6 +8,7 @@ import * as actions from "./projects.actions";
 import { IProject } from "src/app/shared/interfaces/project";
 import { InfoDialogComponent } from "src/app/shared/dialogs/info-dialog/info-dialog.component";
 import { addSprintActionOnSuccess, changeSprintActionOnSuccess, deleteSprintActionOnSuccess } from "./sprint/sprint.actions";
+import { addTaskActionOnSuccess, changeTaskActionOnSuccess, deleteTaskActionOnSuccess } from "./task/task.actions";
 
 
 @Injectable()
@@ -27,7 +28,10 @@ export class ProjectEffects {
         actions.changeProjectActionOnSuccess,
         addSprintActionOnSuccess,
         deleteSprintActionOnSuccess,
-        changeSprintActionOnSuccess
+        changeSprintActionOnSuccess,
+        addTaskActionOnSuccess,
+        changeTaskActionOnSuccess,
+        deleteTaskActionOnSuccess
       ),
       switchMap(() => this.requestService.getProjects().pipe(
         map(({ projects }: { projects: IProject[] }) => actions.getProjectsActionOnSuccess({ projects })),
@@ -74,11 +78,13 @@ export class ProjectEffects {
         actions.deleteProjectActionOnSuccess,
         actions.addProjectActionOnSuccess,
         addSprintActionOnSuccess,
-        deleteSprintActionOnSuccess
+        deleteSprintActionOnSuccess,
+        addTaskActionOnSuccess,
+        deleteTaskActionOnSuccess
       ),
       map(({ type, name }) => {
         const key = type.includes('Add') ? 'ADD' : 'DELETE';
-        const message = `${ type.includes('Project') ? 'PROJECTS' : 'SPRINTS'}.SUCCESS.${key}`
+        const message = `${ type.includes('Project') ? 'PROJECTS' : type.includes('Sprint') ? 'SPRINTS' : 'TASKS'}.SUCCESS.${key}`
         this.dialog.open(InfoDialogComponent, {
           width: '450px',
           data: {
@@ -111,7 +117,8 @@ export class ProjectEffects {
     return this.actions$.pipe(
       ofType(
         actions.addProjectActionOnSuccess,
-        addSprintActionOnSuccess
+        addSprintActionOnSuccess,
+        addTaskActionOnSuccess
       ),
       map(() => actions.closeSidebarFormAction())
     )

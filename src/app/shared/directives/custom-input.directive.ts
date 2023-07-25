@@ -15,7 +15,7 @@ export class InputDirective implements OnInit, OnDestroy {
 
   private spaceRegExp: RegExp= new RegExp(/[\ ]/g);
   private calendarRegExp: RegExp = new RegExp(/[^0-9\-]/g);
-  private numberOnlyRegExp: RegExp = new RegExp(/[^0-9\.]/g);
+  private numberOnlyRegExp: RegExp = new RegExp(/[^0-9\.\-]/g);
   private unsubscribe$: Subject<void> = new Subject();
 
   constructor(

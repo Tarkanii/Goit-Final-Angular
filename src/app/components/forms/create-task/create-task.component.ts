@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { FormsService } from 'src/app/services/forms.service';
 import { IStore } from 'src/app/shared/interfaces/store';
 import { closeSidebarFormAction } from 'src/app/store/projects/projects.actions';
+import { addTaskAction } from 'src/app/store/projects/task/task.actions';
 
 @Component({
   selector: 'app-create-task',
@@ -18,7 +20,8 @@ export class CreateTaskComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private formsService: FormsService,
-    private store: Store<IStore>
+    private store: Store<IStore>,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -39,7 +42,11 @@ export class CreateTaskComponent implements OnInit {
   public submit(): void {
     this.createTaskForm.markAllAsTouched();
     this.createTaskForm.updateValueAndValidity();
-    console.log(this.createTaskForm.value);
+    if (this.createTaskForm.invalid) return;
+
+    const sprintId = this.router.url.split('/').reverse()[1];
+    const { hours, name } = this.createTaskForm.value;
+    this.store.dispatch(addTaskAction({ sprint: sprintId, scheduledHours: hours, name}));
   }
 
   public cancel(): void {

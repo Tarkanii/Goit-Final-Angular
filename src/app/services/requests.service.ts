@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { IValidationResponse } from '../shared/interfaces/validation';
 import { IAuthRequestBody, ILoginResponseBody, IRegisterResponseBody } from '../shared/interfaces/user';
-import { ICreateSprintBody, IProject, ISprint } from '../shared/interfaces/project';
+import { ICreateSprintBody, IProject, ISprint, ITask } from '../shared/interfaces/project';
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +62,22 @@ export class RequestsService {
 
   public deleteSprint(id: string): Observable<void> {
     return this.http.delete<void>(`${environment.backend_url}/api/sprints/${id}`, { headers: this.autharizationHeader });
+  }
+
+  public addTask(body: { sprint: string, name: string, scheduledHours: number }): Observable<{ task: ITask }> {
+    return this.http.post<{ task: ITask }>(`${environment.backend_url}/api/tasks`, body, { headers: this.autharizationHeader });
+  }
+
+  public changeTaskName(id: string, name: string): Observable<{ task: ITask }> {
+    return this.http.patch<{ task: ITask }>(`${environment.backend_url}/api/tasks/${id}/name`, { name }, { headers: this.autharizationHeader });
+  }
+
+  public changeTaskSpentHours(id: string, body: { date: string, hours: number }): Observable<{ task: ITask }> {
+    return this.http.patch<{ task: ITask }>(`${environment.backend_url}/api/tasks/${id}/spent`, body, { headers: this.autharizationHeader });
+  }
+
+  public deleteTask(id: string): Observable<void> {
+    return this.http.delete<void>(`${environment.backend_url}/api/tasks/${id}`, { headers: this.autharizationHeader });
   }
 
   public convertMessageFromBackend(message: string): string {

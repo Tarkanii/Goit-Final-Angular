@@ -3,6 +3,7 @@ import { UserEffects} from './user/user.effects';
 import { projectsReducer } from './projects/projects.reducer';
 import { ProjectEffects } from './projects/projects.effects';
 import { SprintEffects } from './projects/sprint/sprint.effects';
+import { TaskEffects } from './projects/task/task.effects';
 
 export const reducers = {
   user: userReducer,
@@ -12,5 +13,6 @@ export const reducers = {
 export const effects = [
   UserEffects,
   ProjectEffects,
-  SprintEffects
+  SprintEffects,
+  TaskEffects
 ]

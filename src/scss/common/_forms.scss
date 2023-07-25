@@ -63,6 +63,17 @@
     color: var(--error-color);
   }
 
+  &.spent-hours {
+    
+    &.ng-invalid + .hint-container {
+      color: var(--error-color);
+    }
+
+    &.ng-invalid {
+      border-bottom: 1px solid var(--error-color);
+    }
+  }
+
   @include tablet {
     font-size: 18px;
   }

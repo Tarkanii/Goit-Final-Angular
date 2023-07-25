@@ -18,10 +18,12 @@
           </p>
           <button class="forward" (click)="switchSprint('increase')"></button>
         </div>
-        <div class="date-container">
-          <div class="date">{{ sprintDate| date: 'dd.MM.yyyy' }}</div>
-          <button class="arrow-button" [ngClass]="{ open: calendarOpen }" (click)="calendarOpen = !calendarOpen">
-          </button>
+        <div class="date-picker">
+          <div class="date-container" (click)="calendarOpen = !calendarOpen">
+            <div class="date">{{ sprintDate| date: 'dd.MM.yyyy' }}</div>
+            <button class="arrow-button" [ngClass]="{ open: calendarOpen }">
+            </button>
+          </div>
           <app-calendar class="calendar" *ngIf="calendarOpen"
             [selectedDate]="sprintDate"
             [startDate]="(sprint$ | async)?.startDate || null"
@@ -61,6 +63,11 @@
         <li [innerHTML]="'LABELS.TASK_SECTIONS.SPENT_TOTAL' | translate"></li>
       </ul>
     </div>
+    <ul class="tasks">
+      <li class="task" *ngFor="let task of (sprint$ | async)?.tasks">
+        <app-task [task]="task" [sprintDate]="sprintDate"></app-task>
+      </li>
+    </ul>
   </div>
   <button class="chart-button"></button>
 </div>

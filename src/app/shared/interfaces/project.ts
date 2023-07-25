@@ -10,7 +10,16 @@ export interface ISprint {
   name: string,
   startDate: string,
   endDate: string,
-  duration: string
+  duration: string,
+  tasks: ITask[]
+}
+
+export interface ITask {
+  _id: string,
+  name: string,
+  scheduledHours: string,
+  totalHours: string,
+  spentHoursDay: { date: string, hours: number }[]
 }
 
 export interface ICreateSprintBody {
