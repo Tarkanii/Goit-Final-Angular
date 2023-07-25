@@ -47,8 +47,11 @@ export class TasksPageComponent implements OnInit {
     this.sprints$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((sprints: ISprint[]) => {
+        const mustUpdateIndex = !this.sprints.length;
         this.sprints = sprints;
-        this.sprintIndex$.next(this.getSprintIndex(this.sprintId))
+        if (mustUpdateIndex) {
+          this.sprintIndex$.next(this.getSprintIndex(this.sprintId));
+        }
       })
 
     this.sprintIndex$

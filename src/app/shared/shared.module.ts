@@ -16,6 +16,7 @@ import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confi
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { TextareaDirective } from './directives/textarea.directive';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { CalendarComponent } from './components/calendar/calendar.component';
     ConfirmationDialogComponent,
     SidebarComponent,
     AutofocusDirective,
-    CalendarComponent
+    CalendarComponent,
+    TextareaDirective
   ],
   exports: [
     InputDirective,
@@ -42,7 +44,9 @@ import { CalendarComponent } from './components/calendar/calendar.component';
     SidebarComponent,
     SprintComponent,
     AutofocusDirective,
-    CalendarComponent
+    CalendarComponent,
+    TaskComponent,
+    TextareaDirective
   ],
   imports: [
     CommonModule,

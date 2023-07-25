@@ -16,7 +16,13 @@
     "TASK_SECTIONS": {
       "TASK": "Task", 
       "SCHEDULED": "Scheduled<br>hours", 
-      "SPENT_DAY": "Spent<br>hours/ {{day}}", 
+      "SPENT_DAY": "Spent<br>hours / {{day}}", 
+      "SPENT_TOTAL": "Hours spent"
+    },
+    "TASK_KEYS": {
+      "TASK": "Task", 
+      "SCHEDULED": "Scheduled hours", 
+      "SPENT_DAY": "Spent hours / {{day}}", 
       "SPENT_TOTAL": "Hours spent"
     }
   },
@@ -43,6 +49,7 @@
       "DIFFERENCE": "The end date should go after the start date",
       "MIN_DURATION": "Duration shoud be more than 1 hour",
       "MIN_VALUE": "Min value is {{min}}",
+      "MAX_VALUE": "Max value is {{max}}",
       "MIN_LENGTH_PASSWORD": "Password should be at least {{amount}} charactes",
       "PASSWORD_MUST_CONTAIN_NUMBERS": "Password should contain numbers",
       "PASSWORD_MUST_CONTAIN_CAPITALS": "Password should contain english capital letters",
@@ -75,6 +82,13 @@
     "SUCCESS": {
       "ADD":"Sprint {{name}} created successfully!",
       "DELETE": "Sprint {{name}} deleted successfully!"
+    }
+  },
+  "TASKS": {
+    "DELETE_CONFIRMATION": "Do you want to delete this task?",
+    "SUCCESS": {
+      "ADD":"Task {{name}} created successfully!",
+      "DELETE": "Task {{name}} deleted successfully!"
     }
   },
   "BUTTONS": {

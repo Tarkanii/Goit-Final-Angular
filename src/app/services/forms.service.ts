@@ -79,11 +79,13 @@ export class FormsService {
     }
   }
 
-  public hoursValidator(minHours: number): ValidatorFn {
+  public hoursValidator(minHours: number, maxHours?: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       if (!control?.value) return { required: true };
 
       if (Number(control.value) < minHours) return { min: true };
+
+      if (maxHours && Number(control.value) > maxHours) return { max: true }
 
       return null;
     }

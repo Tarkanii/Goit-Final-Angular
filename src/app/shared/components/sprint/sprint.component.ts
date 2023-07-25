@@ -36,7 +36,8 @@ export class SprintComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: {
         question: 'SPRINTS.DELETE_CONFIRMATION'
-      }
+      },
+      maxWidth: 450
     });
 
     dialogRef.afterClosed()
