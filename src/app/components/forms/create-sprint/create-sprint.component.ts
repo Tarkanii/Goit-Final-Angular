@@ -46,7 +46,6 @@ export class CreateSprintComponent implements OnInit, OnDestroy {
   public initForm(): void {
     this.createSprintForm = this.formBuilder.group({
       name: ['', Validators.required],
-      duration: ['', this.formsService.hoursValidator(1)],
       startDate: ['', this.formsService.dateValidator()],
       endDate: ['', [this.formsService.dateValidator(), this.endDateValidator()]]
     })
