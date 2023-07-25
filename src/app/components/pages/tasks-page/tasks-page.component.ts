@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable, Subject, filter, takeUntil } from 'rxjs';
@@ -22,6 +22,7 @@ export class TasksPageComponent implements OnInit {
   public sprintId: string = '';
   public sprintDate: Date | null = null;
   public changeNameForm: FormGroup | null = null;
+  public searchControl: FormControl = this.formBuilder.control(''); 
   public calendarOpen: boolean = false;
 
   private sprints: ISprint[] = [];
@@ -61,6 +62,7 @@ export class TasksPageComponent implements OnInit {
         )
       .subscribe((index: number) => {
         this.calendarOpen = false;
+        this.searchControl.setValue('');
         const { startDate, endDate } = this.sprints[index - 1];
         this.setInitialSprintDate(startDate, endDate);
       })
@@ -101,6 +103,12 @@ export class TasksPageComponent implements OnInit {
     } else if (currentDate.getTime() < start.getTime()) {
       this.sprintDate = start;
     }
+  }
+
+  public filterFunc(): (value: string) => boolean {
+    return (value: string) => {
+      return value.toLowerCase().includes(this.searchControl.value.toLowerCase().trim());
+    };
   }
 
   public setSprintDate(date: Date): void {

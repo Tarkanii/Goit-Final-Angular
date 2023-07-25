@@ -50,12 +50,10 @@
         </div>
         <app-add-button class="add-button" addType="task" [mainButton]="true" (buttonClick)="openSidebarForm()"></app-add-button>
       </div>
-      <form action="#" class="search-form form">
-        <label for="search" class="form-label">
-          <input class="form-input" id="search">
-          <button class="search-button"></button>
-        </label>
-      </form>
+      <div class="search-container">
+        <input class="form-input" id="search" [formControl]="searchControl">
+        <span class="search-icon"></span>
+      </div>
       <ul class="sections">
         <li [innerHTML]="'LABELS.TASK_SECTIONS.TASK' | translate"></li>
         <li [innerHTML]="'LABELS.TASK_SECTIONS.SCHEDULED' | translate"></li>
@@ -64,9 +62,11 @@
       </ul>
     </div>
     <ul class="tasks">
-      <li class="task" *ngFor="let task of (sprint$ | async)?.tasks">
-        <app-task [task]="task" [sprintDate]="sprintDate"></app-task>
-      </li>
+      <ng-container *ngFor="let task of (sprint$ | async)?.tasks">
+        <li class="task" *ngIf="task.name | filter: filterFunc()" >
+          <app-task [task]="task" [sprintDate]="sprintDate"></app-task>
+        </li>
+      </ng-container>
     </ul>
   </div>
   <button class="chart-button"></button>

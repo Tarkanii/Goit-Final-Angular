@@ -17,6 +17,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { TextareaDirective } from './directives/textarea.directive';
+import { FilterPipe } from './pipes/filter.pipe';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { TextareaDirective } from './directives/textarea.directive';
     SidebarComponent,
     AutofocusDirective,
     CalendarComponent,
-    TextareaDirective
+    TextareaDirective,
+    FilterPipe
   ],
   exports: [
     InputDirective,
@@ -46,7 +48,8 @@ import { TextareaDirective } from './directives/textarea.directive';
     AutofocusDirective,
     CalendarComponent,
     TaskComponent,
-    TextareaDirective
+    TextareaDirective,
+    FilterPipe
   ],
   imports: [
     CommonModule,
