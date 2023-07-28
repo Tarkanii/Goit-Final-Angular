@@ -18,6 +18,7 @@ import { AutofocusDirective } from './directives/autofocus.directive';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { TextareaDirective } from './directives/textarea.directive';
 import { FilterPipe } from './pipes/filter.pipe';
+import { TruncatePipe } from './pipes/truncate.pipe';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     AutofocusDirective,
     CalendarComponent,
     TextareaDirective,
-    FilterPipe
+    FilterPipe,
+    TruncatePipe
   ],
   exports: [
     InputDirective,
@@ -49,7 +51,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     CalendarComponent,
     TaskComponent,
     TextareaDirective,
-    FilterPipe
+    FilterPipe,
+    TruncatePipe
   ],
   imports: [
     CommonModule,

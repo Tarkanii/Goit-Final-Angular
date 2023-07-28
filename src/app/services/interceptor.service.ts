@@ -7,6 +7,7 @@ import { setLoadingAction } from '../store/general/general.actions';
 import { MatDialog } from '@angular/material/dialog';
 import { InfoDialogComponent } from '../shared/dialogs/info-dialog/info-dialog.component';
 import { logoutAction } from '../store/user/user.actions';
+import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class InterceptorService implements HttpInterceptor {
 
   constructor(
     private store: Store<IStore>,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private scrollStrategyOptions: ScrollStrategyOptions
   ) { }
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -38,11 +40,12 @@ export class InterceptorService implements HttpInterceptor {
         if (error.status === 401 && !error.url?.includes('/logout')) {
           this.dialog.closeAll();
           this.dialog.open(InfoDialogComponent, {
-            width: '450px',
             data: {
               message: `LABELS.ERRORS.INVALID_TOKEN`
             },
-            autoFocus: false
+            width: '450px',
+            autoFocus: false,
+            scrollStrategy: this.scrollStrategyOptions.noop()
           })
 
           this.store.dispatch(logoutAction());
@@ -51,11 +54,12 @@ export class InterceptorService implements HttpInterceptor {
         if (error.status === 500 || !error.status) {
           this.dialog.closeAll();
           this.dialog.open(InfoDialogComponent, {
-            width: '450px',
             data: {
               message: `LABELS.ERRORS.SERVER_ERROR`
             },
-            autoFocus: false
+            width: '450px',
+            autoFocus: false,
+            scrollStrategy: this.scrollStrategyOptions.noop()
           })
         }
 

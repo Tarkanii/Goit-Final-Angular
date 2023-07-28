@@ -5,6 +5,7 @@ import { filter, take } from 'rxjs';
 import { deleteProjectAction } from 'src/app/store/projects/projects.actions';
 import { ConfirmationDialogComponent } from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { Router } from '@angular/router';
+import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class ProjectComponent implements OnInit {
   constructor(
     private store: Store,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private scrollStrategyOptions: ScrollStrategyOptions
   ) { }
 
   ngOnInit(): void {
@@ -30,10 +32,12 @@ export class ProjectComponent implements OnInit {
   public delete(event: Event): void {
     event.stopPropagation();
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      width: '450px',
       data: {
         question: "PROJECTS.DELETE_CONFIRMATION"
-      }
+      },
+      width: '450px',
+      autoFocus: false,
+      scrollStrategy: this.scrollStrategyOptions.noop()
     });
 
     dialogRef.afterClosed()

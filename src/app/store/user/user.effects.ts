@@ -10,6 +10,7 @@ import * as userActions from './user.actions';
 import { RequestsService } from "src/app/services/requests.service";
 import { ILoginResponseBody, IRegisterResponseBody } from "src/app/shared/interfaces/user";
 import { InfoDialogComponent } from "src/app/shared/dialogs/info-dialog/info-dialog.component";
+import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 
 
 @Injectable()
@@ -19,7 +20,8 @@ export class UserEffects {
     private actions$: Actions,
     private requestService: RequestsService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private scrollStrategyOptions: ScrollStrategyOptions
   ) {}
 
   private register$ = createEffect(() => {
@@ -71,7 +73,6 @@ export class UserEffects {
         const button = type.includes('Login') ? null : 'BUTTONS.LOG_IN';
 
         this.dialog.open(InfoDialogComponent, {
-          width: '450px',
           data: {
             type: 'auth',
             email: email,
@@ -79,7 +80,9 @@ export class UserEffects {
             button,
             callback: type.includes('Login') ? null : () => this.router.navigateByUrl(link)
           },
-          autoFocus: false
+          width: '450px',
+          autoFocus: false,
+          scrollStrategy: this.scrollStrategyOptions.noop()
         });
 
         type.includes('Login') && this.router.navigateByUrl(link);
@@ -97,13 +100,14 @@ export class UserEffects {
       map(({ type, error, email }) => {
         const base = `AUTH.${type.includes('Login') ? 'LOGIN' : 'REGISTER'}`;
         this.dialog.open(InfoDialogComponent, {
-          width: '450px',
           data: {
             type: 'auth',
             email,
             message: `${base}.${this.requestService.convertMessageFromBackend(error.error.message)}`,
           },
-          autoFocus: false
+          width: '450px',
+          autoFocus: false,
+          scrollStrategy: this.scrollStrategyOptions.noop()
         })
       })
     )

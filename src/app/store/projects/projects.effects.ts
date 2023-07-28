@@ -9,6 +9,7 @@ import { IProject } from "src/app/shared/interfaces/project";
 import { InfoDialogComponent } from "src/app/shared/dialogs/info-dialog/info-dialog.component";
 import { addSprintActionOnSuccess, changeSprintActionOnSuccess, deleteSprintActionOnSuccess } from "./sprint/sprint.actions";
 import { addTaskActionOnSuccess, changeTaskActionOnSuccess, deleteTaskActionOnSuccess } from "./task/task.actions";
+import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 
 
 @Injectable()
@@ -17,7 +18,8 @@ export class ProjectEffects {
   constructor (
     private requestService: RequestsService,
     private actions$: Actions,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private scrollStrategyOptions: ScrollStrategyOptions
   ) {}
 
   private getProjects$ = createEffect(() => {
@@ -86,11 +88,13 @@ export class ProjectEffects {
         const key = type.includes('Add') ? 'ADD' : 'DELETE';
         const message = `${ type.includes('Project') ? 'PROJECTS' : type.includes('Sprint') ? 'SPRINTS' : 'TASKS'}.SUCCESS.${key}`
         this.dialog.open(InfoDialogComponent, {
-          width: '450px',
           data: {
             message,
             name
-          }
+          },
+          width: '450px',
+          autoFocus: false,
+          scrollStrategy: this.scrollStrategyOptions.noop()
         })
       })
     )
@@ -105,10 +109,12 @@ export class ProjectEffects {
       map(({ error }) => {
         const base = "PROJECTS.ERROR";
         this.dialog.open(InfoDialogComponent, {
-          width: '450px',
           data: {
             message: `${base}.${this.requestService.convertMessageFromBackend(error.error.message)}`
-          }
+          },
+          width: '450px',
+          autoFocus: false,
+          scrollStrategy: this.scrollStrategyOptions.noop()
         })
       })
     )
