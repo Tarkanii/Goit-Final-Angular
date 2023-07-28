@@ -13,4 +13,4 @@
     </a>
   </li>
 </ul>
-<app-add-button class="add-button-container" [addType]="type" (buttonClick)="openFormSidebar()"></app-add-button>
+<app-add-button class="add-button-container" [addType]="type" (buttonClick)="openFormSidebar()" *ngIf="list?.length"></app-add-button>

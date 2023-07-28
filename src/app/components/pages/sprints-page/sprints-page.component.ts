@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { IProject } from 'src/app/shared/interfaces/project';
 import { IStore } from 'src/app/shared/interfaces/store';
+import { loadingSelector } from 'src/app/store/general/general.selectors';
 import { changeProjectAction, openSidebarFormAction } from 'src/app/store/projects/projects.actions';
 import { projectSelector, projectsSelector } from 'src/app/store/projects/projects.selectors';
 
@@ -15,6 +16,7 @@ import { projectSelector, projectsSelector } from 'src/app/store/projects/projec
 })
 export class SprintsPageComponent implements OnInit, OnDestroy {
 
+  public loading$: Observable<boolean> = this.store.select(loadingSelector);
   public projects$: Observable<IProject[]> = this.store.select(projectsSelector);
   public project$!: Observable<IProject | undefined>;
   public changeNameForm: FormGroup | null = null;

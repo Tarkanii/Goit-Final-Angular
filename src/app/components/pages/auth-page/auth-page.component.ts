@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsService } from 'src/app/services/forms.service';
 
 @Component({
   selector: 'app-auth-page',
@@ -8,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private formService: FormsService
+  ) { }
 
   ngOnInit(): void {
+    this.formService.getValidationRules();
   }
 
 }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -12,6 +12,7 @@ import { AppRoutingModule } from './routing/app-routing.module';
 import { AppComponent } from './app.component';
 import { ComponentsModule } from './components/components.module';
 import { effects, reducers } from './store';
+import { InterceptorService } from './services/interceptor.service';
 
 
 function HttpLoaderFactory(http: HttpClient) {
@@ -40,7 +41,9 @@ function HttpLoaderFactory(http: HttpClient) {
     MatDialogModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 

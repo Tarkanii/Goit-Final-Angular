@@ -22,9 +22,7 @@ export class FormsService {
 
   constructor(
     private requestsService: RequestsService
-  ) {
-    this.getValidationRules();
-  }
+  ) { }
 
   // Validators
 
@@ -95,7 +93,8 @@ export class FormsService {
     return this.passwordValidationRules?.min_length;
   }
 
-  private getValidationRules(): void {
+  public getValidationRules(): void {
+    if (this.validationRulesObtained$.value) return;
     this.requestsService.getValidationRules()
       .pipe(
         map(({ data }: IValidationResponse) => data),

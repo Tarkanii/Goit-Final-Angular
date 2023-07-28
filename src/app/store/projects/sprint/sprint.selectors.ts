@@ -10,7 +10,7 @@ export const sprintsSelector = (projectId: string) => createSelector(
     }
 
     const idx = projects.findIndex((project: IProject) => project._id === projectId);
-    return projects[idx].sprints;
+    return projects[idx]?.sprints ?? [];
   }
 )
 
