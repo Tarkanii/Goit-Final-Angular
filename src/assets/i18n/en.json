@@ -25,6 +25,10 @@
       "SCHEDULED": "Scheduled hours", 
       "SPENT_DAY": "Spent hours / {{day}}", 
       "SPENT_TOTAL": "Hours spent"
+    },
+    "ERRORS": {
+      "SERVER_ERROR": "Server error. Try again later",
+      "INVALID_TOKEN": "User is not authorized. Please log in."
     }
   },
   "FORM": {

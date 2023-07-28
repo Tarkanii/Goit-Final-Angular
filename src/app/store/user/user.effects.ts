@@ -3,7 +3,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
 import { of } from 'rxjs';
-import { catchError, exhaustMap, map, mergeMap } from "rxjs/operators";
+import { catchError, exhaustMap, filter, map, mergeMap } from "rxjs/operators";
 import { createEffect, ofType } from "@ngrx/effects";
 import { Actions } from "@ngrx/effects";
 import * as userActions from './user.actions';
@@ -28,7 +28,7 @@ export class UserEffects {
       exhaustMap(({ type, ...body }) => {
         return this.requestService.register(body).pipe(
           map(({ user }: IRegisterResponseBody) => userActions.registerOnSuccess({ email: user.email })),
-          catchError(({ error }: HttpErrorResponse) => of(userActions.registerOnError({ email: body.email, message: error.message })))
+          catchError((error: HttpErrorResponse) => of(userActions.registerOnError({ email: body.email, error })))
         )
       })
     )
@@ -43,7 +43,7 @@ export class UserEffects {
             this.requestService.setToken(user.token);
             return userActions.loginOnSuccess({ email: user.email, token: user.token })
           }),
-          catchError(({ error }: HttpErrorResponse) => of(userActions.loginOnError({ email: body.email, message: error.message })))
+          catchError((error: HttpErrorResponse) => of(userActions.loginOnError({ email: body.email, error })))
         )
       })
     )
@@ -93,14 +93,15 @@ export class UserEffects {
         userActions.loginOnError, 
         userActions.registerOnError
       ),
-      map(({ type, message, email }) => {
+      filter(({ error }) => (!!error.status && error.status !== 401 && error.status < 500)),
+      map(({ type, error, email }) => {
         const base = `AUTH.${type.includes('Login') ? 'LOGIN' : 'REGISTER'}`;
         this.dialog.open(InfoDialogComponent, {
           width: '450px',
           data: {
             type: 'auth',
             email,
-            message: `${base}.${this.requestService.convertMessageFromBackend(message)}`,
+            message: `${base}.${this.requestService.convertMessageFromBackend(error.error.message)}`,
           },
           autoFocus: false
         })
