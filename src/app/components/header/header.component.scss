@@ -74,6 +74,9 @@
 .username {
   font-size: 14px;
   font-weight: 600;
+  max-width: 75%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .icon {

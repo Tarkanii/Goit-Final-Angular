@@ -71,7 +71,12 @@
 
   @include tablet {
     background-image: url('../../../../assets/images/waves.png');
+    background-size: 752px 184px;
     background-repeat: no-repeat;
+  }
+
+  @include desktop {
+    background-size: 752px 230px;
   }
 
   &:nth-child(3n + 1) {
@@ -111,7 +116,7 @@
   }
 
   &:nth-child(4n + 3) {
-    background-position: -435px 75px;
+    background-position: -445px 75px;
     
     @include desktop {
       background-position: -87px 75px;

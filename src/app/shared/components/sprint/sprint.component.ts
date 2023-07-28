@@ -7,6 +7,7 @@ import { ISprint } from '../../interfaces/project';
 import { ConfirmationDialogComponent } from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { IStore } from '../../interfaces/store';
 import { deleteSprintAction } from 'src/app/store/projects/sprint/sprint.actions';
+import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-sprint',
@@ -21,7 +22,8 @@ export class SprintComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private store: Store<IStore>,
-    private router: Router
+    private router: Router,
+    private scrollStrategyOptions: ScrollStrategyOptions
   ) { }
 
   ngOnInit(): void {
@@ -37,7 +39,9 @@ export class SprintComponent implements OnInit {
       data: {
         question: 'SPRINTS.DELETE_CONFIRMATION'
       },
-      maxWidth: 450
+      width: '450px',
+      autoFocus: false,
+      scrollStrategy: this.scrollStrategyOptions.noop()
     });
 
     dialogRef.afterClosed()

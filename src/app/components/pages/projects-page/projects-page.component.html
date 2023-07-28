@@ -6,8 +6,8 @@
   <ul class="projects-grid">
     <li class="project-card" *ngFor="let project of projects$ | async">
       <app-project
-        [name]="project.name" 
-        [description]="project.description"
+        [name]="project.name | truncate: 22 " 
+        [description]="project.description | truncate: 50"
         [id]="project._id"
         >
       </app-project>

@@ -8,6 +8,7 @@ import { ConfirmationDialogComponent } from '../../dialogs/confirmation-dialog/c
 import { IStore } from '../../interfaces/store';
 import { changeTaskNameAction, changeTaskSpentHoursAction, deleteTaskAction } from 'src/app/store/projects/task/task.actions';
 import { FormsService } from 'src/app/services/forms.service';
+import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-task',
@@ -28,7 +29,8 @@ export class TaskComponent implements OnInit, OnChanges {
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
     private store: Store<IStore>,
-    private formsService: FormsService
+    private formsService: FormsService,
+    private scrollStrategyOptions: ScrollStrategyOptions
   ) { }
 
   ngOnInit(): void {
@@ -81,7 +83,9 @@ export class TaskComponent implements OnInit, OnChanges {
       data: {
         question: 'TASKS.DELETE_CONFIRMATION'
       },
-      maxWidth: 450
+      width: '450px',
+      autoFocus: false,
+      scrollStrategy: this.scrollStrategyOptions.noop()
     });
 
     dialogRef.afterClosed()

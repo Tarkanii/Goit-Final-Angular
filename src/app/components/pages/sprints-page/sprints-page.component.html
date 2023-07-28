@@ -31,8 +31,8 @@
         <span class="text">{{ 'BUTTONS.ADD_PEOPLE' | translate }}</span>
       </button>
       <ul class="sprints-grid">
-        <li class="sprint-card" *ngFor="let sprint of (project$ | async)?.sprints">
-          <app-sprint [sprint]="sprint"></app-sprint>
+        <li class="sprint-card-container" *ngFor="let sprint of (project$ | async)?.sprints">
+          <app-sprint class="sprint-card" [sprint]="sprint"></app-sprint>
         </li>
       </ul>
     </ng-container>
