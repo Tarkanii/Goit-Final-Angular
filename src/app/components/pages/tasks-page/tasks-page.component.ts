@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable, Subject, filter, takeUntil } from 'rxjs';
 import { ISprint } from 'src/app/shared/interfaces/project';
 import { IStore } from 'src/app/shared/interfaces/store';
+import { loadingSelector } from 'src/app/store/general/general.selectors';
 import { openSidebarFormAction } from 'src/app/store/projects/projects.actions';
 import { changeSprintAction } from 'src/app/store/projects/sprint/sprint.actions';
 import { sprintSelector, sprintsSelector } from 'src/app/store/projects/sprint/sprint.selectors';
@@ -16,6 +17,7 @@ import { sprintSelector, sprintsSelector } from 'src/app/store/projects/sprint/s
 })
 export class TasksPageComponent implements OnInit {
 
+  public loading$: Observable<boolean> = this.store.select(loadingSelector);
   public sprint$!: Observable<ISprint | null>;
   public sprints$!: Observable<ISprint[]>;
   public sprintIndex$: BehaviorSubject<number> = new BehaviorSubject<number>(0);

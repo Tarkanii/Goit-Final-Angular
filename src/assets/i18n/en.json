@@ -1,5 +1,6 @@
 {
   "LABELS": {
+    "NOT_FOUND": "{{object}} not found",
     "ENTER": "Enter",
     "REGISTRATION": "Registration",
     "NO_ACCOUNT": "No account?",

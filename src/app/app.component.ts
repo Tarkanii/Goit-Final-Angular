@@ -8,6 +8,7 @@ import { setUserStateAction } from './store/user/user.actions';
 import { RequestsService } from './services/requests.service';
 import { getProjectsAction } from './store/projects/projects.actions';
 import { sidebarFormOpenSelector } from './store/projects/projects.selectors';
+import { loadingSelector } from './store/general/general.selectors';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ import { sidebarFormOpenSelector } from './store/projects/projects.selectors';
 })
 export class AppComponent implements OnDestroy {
   
+  public loading$: Observable<boolean> = this.store.select(loadingSelector);
   public sidebarFormOpen$: Observable<string | null> = this.store.select(sidebarFormOpenSelector);
   private unsubscribe$: Subject<void> = new Subject();
 

@@ -201,7 +201,6 @@
 
   @include desktop {
     padding-left: 70px;
-    border-bottom: 1px solid var(--border-color);
   }
 }
 
@@ -271,6 +270,7 @@
   }
 
   @include desktop {
+    border-top: 1px solid var(--border-color);
     padding-left: 70px;
   }
 
