@@ -18,7 +18,7 @@ export class TaskEffects {
       ofType(actions.addTaskAction),
       exhaustMap(({ type, ...body }) => this.requestsService.addTask(body).pipe(
         map(({ task }) => actions.addTaskActionOnSuccess({ name: task.name })),
-        catchError(({ error }: HttpErrorResponse) => of(actions.addTaskActionOnError({ message: error.message })))
+        catchError((error: HttpErrorResponse) => of(actions.addTaskActionOnError({ error })))
       ))
     )
   })
@@ -28,7 +28,7 @@ export class TaskEffects {
       ofType(actions.deleteTaskAction),
       exhaustMap(({ id, name }) => this.requestsService.deleteTask(id).pipe(
         map(() => actions.deleteTaskActionOnSuccess({ name })),
-        catchError(({ error }: HttpErrorResponse) => of(actions.deleteTaskActionOnError({ message: error.message })))
+        catchError((error: HttpErrorResponse) => of(actions.deleteTaskActionOnError({ error })))
       ))
     )
   })
@@ -39,7 +39,7 @@ export class TaskEffects {
       exhaustMap(({ id, name }) => {
         return this.requestsService.changeTaskName(id, name).pipe(
           map(() => actions.changeTaskActionOnSuccess()),
-          catchError(({ error }: HttpErrorResponse) => of(actions.changeTaskActionOnError({ message: error.message })))
+          catchError((error: HttpErrorResponse) => of(actions.changeTaskActionOnError({ error })))
         )
       })
     )
@@ -51,7 +51,7 @@ export class TaskEffects {
       exhaustMap(({ type, id, ...body  }) => {
         return this.requestsService.changeTaskSpentHours(id, body).pipe(
           map(() => actions.changeTaskActionOnSuccess()),
-          catchError(({ error }: HttpErrorResponse) => of(actions.changeTaskActionOnError({ message: error.message })))
+          catchError((error: HttpErrorResponse) => of(actions.changeTaskActionOnError({ error })))
         )
       })
     )

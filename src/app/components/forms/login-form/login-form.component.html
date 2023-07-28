@@ -17,6 +17,6 @@
       </div>
     </div>
   </form>
-  <button class="accent-text-button" (click)="submit()">{{ 'BUTTONS.ENTER' | translate }}</button>
+  <button class="accent-text-button" (click)="submit()" *ngIf="loginForm">{{ 'BUTTONS.ENTER' | translate }}</button>
   <p class="secondary-text redirect-label">{{ 'LABELS.NO_ACCOUNT' | translate }} <a routerLink="../register" class="secondary-text">{{ 'BUTTONS.REGISTER' | translate }}</a></p>
 </div>

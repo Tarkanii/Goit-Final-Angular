@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { HttpErrorResponse } from "@angular/common/http";
-import { catchError, map, of, switchMap } from "rxjs";
+import { catchError, filter, map, of, switchMap } from "rxjs";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { RequestsService } from "src/app/services/requests.service";
 import * as actions from "./projects.actions";
@@ -35,7 +35,7 @@ export class ProjectEffects {
       ),
       switchMap(() => this.requestService.getProjects().pipe(
         map(({ projects }: { projects: IProject[] }) => actions.getProjectsActionOnSuccess({ projects })),
-        catchError(({ error }: HttpErrorResponse) => of(actions.getProjectsActionOnError({ message: error.message })))
+        catchError((error: HttpErrorResponse) => of(actions.getProjectsActionOnError({ error })))
       ))
     )
   })
@@ -45,7 +45,7 @@ export class ProjectEffects {
       ofType(actions.deleteProjectAction),
       switchMap(({ id, name }) => this.requestService.deleteProject(id).pipe(
         map(() => actions.deleteProjectActionOnSuccess({ name })),
-        catchError(({ error }: HttpErrorResponse) => of(actions.deleteProjectActionOnError({ message: error.message })))
+        catchError((error: HttpErrorResponse) => of(actions.deleteProjectActionOnError({ error })))
       ))
     )
   })
@@ -55,7 +55,7 @@ export class ProjectEffects {
       ofType(actions.addProjectAction),
       switchMap(({ type, ...body }) => this.requestService.addProject(body).pipe(
         map(({ project }: { project: IProject }) => actions.addProjectActionOnSuccess({ name: project.name, project })),
-        catchError(({ error }: HttpErrorResponse) => of(actions.addProjectActionOnError({ message: error.message })))
+        catchError((error: HttpErrorResponse) => of(actions.addProjectActionOnError({ error })))
       ))
     )
   })
@@ -66,7 +66,7 @@ export class ProjectEffects {
       switchMap(({ type, id, ...body }) => {
         return this.requestService.changeProject(id, body).pipe(
           map(() => actions.changeProjectActionOnSuccess()),
-          catchError(({ error }: HttpErrorResponse) => of(actions.changeProjectActionOnError({ message: error.message })))
+          catchError((error: HttpErrorResponse) => of(actions.changeProjectActionOnError({ error })))
         )
       })
     )
@@ -101,12 +101,13 @@ export class ProjectEffects {
       ofType(
         actions.deleteProjectActionOnError
       ),
-      map(({ message }) => {
+      filter(({ error }) => (!!error.status && error.status !== 401 && error.status < 500)), 
+      map(({ error }) => {
         const base = "PROJECTS.ERROR";
         this.dialog.open(InfoDialogComponent, {
           width: '450px',
           data: {
-            message: `${base}.${this.requestService.convertMessageFromBackend(message)}`
+            message: `${base}.${this.requestService.convertMessageFromBackend(error.error.message)}`
           }
         })
       })

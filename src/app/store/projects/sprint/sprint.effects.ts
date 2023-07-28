@@ -18,7 +18,7 @@ export class SprintEffects {
       ofType(actions.addSprintAction),
       switchMap(({ type, ...body }) => this.requestsService.addSprint(body).pipe(
         map(({ sprint }) => actions.addSprintActionOnSuccess({ name: sprint.name, sprint })),
-        catchError(({ error }: HttpErrorResponse) => of(actions.addSprintActionOnError({ message: error.message })))
+        catchError((error: HttpErrorResponse) => of(actions.addSprintActionOnError({ error })))
       ))
     )
   })
@@ -28,7 +28,7 @@ export class SprintEffects {
       ofType(actions.deleteSprintAction),
       switchMap(({ id, name }) => this.requestsService.deleteSprint(id).pipe(
         map(() => actions.deleteSprintActionOnSuccess({ name })),
-        catchError(({ error }: HttpErrorResponse) => of(actions.deleteSprintActionOnError({ message: error.message })))
+        catchError(({ error }: HttpErrorResponse) => of(actions.deleteSprintActionOnError({ error })))
       )
     ))
   })
@@ -38,7 +38,7 @@ export class SprintEffects {
       ofType(actions.changeSprintAction),
       switchMap(({ id, name }) => this.requestsService.changeSprint(id, name).pipe(
         map(() => actions.changeSprintActionOnSuccess()),
-        catchError(({ error }: HttpErrorResponse) => of(actions.changeSprintActionOnError({ message: error.message })))
+        catchError(({ error }: HttpErrorResponse) => of(actions.changeSprintActionOnError({ error })))
       )
     ))
   })
