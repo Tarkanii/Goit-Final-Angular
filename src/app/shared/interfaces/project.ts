@@ -10,7 +10,7 @@ export interface ISprint {
   name: string,
   startDate: string,
   endDate: string,
-  duration: string,
+  duration: number,
   tasks: ITask[]
 }
 

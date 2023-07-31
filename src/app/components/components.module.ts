@@ -12,6 +12,7 @@ import { CreateProjectComponent } from './forms/create-project/create-project.co
 import { FormSidebarComponent } from './form-sidebar/form-sidebar.component';
 import { CreateSprintComponent } from './forms/create-sprint/create-sprint.component';
 import { CreateTaskComponent } from './forms/create-task/create-task.component';
+import { ChartComponent } from './chart/chart.component';
 
 
 
@@ -27,7 +28,8 @@ import { CreateTaskComponent } from './forms/create-task/create-task.component';
     RegisterFormComponent,
     HeaderComponent,
     AuthPageComponent,
-    FormSidebarComponent
+    FormSidebarComponent,
+    ChartComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,8 @@ import { CreateTaskComponent } from './forms/create-task/create-task.component';
     CreateProjectComponent,
     CreateSprintComponent,
     CreateTaskComponent,
-    FormSidebarComponent
+    FormSidebarComponent,
+    ChartComponent
   ]
 })
 export class ComponentsModule { }

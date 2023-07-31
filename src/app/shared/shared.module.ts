@@ -8,7 +8,6 @@ import { TaskComponent } from './components/task/task.component';
 import { SprintComponent } from './components/sprint/sprint.component';
 import { ProjectComponent } from './components/project/project.component';
 import { AddButtonComponent } from './components/add-button/add-button.component';
-import { ChartTableComponent } from './dialogs/chart-table/chart-table.component';
 import { InputDirective } from './directives/custom-input.directive';
 import { AppRoutingModule } from '../routing/app-routing.module';
 import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
@@ -27,7 +26,6 @@ import { TruncatePipe } from './pipes/truncate.pipe';
     SprintComponent,
     ProjectComponent,
     AddButtonComponent,
-    ChartTableComponent,
     InputDirective,
     InfoDialogComponent,
     ConfirmationDialogComponent,

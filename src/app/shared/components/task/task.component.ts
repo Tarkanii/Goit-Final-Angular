@@ -74,7 +74,7 @@ export class TaskComponent implements OnInit, OnChanges {
   }
 
   private getFormattedDate(): string {
-    return `${this.sprintDate?.getFullYear()}-${this.sprintDate?.getMonth() && String(this.sprintDate?.getMonth() + 1).padStart(2, '0')}-${this.sprintDate?.getDate()}`;
+    return `${this.sprintDate?.getFullYear()}-${this.sprintDate?.getMonth() && String(this.sprintDate?.getMonth() + 1).padStart(2, '0')}-${String(this.sprintDate?.getDate()).padStart(2, '0')}`;
   }
 
   public delete(event: Event): void {
@@ -93,6 +93,12 @@ export class TaskComponent implements OnInit, OnChanges {
       .subscribe(() => {
         this.store.dispatch(deleteTaskAction({ id: this.task._id, name: this.task.name }));
       })
+  }
+
+  public onKeyUp(event: KeyboardEvent): void {
+    // 13 - Enter
+    if (event.keyCode !== 13) return;
+    (event.target as HTMLElement).blur();
   }
 
 }
