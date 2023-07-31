@@ -13,7 +13,8 @@ export interface IUserState {
 
 export interface IProjectsState {
   projects: IProject[],
-  formSidebar: 'project' | 'sprint' | 'task' | null
+  formSidebar: 'project' | 'sprint' | 'task' | null,
+  chartOpen: boolean
 }
 
 export interface IGeneralState {

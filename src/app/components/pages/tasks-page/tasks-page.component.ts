@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable, Subject, filter, takeUntil } from 'rxjs';
 import { ISprint } from 'src/app/shared/interfaces/project';
 import { IStore } from 'src/app/shared/interfaces/store';
 import { loadingSelector } from 'src/app/store/general/general.selectors';
-import { openSidebarFormAction } from 'src/app/store/projects/projects.actions';
+import { openSidebarFormAction, setChartAction } from 'src/app/store/projects/projects.actions';
 import { changeSprintAction } from 'src/app/store/projects/sprint/sprint.actions';
 import { sprintSelector, sprintsSelector } from 'src/app/store/projects/sprint/sprint.selectors';
 
@@ -123,6 +123,11 @@ export class TasksPageComponent implements OnInit {
 
   public openSidebarForm(): void {
     this.store.dispatch(openSidebarFormAction({ form: 'task' }));
+  }
+
+  public openChart(): void {
+    this.calendarOpen = false;
+    this.store.dispatch(setChartAction({ chartOpen: true }));
   }
 
   public submitChangeNameForm(event: Event): void {

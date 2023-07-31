@@ -10,7 +10,7 @@
       <div class="value">
         <div class="form-field">
           <input class="spent-hours form-input" appInput [numberOnly]="true" [formControl]="spentHoursDayControl" 
-            (blur)="changeHours()">
+            (blur)="changeHours()" (keyup)="onKeyUp($event)">
           <div class="hint-container">
             <p *ngIf="spentHoursDayControl.errors?.['min']">{{ 'FORM.ERRORS.MIN_VALUE' | translate: { min: minValue } }}</p>
             <p *ngIf="spentHoursDayControl.errors?.['max']">{{ 'FORM.ERRORS.MAX_VALUE' | translate: { max: maxValue } }}</p>

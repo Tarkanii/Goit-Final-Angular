@@ -18,3 +18,8 @@ export const sidebarFormOpenSelector = createSelector(
   selectorFeature,
   (state: IProjectsState) => (state.formSidebar)
 )
+
+export const chartOpenSelector = createSelector(
+  selectorFeature,
+  (state: IProjectsState) => (state.chartOpen)
+)

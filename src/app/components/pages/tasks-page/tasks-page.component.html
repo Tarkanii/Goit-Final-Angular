@@ -72,5 +72,5 @@
       </ng-container>
     </ul>
   </div>
-  <button class="chart-button"></button>
+  <button class="chart-button" (click)="openChart()" *ngIf="sprint$ | async"></button>
 </div>

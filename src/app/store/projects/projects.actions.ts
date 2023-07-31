@@ -25,3 +25,6 @@ export const changeProjectActionOnError = createAction('[Projects] Change Projec
 // Add project form actions
 export const openSidebarFormAction = createAction('[Projects] Open Form', props<{ form: 'project' | 'sprint' | 'task' }>());
 export const closeSidebarFormAction = createAction('[Projects] Close Form');
+
+// Set chart value 
+export const setChartAction = createAction('[Projects] Set Chart value', props<{ chartOpen: boolean }>());

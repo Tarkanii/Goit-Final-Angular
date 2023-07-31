@@ -1,0 +1,9 @@
+<div class="overlay" (click)="closeChart()"></div>
+<div class="dialog">
+  <button class="close-button" (click)="closeChart()"></button>
+  <div class="container">
+    <div class="chart-container" [ngStyle]="{ width: sizes.width + 'px', height: sizes.height + 'px' }">
+      <canvas id="chart"></canvas>
+    </div>
+  </div>
+</div>

@@ -4,6 +4,7 @@
   <div class="overlay" *ngIf="loading$ | async">
     <div class="loader"></div>
   </div>
+  <app-chart *ngIf="chartOpen$ | async"></app-chart>
   <app-form-sidebar [open]="!!(sidebarFormOpen$ | async)">
     <app-create-project *ngIf="(sidebarFormOpen$ | async) === 'project'"></app-create-project>
     <app-create-sprint *ngIf="(sidebarFormOpen$ | async) === 'sprint'"></app-create-sprint>
