@@ -1,6 +1,6 @@
 <div class="container">
   <h1 class="form-title">{{ 'LABELS.CREATING' | translate: { object: 'task' } }}</h1>
-  <form action="#" [formGroup]="createTaskForm" class="form">
+  <form action="#" [formGroup]="createTaskForm" class="form" (keyup)="onKeyUp($event)">
     <div class="form-field">
       <label class="form-label" for="name">{{ 'FORM.TASK_NAME' | translate }}</label>
       <input class="form-input" id="name" appInput [text]="true" formControlName="name">

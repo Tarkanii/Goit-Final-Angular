@@ -1,6 +1,6 @@
 <div class="container">
   <h1 class="form-title">{{ 'LABELS.REGISTRATION' | translate }}</h1>
-  <form action="#" *ngIf="registerForm" [formGroup]="registerForm" class="form">
+  <form *ngIf="registerForm" [formGroup]="registerForm" class="form" (keyup)="onKeyUp($event)">
     <div class="form-field">
       <label class="form-label" for="email">{{ 'FORM.EMAIL' | translate }}</label>
       <input class="form-input" id="email" appInput [email]="true" formControlName="email">
@@ -29,6 +29,6 @@
       </div>
     </div>
   </form>
-  <button class="accent-text-button" (click)="register()" *ngIf="registerForm">{{ 'BUTTONS.REGISTER' | translate }}</button>
+  <button class="accent-text-button" (click)="submit()" *ngIf="registerForm">{{ 'BUTTONS.REGISTER' | translate }}</button>
   <p class="secondary-text redirect-label">{{ 'LABELS.HAVE_ACCOUNT_QUESTION' | translate }} <a routerLink="../login" class="secondary-text">{{ 'LABELS.LOGIN' | translate }}</a></p>
 </div>
