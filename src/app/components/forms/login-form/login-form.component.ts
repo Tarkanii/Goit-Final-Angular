@@ -64,4 +64,9 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     this.store.dispatch(loginAction(this.loginForm?.value));
   }
 
+  public onKeyUp(event: KeyboardEvent): void {
+    if (event.keyCode !== 13) return;
+    this.submit();
+  }
+
 }

@@ -1,6 +1,6 @@
 <div class="container">
   <h1 class="form-title">{{ 'LABELS.CREATING' | translate: { object: 'sprint' } }}</h1>
-  <form action="#" [formGroup]="createSprintForm" class="form">
+  <form action="#" [formGroup]="createSprintForm" class="form" (keyup)="onKeyUp($event)">
     <div class="form-field">
       <label class="form-label" for="name">{{ 'FORM.SPRINT_NAME' | translate }}</label>
       <input class="form-input" id="name" appInput [text]="true" formControlName="name">
@@ -20,11 +20,11 @@
           <p class="hint" *ngIf="getControl('startDate')?.errors?.['month']">{{ 'FORM.ERRORS.MONTH' | translate }}</p>
           <p class="hint" *ngIf="getControl('startDate')?.errors?.['day']">{{ 'FORM.ERRORS.REAL_DATE' | translate }}</p>
         </div>
-        <button class="arrow-button" [ngClass]="{ open: calendarOpen === 'start' }" 
+        <button type="button" class="arrow-button" [ngClass]="{ open: calendarOpen === 'start' }" 
           (click)="setCalendarOpen(calendarOpen === 'start' ? null : 'start')">
         </button>
         <app-calendar class="calendar" *ngIf="calendarOpen === 'start'"
-          (dateSelected)="setDate('startDate', $event)" [selectedDate]="getDate('startDate')">
+          (dateSelected)="setDate('startDate', $event); setCalendarOpen(null)" [selectedDate]="getDate('startDate')">
         </app-calendar>
       </div>
       <div class="form-field">
@@ -39,11 +39,11 @@
           <p class="hint" *ngIf="getControl('endDate')?.errors?.['day']">{{ 'FORM.ERRORS.REAL_DATE' | translate }}</p>
           <p class="hint" *ngIf="mustShowDifferenceError()">{{ 'FORM.ERRORS.DIFFERENCE' | translate }}</p>
         </div>
-        <button class="arrow-button" [ngClass]="{ open: calendarOpen === 'end' }" 
+        <button type="button" class="arrow-button" [ngClass]="{ open: calendarOpen === 'end' }" 
           (click)="setCalendarOpen(calendarOpen === 'end' ? null : 'end')">
         </button>
         <app-calendar class="calendar" *ngIf="calendarOpen === 'end'"
-          (dateSelected)="setDate('endDate', $event)" [selectedDate]="getDate('endDate')">
+          (dateSelected)="setDate('endDate', $event); setCalendarOpen(null)" [selectedDate]="getDate('endDate')">
         </app-calendar>
       </div>
     </div>

@@ -52,4 +52,9 @@ export class CreateProjectComponent implements OnInit {
     this.store.dispatch(closeSidebarFormAction());
   }
 
+  public onKeyUp(event: KeyboardEvent): void {
+    if (event.keyCode !== 13) return;
+    this.submit();
+  }
+
 }
