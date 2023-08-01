@@ -85,6 +85,20 @@ button {
   background: url('../../assets/icons/delete.svg');
 }
 
+.visibility-button {
+  height: 16px;
+  width: 16px;
+  background-color: var(--secondary-text-color);
+  --webkit-mask: url(../../assets/icons/blocked-eye.svg);
+  mask: url(../../assets/icons/blocked-eye.svg);
+
+  &.open {
+    background-color: var(--accent-color);
+    --webkit-mask: url(../../assets/icons/eye.svg);
+    mask: url(../../assets/icons/eye.svg);
+  }
+}
+
 .arrow-button {
   height: 12px;
   width: 10px;

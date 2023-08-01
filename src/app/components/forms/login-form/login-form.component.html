@@ -11,10 +11,11 @@
     </div>
     <div class="form-field">
       <label class="form-label" for="password">{{ 'FORM.PASSWORD' | translate }}</label>
-      <input class="form-input" id="password" type="password" appInput formControlName="password">
+      <input class="form-input password" id="password" type="password" appInput formControlName="password">
       <div class="hint-container">
         <p class="hint" *ngIf="passwordControl?.errors?.['required'] && passwordControl?.touched">{{ 'FORM.ERRORS.REQUIRED_FIELD' | translate }}</p>
       </div>
+      <button type="button" class="visibility-button" appVisibilitySwitcher></button>
     </div>
   </form>
   <button class="accent-text-button" (click)="submit()" *ngIf="loginForm">{{ 'BUTTONS.ENTER' | translate }}</button>

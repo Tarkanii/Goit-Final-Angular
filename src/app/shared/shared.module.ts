@@ -18,6 +18,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { TextareaDirective } from './directives/textarea.directive';
 import { FilterPipe } from './pipes/filter.pipe';
 import { TruncatePipe } from './pipes/truncate.pipe';
+import { VisibilitySwitcherDirective } from './directives/visibility-switcher.directive';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { TruncatePipe } from './pipes/truncate.pipe';
     CalendarComponent,
     TextareaDirective,
     FilterPipe,
-    TruncatePipe
+    TruncatePipe,
+    VisibilitySwitcherDirective
   ],
   exports: [
     InputDirective,
@@ -50,7 +52,8 @@ import { TruncatePipe } from './pipes/truncate.pipe';
     TaskComponent,
     TextareaDirective,
     FilterPipe,
-    TruncatePipe
+    TruncatePipe,
+    VisibilitySwitcherDirective
   ],
   imports: [
     CommonModule,
