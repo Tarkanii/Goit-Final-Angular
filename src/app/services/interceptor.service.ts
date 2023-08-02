@@ -1,13 +1,13 @@
-import { HttpErrorResponse, HttpEvent, HttpEventType, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpErrorResponse, HttpEvent, HttpEventType, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { MatDialog } from '@angular/material/dialog';
+import { ScrollStrategyOptions } from '@angular/cdk/overlay';
+import { Store } from '@ngrx/store';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import { IStore } from '../shared/interfaces/store';
-import { Store } from '@ngrx/store';
 import { setLoadingAction } from '../store/general/general.actions';
-import { MatDialog } from '@angular/material/dialog';
 import { InfoDialogComponent } from '../shared/dialogs/info-dialog/info-dialog.component';
 import { logoutAction } from '../store/user/user.actions';
-import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 
 @Injectable({
   providedIn: 'root'

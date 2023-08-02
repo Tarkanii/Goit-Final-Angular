@@ -15,13 +15,17 @@ export class RequestsService {
 
   constructor( private http: HttpClient) { }
 
+  // Sets token after successful login or on the project init, if user was authorized 
   public setToken(token: string): void {
     this.token = token;
   }
 
+  // Gets validation rules for login and register forms( email regexp, min length of password, etc.)
   public getValidationRules(): Observable<IValidationResponse> {
     return this.http.get<IValidationResponse>(`${environment.backend_url}/api/validation`);
   }
+
+  // Auth requests
 
   public register(body: IAuthRequestBody): Observable<IRegisterResponseBody> {
     return this.http.post<IRegisterResponseBody>(`${environment.backend_url}/api/auth/register`, body);
@@ -31,10 +35,11 @@ export class RequestsService {
     return this.http.post<ILoginResponseBody>(`${environment.backend_url}/api/auth/login`, body);
   }
 
-  public logout(): Observable<void> {
-    
+  public logout(): Observable<void> {    
     return this.http.get<void>(`${environment.backend_url}/api/auth/logout`, { headers: this.autharizationHeader });
   }
+
+  // Projects requests
 
   public getProjects(): Observable<{ projects: IProject[] }> {
     return this.http.get<{ projects: IProject[] }>(`${environment.backend_url}/api/projects`, { headers: this.autharizationHeader });
@@ -52,6 +57,8 @@ export class RequestsService {
     return this.http.delete<void>(`${environment.backend_url}/api/projects/${id}`, { headers: this.autharizationHeader });
   }
 
+  // Sprints requests
+
   public addSprint(body: ICreateSprintBody): Observable<{ sprint: ISprint }> {
     return this.http.post<{ sprint: ISprint }>(`${environment.backend_url}/api/sprints/`, body, { headers: this.autharizationHeader });
   }
@@ -63,6 +70,8 @@ export class RequestsService {
   public deleteSprint(id: string): Observable<void> {
     return this.http.delete<void>(`${environment.backend_url}/api/sprints/${id}`, { headers: this.autharizationHeader });
   }
+
+  // Tasks requests
 
   public addTask(body: { sprint: string, name: string, scheduledHours: number }): Observable<{ task: ITask }> {
     return this.http.post<{ task: ITask }>(`${environment.backend_url}/api/tasks`, body, { headers: this.autharizationHeader });
@@ -80,10 +89,12 @@ export class RequestsService {
     return this.http.delete<void>(`${environment.backend_url}/api/tasks/${id}`, { headers: this.autharizationHeader });
   }
 
+  // Converts message into the key, which we can use for i18 lang file
   public convertMessageFromBackend(message: string): string {
     return message.toUpperCase().split(' ').join('_');
   }
 
+  // Gets auth header
   private get autharizationHeader(): HttpHeaders {
     return new HttpHeaders({ 'Authorization': `Bearer ${this.token}` });
   }

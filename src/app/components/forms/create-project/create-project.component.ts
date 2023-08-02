@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { IStore } from 'src/app/shared/interfaces/store';
-import { addProjectAction, closeSidebarFormAction } from 'src/app/store/projects/projects.actions';
+import { addProjectAction, setSidebarFormAction } from 'src/app/store/projects/projects.actions';
 
 @Component({
   selector: 'app-create-project',
@@ -37,7 +37,6 @@ export class CreateProjectComponent implements OnInit {
   }
 
   // Submitting create project form
-
   public submit(): void {
     this.createProjectForm.markAllAsTouched();
     this.createProjectForm.updateValueAndValidity();
@@ -46,12 +45,12 @@ export class CreateProjectComponent implements OnInit {
     this.store.dispatch(addProjectAction(this.createProjectForm.value));
   }
 
-  // Cancel project creating
-
+  // Closes sidebar form if user clicked cancel button
   public cancel(): void {
-    this.store.dispatch(closeSidebarFormAction());
+    this.store.dispatch(setSidebarFormAction({ form: null }));
   }
 
+  // Submits form if user clicked Enter
   public onKeyUp(event: KeyboardEvent): void {
     if (event.keyCode !== 13) return;
     this.submit();

@@ -6,7 +6,7 @@ import { Observable, Subject, takeUntil } from 'rxjs';
 import { IProject } from 'src/app/shared/interfaces/project';
 import { IStore } from 'src/app/shared/interfaces/store';
 import { loadingSelector } from 'src/app/store/general/general.selectors';
-import { changeProjectAction, openSidebarFormAction } from 'src/app/store/projects/projects.actions';
+import { changeProjectAction, setSidebarFormAction } from 'src/app/store/projects/projects.actions';
 import { projectSelector, projectsSelector } from 'src/app/store/projects/projects.selectors';
 
 @Component({
@@ -53,6 +53,7 @@ export class SprintsPageComponent implements OnInit, OnDestroy {
     this.changeNameForm = null;
   }
 
+  // Changes name of the project
   public submitChangeNameForm(event: Event): void {
     event.preventDefault();
     const { name } = this.changeNameForm?.value;
@@ -62,8 +63,9 @@ export class SprintsPageComponent implements OnInit, OnDestroy {
     this.destroyChangeNameForm();
   }
 
+  // Opens sidebar form to create new sprint
   public openSidebarForm(): void {
-    this.store.dispatch(openSidebarFormAction({ form: 'sprint' }));
+    this.store.dispatch(setSidebarFormAction({ form: 'sprint' }));
   }
 
 }

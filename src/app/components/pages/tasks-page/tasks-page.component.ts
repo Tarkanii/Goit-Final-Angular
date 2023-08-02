@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable, Subject, filter, takeUntil } from 'rxjs';
 import { ISprint } from 'src/app/shared/interfaces/project';
 import { IStore } from 'src/app/shared/interfaces/store';
 import { loadingSelector } from 'src/app/store/general/general.selectors';
-import { openSidebarFormAction, setChartAction } from 'src/app/store/projects/projects.actions';
+import { setSidebarFormAction, setChartAction } from 'src/app/store/projects/projects.actions';
 import { changeSprintAction } from 'src/app/store/projects/sprint/sprint.actions';
 import { sprintSelector, sprintsSelector } from 'src/app/store/projects/sprint/sprint.selectors';
 
@@ -53,10 +53,13 @@ export class TasksPageComponent implements OnInit {
         const mustUpdateIndex = !this.sprints.length;
         this.sprints = sprints;
         if (mustUpdateIndex) {
+          // Must update current sprint index only if there were no sprints before
+          // otherwise it will cause change of sprint date selected by user
           this.sprintIndex$.next(this.getSprintIndex(this.sprintId));
         }
       })
 
+    // Updating search control and sprint date on change of current sprint
     this.sprintIndex$
       .pipe(
         filter(() => !!this.sprints.length),
@@ -76,11 +79,17 @@ export class TasksPageComponent implements OnInit {
     })
   }
 
+  public destroyChangeNameForm(): void {
+    this.changeNameForm = null;
+  }
+
+  // Gets sprint index of current sprint
   public getSprintIndex(sprintId: string): number {
     const index = this.sprints.findIndex((sprint: ISprint) => sprint._id === sprintId);
     return index < 0 ? 1 : index + 1;    
   }
 
+  // Swicthes to next or previous sprint
   public switchSprint(action: 'decrease' | 'increase'): void {
     if (action === 'decrease' && this.sprintIndex$.value <= 1) return;
 
@@ -93,6 +102,7 @@ export class TasksPageComponent implements OnInit {
     this.router.navigateByUrl(url);
   }
 
+  // Sets initial date of sprint on init or on swicthing sprints 
   public setInitialSprintDate(startDate: string, endDate: string): void {
     const start = new Date(startDate);
     const end = new Date(endDate);
@@ -107,29 +117,30 @@ export class TasksPageComponent implements OnInit {
     }
   }
 
+  // Gets filter functions for filter pipe
   public filterFunc(): (value: string) => boolean {
     return (value: string) => {
       return value.toLowerCase().includes(this.searchControl.value.toLowerCase().trim());
     };
   }
 
+  // Sets sprint date
   public setSprintDate(date: Date): void {
     this.sprintDate = date;
   }
 
-  public destroyChangeNameForm(): void {
-    this.changeNameForm = null;
-  }
-
+  // Opens sidebar form to create new task
   public openSidebarForm(): void {
-    this.store.dispatch(openSidebarFormAction({ form: 'task' }));
+    this.store.dispatch(setSidebarFormAction({ form: 'task' }));
   }
 
+  // Opens chart to see the progress on the sprint
   public openChart(): void {
     this.calendarOpen = false;
     this.store.dispatch(setChartAction({ chartOpen: true }));
   }
 
+  // Changes name of sprint
   public submitChangeNameForm(event: Event): void {
     event.preventDefault();
     const { name } = this.changeNameForm?.value;

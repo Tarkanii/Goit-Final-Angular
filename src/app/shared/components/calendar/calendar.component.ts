@@ -61,6 +61,7 @@ export class CalendarComponent implements OnInit {
 
   // Actions
 
+  // Switches to the next or previous month
   public changeMonth(action: 'previous' | 'next'): void {
     if (action === 'next' && !this.shouldStop(action)) {
       this.currentDate = new Date(this.currentYear, this.currentMonth + 1);
@@ -69,6 +70,14 @@ export class CalendarComponent implements OnInit {
     }
   }
 
+  // Selects date if it's active and sends it to the parent 
+  public selectDate({ value, inactive }: IDay): void {
+    if (inactive) return;
+    this.selectedDate = new Date(this.currentYear, this.currentMonth, value);
+    this.dateSelected.emit(this.selectedDate);
+  }
+
+  // Stops user from switching months if the next month is more than endDate and if previous is less than startDate
   public shouldStop(action: 'previous' | 'next'): boolean {
     if (!this.startDate && !this.endDate) return false;
 
@@ -92,6 +101,8 @@ export class CalendarComponent implements OnInit {
     return false;
   }
 
+  // Marks days as inactive if they are in different month(on the begining or the end of the calendar) 
+  // or days are bigger than endDate os smaller then startDate 
   public shouldBeInactive(day: number): boolean {
     if (!this.startDate && !this.endDate) return false;
 
@@ -112,12 +123,6 @@ export class CalendarComponent implements OnInit {
     }
 
     return false;
-  }
-
-  public selectDate({ value, inactive }: IDay): void {
-    if (inactive) return;
-    this.selectedDate = new Date(this.currentYear, this.currentMonth, value);
-    this.dateSelected.emit(this.selectedDate);
   }
 
 }

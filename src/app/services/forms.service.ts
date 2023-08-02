@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { BehaviorSubject, map, take } from 'rxjs';
 import { RequestsService } from './requests.service';
 import { IPasswordRules, IValidationResponse, IValidationRules } from '../shared/interfaces/validation';
 
@@ -18,7 +17,6 @@ export class FormsService {
   private specialSymbolsRegExp: RegExp = new RegExp('[\\W_]');
   private dateRegExp: RegExp = new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}$');
   private passwordValidationRules!: IPasswordRules;
-
 
   constructor(
     private requestsService: RequestsService
@@ -93,6 +91,7 @@ export class FormsService {
     return this.passwordValidationRules?.min_length;
   }
 
+  // Gets validation rules for auth forms
   public getValidationRules(): void {
     if (this.validationRulesObtained$.value) return;
     this.requestsService.getValidationRules()

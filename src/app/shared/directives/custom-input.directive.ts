@@ -1,7 +1,6 @@
 import { Directive, ElementRef, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { Subject, filter, takeUntil, tap } from 'rxjs';
-import { FormsService } from 'src/app/services/forms.service';
+import { Subject, filter, takeUntil } from 'rxjs';
 
 @Directive({
   selector: '[appInput]'

@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
+import { combineLatest, filter, take } from 'rxjs';
 import { Chart, registerables } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { combineLatest, filter, take } from 'rxjs';
 import { ISprint } from 'src/app/shared/interfaces/project';
 import { IStore } from 'src/app/shared/interfaces/store';
 import { setChartAction } from 'src/app/store/projects/projects.actions';
@@ -25,6 +25,7 @@ export class ChartComponent implements OnInit, OnDestroy {
   private sprint!: ISprint;
   private months: string[] = [];
   private chart: Chart  | null = null;
+  private chartLables!: {[key: string]: string};
 
   constructor (
     private store: Store<IStore>,
@@ -36,12 +37,15 @@ export class ChartComponent implements OnInit, OnDestroy {
     const urlArr = this.router.url.split('/').reverse();
     const projectId = urlArr[3];
     const sprintId = urlArr[1];
-    combineLatest(this.store.select(sprintSelector(projectId, sprintId)), this.translateService.get('LABELS.MONTHS'))   
+    combineLatest(
+      this.store.select(sprintSelector(projectId, sprintId)), 
+      this.translateService.get(['LABELS.MONTHS', 'CHART'])
+      )   
       .pipe(filter(([sprint]) => !!sprint), take(1))
-      .subscribe(([sprint, months]) => {
+      .subscribe(([sprint, language]) => {
         this.sprint = sprint as ISprint;
-        this.months = months;
-        this.getDataForChart();
+        this.months = language?.['LABELS.MONTHS'];
+        this.chartLables = language?.['CHART'];
         this.initChart();
       })
   }
@@ -65,6 +69,7 @@ export class ChartComponent implements OnInit, OnDestroy {
     this.chart = new Chart('chart', this.getSettingsForChart(scheduledData, actualData, labels));
   }
 
+  // Sets size of chart container, based on amount of dates(labels for bottom scale)
   private setChartSize(value: number): void {
     if (value * 80 < 650) {
       this.sizes.width = 650;
@@ -77,6 +82,7 @@ export class ChartComponent implements OnInit, OnDestroy {
     this.sizes.height = this.sizes.width / 2;
   }
 
+  // Gets labels, scheduled time left data and actual time left data
   private getDataForChart(): { scheduledData: number[], actualData: number[], labels: string[] } {
     const scheduledData: number[] = [];
     const labelDates: string[] = [];
@@ -106,6 +112,7 @@ export class ChartComponent implements OnInit, OnDestroy {
     }
   }
 
+  // Gets actual time left data
   private getActualSpentsData(dates: string[]): any[] {
     const actualData = [];
     const hoursSpentArr = [];
@@ -137,6 +144,7 @@ export class ChartComponent implements OnInit, OnDestroy {
     return actualData.slice(0, indexOfLastChanges + 1);
   }
 
+  // Gets formatted date. Format 'label' for chart labels, 'storage' - to get hours spent in certain date
   private getFormattedDate(date: Date, format: 'label' | 'storage'): string {
     if (format === 'storage') {
       return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
@@ -145,6 +153,7 @@ export class ChartComponent implements OnInit, OnDestroy {
     }
   }
 
+  // Gets formatter function for chart to filter which labels to show
   private getFormatterForDataset(): (value: any, context: any) => number | string {
     return (value, context) => {
       if (context.datasetIndex !== 1) return value;
@@ -158,6 +167,7 @@ export class ChartComponent implements OnInit, OnDestroy {
     }
   }
 
+  // Gets settings and data for chart
   private getSettingsForChart(scheduledData: number[], actualData: number[], labels: string[] ): any {
     const options = {
       responsive: true,
@@ -188,7 +198,7 @@ export class ChartComponent implements OnInit, OnDestroy {
       plugins: {
         title: {
           display: true,
-          text: 'Burndown Chart',
+          text: this.chartLables?.['TITLE'],
           position: 'top',
           align: 'start',
           font: {
@@ -197,7 +207,7 @@ export class ChartComponent implements OnInit, OnDestroy {
         },
         subtitle: {
           display: true,
-          text: 'Man hours',
+          text: this.chartLables?.['SUBTITLE'],
           position: 'left'
         },
         legend: {
@@ -231,7 +241,7 @@ export class ChartComponent implements OnInit, OnDestroy {
     const data = {
       labels,
       datasets: [{
-        label: 'Scheduled time left',
+        label: this.chartLables?.['SCHEDULED_TIME'],
         data: scheduledData,
         datalabels: {
           color: '#FA3B3F',
@@ -242,7 +252,7 @@ export class ChartComponent implements OnInit, OnDestroy {
         backgroundColor: '#FA3B3F'
       },
       {
-        label: 'Actual time left',
+        label: this.chartLables?.['ACTUAL_TIME'],
         data: actualData,
         datalabels: {
           color: '#1988ee',

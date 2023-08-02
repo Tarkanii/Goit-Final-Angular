@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { Store } from '@ngrx/store';
 import { filter, take } from 'rxjs';
 import { deleteProjectAction } from 'src/app/store/projects/projects.actions';
 import { ConfirmationDialogComponent } from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
-import { Router } from '@angular/router';
-import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 
 
 @Component({

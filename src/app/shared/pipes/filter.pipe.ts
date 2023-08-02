@@ -6,6 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FilterPipe implements PipeTransform {
 
   transform(value: string, callback: (value: string) => boolean ): boolean {
+    // Callback is the filtering function
     return callback(value);
   }
 

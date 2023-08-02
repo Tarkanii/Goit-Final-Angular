@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { Store } from '@ngrx/store';
 import { filter, take } from 'rxjs';
 import { ISprint } from '../../interfaces/project';
-import { ConfirmationDialogComponent } from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { IStore } from '../../interfaces/store';
+import { ConfirmationDialogComponent } from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { deleteSprintAction } from 'src/app/store/projects/sprint/sprint.actions';
-import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-sprint',
