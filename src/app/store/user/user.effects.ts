@@ -2,15 +2,13 @@ import { Injectable } from "@angular/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
-import { of } from 'rxjs';
-import { catchError, exhaustMap, filter, map, mergeMap } from "rxjs/operators";
-import { createEffect, ofType } from "@ngrx/effects";
-import { Actions } from "@ngrx/effects";
+import { ScrollStrategyOptions } from '@angular/cdk/overlay';
+import { of, catchError, exhaustMap, filter, map, mergeMap } from 'rxjs';
+import { createEffect, ofType, Actions} from "@ngrx/effects";
 import * as userActions from './user.actions';
 import { RequestsService } from "src/app/services/requests.service";
 import { ILoginResponseBody, IRegisterResponseBody } from "src/app/shared/interfaces/user";
 import { InfoDialogComponent } from "src/app/shared/dialogs/info-dialog/info-dialog.component";
-import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 
 
 @Injectable()
@@ -70,22 +68,19 @@ export class UserEffects {
       map(({ type, email }) => {
         const link = type.includes('Login') ? 'projects' : 'auth/login';
         const message = `AUTH.${type.includes('Login') ? 'LOGIN' : 'REGISTER'}.SUCCESS`;
-        const button = type.includes('Login') ? null : 'BUTTONS.LOG_IN';
 
         this.dialog.open(InfoDialogComponent, {
           data: {
             type: 'auth',
-            email: email,
-            message,
-            button,
-            callback: type.includes('Login') ? null : () => this.router.navigateByUrl(link)
+            email,
+            message
           },
           width: '450px',
           autoFocus: false,
           scrollStrategy: this.scrollStrategyOptions.noop()
         });
 
-        type.includes('Login') && this.router.navigateByUrl(link);
+        this.router.navigateByUrl(link);
       })
     )
   }, { dispatch: false })
@@ -99,6 +94,7 @@ export class UserEffects {
       filter(({ error }) => (!!error.status && error.status !== 401 && error.status < 500)),
       map(({ type, error, email }) => {
         const base = `AUTH.${type.includes('Login') ? 'LOGIN' : 'REGISTER'}`;
+        
         this.dialog.open(InfoDialogComponent, {
           data: {
             type: 'auth',

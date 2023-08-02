@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, ElementRef, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, HostListener, Output } from '@angular/core';
 
 @Directive({
   selector: '[appTextarea]'
@@ -26,6 +26,7 @@ export class TextareaDirective implements AfterViewInit {
     this.setHeight();
   }
 
+  // Function sets height of textarea, so user won't see any scroll
   private setHeight(): void {
     this.elementRef.nativeElement.removeAttribute('style');
     const scrollHeight = this.elementRef.nativeElement.scrollHeight;

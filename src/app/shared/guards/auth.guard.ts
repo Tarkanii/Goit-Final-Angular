@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { IStore } from '../interfaces/store';
-import { Store } from '@ngrx/store';
 import { tokenSelector } from 'src/app/store/user/user.selectors';
 
 @Injectable({

@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { IStore } from '../../interfaces/store';
-import { Store } from '@ngrx/store';
-import { openSidebarFormAction } from 'src/app/store/projects/projects.actions';
+import { setSidebarFormAction } from 'src/app/store/projects/projects.actions';
 
 @Component({
   selector: 'app-sidebar',
@@ -33,11 +33,12 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     }
   }
 
+  // Getting ids of current project and sprint 
   private getParams(): Observable<{ project: string, sprint: string }> {
     return this.activatedRoute.params
       .pipe(
         map(({ projectId, sprintId }) => {
-          return { project: projectId, sprint: sprintId }
+          return { project: projectId, sprint: sprintId };
         })
       )
   }
@@ -52,6 +53,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     this.router.navigateByUrl(projectPageUrl);
   }
 
+  // Getting link for list items (projects or sprints items)
   public getLink(id: string): string {
     if (this.type === 'project') {
       return `/projects/${id}/sprints`;
@@ -63,6 +65,6 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   public openFormSidebar(): void {
-    this.store.dispatch(openSidebarFormAction({ form: this.type }));
+    this.store.dispatch(setSidebarFormAction({ form: this.type }));
   }
 }

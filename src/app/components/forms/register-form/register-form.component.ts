@@ -72,8 +72,7 @@ export class RegisterFormComponent implements OnInit {
     }
   }
 
-  // Register
-
+  // Submitting register form
   public submit(): void {
     this.registerForm.markAllAsTouched();
     for (const control in this.registerForm.controls) {
@@ -85,6 +84,7 @@ export class RegisterFormComponent implements OnInit {
     this.store.dispatch(registerAction({ email, password }));
   }
 
+  // Submits form if user clicked Enter
   public onKeyUp(event: KeyboardEvent): void {
     if (event.keyCode !== 13) return;
     this.submit();

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IStore } from '../../shared/interfaces/store';
-import { closeSidebarFormAction } from 'src/app/store/projects/projects.actions';
+import { setSidebarFormAction } from 'src/app/store/projects/projects.actions';
 
 @Component({
   selector: 'app-form-sidebar',
@@ -19,8 +19,9 @@ export class FormSidebarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // Closes sidebar form
   public closeSidebar(): void {
-    this.store.dispatch(closeSidebarFormAction());
+    this.store.dispatch(setSidebarFormAction({ form: null }));
   }
 
 }

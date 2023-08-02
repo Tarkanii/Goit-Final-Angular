@@ -14,6 +14,7 @@ export class AuthPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // Gets validation rules for auth forms
     this.formService.getValidationRules();
   }
 

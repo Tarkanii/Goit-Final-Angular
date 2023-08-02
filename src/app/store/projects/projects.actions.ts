@@ -17,14 +17,13 @@ export const addProjectAction = createAction('[Projects] Add Project', props<{ n
 export const addProjectActionOnSuccess = createAction('[Projects] Add Project Success', props<{ name: string, project: IProject }>());
 export const addProjectActionOnError = createAction('[Projects] Add Project Error', props<{ error: HttpErrorResponse }>());
 
-// Change project actions
+// Changing project actions
 export const changeProjectAction = createAction('[Projects] Change Project', props<{ id: string, name?: string, description?: string }>());
 export const changeProjectActionOnSuccess = createAction('[Projects] Change Project Success');
 export const changeProjectActionOnError = createAction('[Projects] Change Project Error', props<{ error: HttpErrorResponse }>());
 
-// Add project form actions
-export const openSidebarFormAction = createAction('[Projects] Open Form', props<{ form: 'project' | 'sprint' | 'task' }>());
-export const closeSidebarFormAction = createAction('[Projects] Close Form');
+// Setting sidebar form value action
+export const setSidebarFormAction = createAction('[Projects] Set Sidebar Form Value', props<{ form: 'project' | 'sprint' | 'task' | null }>());
 
-// Set chart value 
-export const setChartAction = createAction('[Projects] Set Chart value', props<{ chartOpen: boolean }>());
+// Setting chart value action
+export const setChartAction = createAction('[Projects] Set Chart Value', props<{ chartOpen: boolean }>());

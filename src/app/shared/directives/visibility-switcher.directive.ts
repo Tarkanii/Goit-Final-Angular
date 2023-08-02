@@ -9,6 +9,7 @@ export class VisibilitySwitcherDirective {
     private elementRef: ElementRef
   ) { }
 
+  // On click we change type of input, which is in the same form field as button and change styling of button  
   @HostListener('click') public onClick(): void {
     const passwordInput = (this.elementRef.nativeElement as HTMLElement).parentElement?.querySelector('input');
     if (!passwordInput) return;

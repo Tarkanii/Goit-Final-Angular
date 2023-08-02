@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { FormsService } from 'src/app/services/forms.service';
 import { IStore } from 'src/app/shared/interfaces/store';
-import { closeSidebarFormAction } from 'src/app/store/projects/projects.actions';
+import { setSidebarFormAction } from 'src/app/store/projects/projects.actions';
 import { addTaskAction } from 'src/app/store/projects/task/task.actions';
 
 @Component({
@@ -39,6 +39,7 @@ export class CreateTaskComponent implements OnInit {
     return this.createTaskForm?.get(control);
   }
 
+  // Submitting create task form 
   public submit(): void {
     this.createTaskForm.markAllAsTouched();
     this.createTaskForm.updateValueAndValidity();
@@ -49,10 +50,12 @@ export class CreateTaskComponent implements OnInit {
     this.store.dispatch(addTaskAction({ sprint: sprintId, scheduledHours: hours, name}));
   }
 
+  // Closes sidebar form if user clicked cancel button
   public cancel(): void {
-    this.store.dispatch(closeSidebarFormAction());
+    this.store.dispatch(setSidebarFormAction({ form: null }));
   }
 
+  // Submits form if user clicked Enter
   public onKeyUp(event: KeyboardEvent): void {
     if (event.keyCode !== 13) return;
     this.submit();

@@ -1,15 +1,15 @@
 import { Injectable } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { HttpErrorResponse } from "@angular/common/http";
-import { catchError, filter, map, of, switchMap } from "rxjs";
+import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { catchError, filter, map, of, switchMap } from "rxjs";
 import { RequestsService } from "src/app/services/requests.service";
 import * as actions from "./projects.actions";
 import { IProject } from "src/app/shared/interfaces/project";
 import { InfoDialogComponent } from "src/app/shared/dialogs/info-dialog/info-dialog.component";
 import { addSprintActionOnSuccess, changeSprintActionOnSuccess, deleteSprintActionOnSuccess } from "./sprint/sprint.actions";
 import { addTaskActionOnSuccess, changeTaskActionOnSuccess, deleteTaskActionOnSuccess } from "./task/task.actions";
-import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 
 
 @Injectable()
@@ -127,7 +127,7 @@ export class ProjectEffects {
         addSprintActionOnSuccess,
         addTaskActionOnSuccess
       ),
-      map(() => actions.closeSidebarFormAction())
+      map(() => actions.setSidebarFormAction({ form: null }))
     )
   })
 

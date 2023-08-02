@@ -107,5 +107,11 @@
     "READY": "Ready",
     "CANCEL": "Cancel",
     "ADD_PEOPLE": "Add people"
+  },
+  "CHART": {
+    "TITLE": "Burndown Chart",
+    "SUBTITLE": "Man hours",
+    "SCHEDULED_TIME": "Scheduled time left",
+    "ACTUAL_TIME": "Actual time left"
   }
 }

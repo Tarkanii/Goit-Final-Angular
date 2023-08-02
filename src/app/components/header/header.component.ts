@@ -17,7 +17,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private store: Store<IStore>
-  ) { 
+  ) {
+    // Sets first part of email as username
     this.username$ = this.store.select(emailSelector).pipe(
       map((email: string) => email.split('@')[0])
     )
