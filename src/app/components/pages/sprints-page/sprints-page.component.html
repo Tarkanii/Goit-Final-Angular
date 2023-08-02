@@ -26,7 +26,7 @@
         <app-add-button class="add-button" addType="sprint" [mainButton]="true" (buttonClick)="openSidebarForm()"></app-add-button>
       </div>
       <p class="description" *ngIf="(project$ | async)?.description">{{ (project$ | async)?.description }}</p>
-      <button class="add-people-button">
+      <button class="add-people-button" *ngIf="false">
         <div class="icon"></div>
         <span class="text">{{ 'BUTTONS.ADD_PEOPLE' | translate }}</span>
       </button>

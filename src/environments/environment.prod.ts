@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  backend_url: 'http://localhost:3000'
+  backend_url: 'https://goit-backend-384931a15091.herokuapp.com'
 };
