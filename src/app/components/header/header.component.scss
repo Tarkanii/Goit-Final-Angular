@@ -5,6 +5,9 @@
 }
 
 .container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   padding-top: 14px;
   padding-bottom: 14px;
 
@@ -12,6 +15,68 @@
     padding-top: 19px;
     padding-bottom: 19px;
   }
+}
+
+.user-info-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 0.5;
+
+  @include tablet {
+    justify-content: unset;
+    flex-grow: unset;
+  }
+}
+
+.button-logout {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 50%;
+  padding: 0;
+  background: none;
+  
+
+  @include tablet {
+    border-radius: unset;
+    margin-left: 77px;
+  }
+}
+
+.button-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: inherit;
+  background: var(--secondary-button-color) url(../../../assets/icons/logout.svg) no-repeat 8px 6px;
+
+  @include tablet {
+    width: 18px;
+    height: 18px;
+    background: var(--secondary-button-color);
+    -webkit-mask: url(../../../assets/icons/logout.svg) center no-repeat;
+    mask: url(../../../assets/icons/logout.svg) center no-repeat;
+  }
+}
+
+.button-text {
+  display: none;
+
+  @include tablet {
+    display: inline;
+    font-family: var(--font);
+    color: var(--secondary-button-color);
+    margin-left: 10px;
+  }
+}
+
+.username {
+  font-size: 14px;
+  font-weight: 600;
+  max-width: 75%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .icon {

@@ -1,5 +1,9 @@
 @import '../../../../scss/mixins';
 
+a.secondary-text {
+  text-decoration: underline;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -11,22 +15,19 @@
   }
 }
 
-.auth-form-title {
-  font-size: 26px;
-  font-weight: 500;
-  padding-bottom: 30px;
+.form-title {
+  margin-bottom: 30px;
 
   @include tablet {
-    padding-bottom: 53px;
-    font-size: 36px;
+    margin-bottom: 53px;
   }
 
   @include desktop {
-    padding-bottom: 47px;
+    margin-bottom: 47px;
   }
 }
 
-.auth-form {
+.form {
   width: 100%;
   margin-bottom: 40px;
 
@@ -37,4 +38,14 @@
 
 .redirect-label {
   font-size: 12px;
+}
+
+.accent-text-button {
+  margin-bottom: 20px;
+}
+
+.visibility-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
 }

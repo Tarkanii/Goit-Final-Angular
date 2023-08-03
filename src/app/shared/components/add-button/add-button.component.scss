@@ -1,0 +1,41 @@
+@import '../../../../scss/mixins';
+
+.add-button-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  & .add-button-label {
+    margin-top: 15px;
+  }
+
+  &.main {
+    flex-direction: row;
+    align-items: center;
+    
+    & .add-button-label {
+      display: none;
+      margin-top: 0;
+      margin-left: 20px;
+
+      @include desktop {
+        display: inline;
+        text-wrap: nowrap;
+      }
+
+    }
+  }
+}
+
+.add-button {
+  min-height: 44px;
+  min-width: 44px;
+  background: var(--accent-color) url('../../../../assets/icons/plus.svg') center no-repeat;
+  border-radius: 50%;
+  box-shadow: 0px 0px 2px var(--accent-color);
+
+  &-label {
+    font-weight: 500;
+    font-size: 18px;
+  }
+}

@@ -1,0 +1,50 @@
+@import '../../../../scss/mixins';
+
+.sprint-container {
+  background: inherit;
+  border-radius: inherit;
+  box-shadow: inherit;
+  transform: inherit;
+  position: relative;
+  padding: 20px 20px 40px;
+
+  @include desktop {
+    padding: 20px 30px 40px;
+  }
+
+  & .name {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 20px;
+
+    @include tablet {
+      font-size: 18px;
+      margin-bottom: 28px;
+    }
+  }
+
+  & .table {
+    width: 100%;
+
+    & .row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-bottom: 10px;
+
+      @include tablet {
+        margin-bottom: 35px;
+      }
+
+      @include desktop {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  & .secondary-delete-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+  }
+}

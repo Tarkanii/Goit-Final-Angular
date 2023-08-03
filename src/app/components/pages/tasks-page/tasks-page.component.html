@@ -1,1 +1,76 @@
-<p>tasks-page works!</p>
+<div class="mobile-sidebar-container">
+  <div class="container">
+    <app-sidebar type="sprint"></app-sidebar> 
+  </div>
+</div>
+
+<div class="container main">
+  <app-sidebar class="sidebar-container" type="sprint" [list]="sprints$ | async"></app-sidebar>
+  <div class="sprint-information">
+    <div class="header">
+      <ng-container *ngIf="sprint$ | async">
+        <div class="sprint-actions-container">
+          <div class="sprint-switcher">
+            <button class="back" (click)="switchSprint('decrease')"></button>
+            <p class="index-container">
+              <span class="index">{{ sprintIndex$ | async }}</span>
+              <span class="divider">/</span>
+              <span class="amount">{{ (sprints$ | async)?.length }}</span>
+            </p>
+            <button class="forward" (click)="switchSprint('increase')"></button>
+          </div>
+          <div class="date-picker">
+            <div class="date-container" (click)="calendarOpen = !calendarOpen">
+              <div class="date">{{ sprintDate| date: 'dd.MM.yyyy' }}</div>
+              <button class="arrow-button" [ngClass]="{ open: calendarOpen }">
+              </button>
+            </div>
+            <app-calendar class="calendar" *ngIf="calendarOpen"
+              [selectedDate]="sprintDate"
+              [startDate]="(sprint$ | async)?.startDate || null"
+              [endDate]="(sprint$ | async)?.endDate || null"
+              (dateSelected)="setSprintDate($event); calendarOpen = false"
+              >
+            </app-calendar>
+          </div>
+        </div>
+        <div class="name-button-container">
+          <div class="name-container">
+            <h1 *ngIf="!changeNameForm" class="name">{{ (sprint$ | async)?.name }}</h1>
+            <form action="#" class="form" *ngIf="changeNameForm"
+              (submit)="submitChangeNameForm($event)" [formGroup]="changeNameForm">
+              <div class="form-field">
+                <input 
+                  type="text" class="form-input name" [autofocus]="true" appAutofocus
+                  (blur)="destroyChangeNameForm()" [placeholder]="(sprint$ | async)?.name"
+                  formControlName="name"
+                >
+              </div>
+            </form>
+            <button *ngIf="!changeNameForm" class="redacting-button" (click)="initializeChangeNameForm()"></button>
+          </div>
+          <app-add-button class="add-button" addType="task" [mainButton]="true" (buttonClick)="openSidebarForm()"></app-add-button>
+        </div>
+        <div class="search-container">
+          <input class="form-input" id="search" [formControl]="searchControl">
+          <span class="search-icon"></span>
+        </div>
+        <ul class="sections">
+          <li [innerHTML]="'LABELS.TASK_SECTIONS.TASK' | translate"></li>
+          <li [innerHTML]="'LABELS.TASK_SECTIONS.SCHEDULED' | translate"></li>
+          <li [innerHTML]="'LABELS.TASK_SECTIONS.SPENT_DAY' | translate: { day: sprintDate | date: 'dd MMM yyyy' }"></li>
+          <li [innerHTML]="'LABELS.TASK_SECTIONS.SPENT_TOTAL' | translate"></li>
+        </ul>
+      </ng-container>
+      <h1 class="name" *ngIf="!(loading$ | async) && !(sprint$ | async)">{{ "LABELS.NOT_FOUND" | translate: { object: 'Sprint' } }}</h1>
+    </div>
+    <ul class="tasks" *ngIf="sprint$ | async">
+      <ng-container *ngFor="let task of (sprint$ | async)?.tasks">
+        <li class="task" *ngIf="task.name | filter: filterFunc()" >
+          <app-task [task]="task" [sprintDate]="sprintDate"></app-task>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+  <button class="chart-button" (click)="openChart()" *ngIf="sprint$ | async"></button>
+</div>

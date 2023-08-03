@@ -1,1 +1,18 @@
-<p>sprint works!</p>
+<div class="sprint-container" (click)="navigateTo()">
+  <h2 class="name">{{ sprint.name }}</h2>
+  <div class="table">
+    <div class="row">
+      <p>{{ 'LABELS.START_DATE' | translate }}</p>
+      <p>{{ sprint.startDate | date: dateFormat }}</p>
+    </div>
+    <div class="row">
+      <p>{{ 'LABELS.END_DATE' | translate }}</p>
+      <p>{{ sprint.endDate | date: dateFormat }}</p>
+    </div>
+    <div class="row">
+      <p>{{ 'LABELS.DURATION' | translate }}</p>
+      <p>{{ sprint.duration }}</p>
+    </div>
+  </div>
+  <button class="secondary-delete-button" (click)="delete($event)"></button>
+</div>

@@ -1,1 +1,16 @@
-<p>projects-page works!</p>
+<div class="container">
+  <div class="header">
+    <h1 class="title">Projects</h1>
+    <app-add-button class="add-button" (buttonClick)="openSidebarForm()" [mainButton]="true"></app-add-button>
+  </div>
+  <ul class="projects-grid">
+    <li class="project-card" *ngFor="let project of projects$ | async">
+      <app-project
+        [name]="project.name | truncate: 22 " 
+        [description]="project.description | truncate: 50"
+        [id]="project._id"
+        >
+      </app-project>
+    </li>
+  </ul>
+</div>

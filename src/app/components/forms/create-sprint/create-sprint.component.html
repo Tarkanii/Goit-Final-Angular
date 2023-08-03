@@ -1,1 +1,55 @@
-<p>create-sprint works!</p>
+<div class="container">
+  <h1 class="form-title">{{ 'LABELS.CREATING' | translate: { object: 'sprint' } }}</h1>
+  <form action="#" [formGroup]="createSprintForm" class="form" (keyup)="onKeyUp($event)">
+    <div class="form-field">
+      <label class="form-label" for="name">{{ 'FORM.SPRINT_NAME' | translate }}</label>
+      <input class="form-input" id="name" appInput [text]="true" formControlName="name">
+      <div class="hint-container">
+        <p class="hint" *ngIf="getControl('name')?.errors?.['required'] && getControl('name')?.touched">{{ 'FORM.ERRORS.REQUIRED_FIELD' | translate }}</p>
+      </div>
+    </div>
+    <div class="form-fields-set">
+      <div class="form-field">
+        <label class="form-label" for="startDate">{{ 'FORM.START_DATE' | translate }}</label>
+        <input class="form-input" id="startDate" appInput [calendar]="true" formControlName="startDate" 
+          (focus)="setCalendarOpen('start')" autocomplete="off">
+        <div class="hint-container" *ngIf="getControl('startDate')?.touched">
+          <p class="hint" *ngIf="getControl('startDate')?.errors?.['required']">{{ 'FORM.ERRORS.REQUIRED_FIELD' | translate }}</p>
+          <p class="hint" *ngIf="getControl('startDate')?.errors?.['format']">{{ 'FORM.ERRORS.DATE_FORMAT' | translate }}</p>
+          <p class="hint" *ngIf="getControl('startDate')?.errors?.['year']">{{ 'FORM.ERRORS.YEAR' | translate: { currentYear: currentYear } }}</p>
+          <p class="hint" *ngIf="getControl('startDate')?.errors?.['month']">{{ 'FORM.ERRORS.MONTH' | translate }}</p>
+          <p class="hint" *ngIf="getControl('startDate')?.errors?.['day']">{{ 'FORM.ERRORS.REAL_DATE' | translate }}</p>
+        </div>
+        <button type="button" class="arrow-button" [ngClass]="{ open: calendarOpen === 'start' }" 
+          (click)="setCalendarOpen(calendarOpen === 'start' ? null : 'start')">
+        </button>
+        <app-calendar class="calendar" *ngIf="calendarOpen === 'start'"
+          (dateSelected)="setDate('startDate', $event); setCalendarOpen(null)" [selectedDate]="getDate('startDate')">
+        </app-calendar>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="endDate">{{ 'FORM.END_DATE' | translate }}</label>
+        <input class="form-input" id="endDate" appInput [calendar]="true" formControlName="endDate" 
+          (focus)="setCalendarOpen('end')" autocomplete="off">
+        <div class="hint-container" *ngIf="getControl('endDate')?.touched">
+          <p class="hint" *ngIf="getControl('endDate')?.errors?.['required']">{{ 'FORM.ERRORS.REQUIRED_FIELD' | translate }}</p>
+          <p class="hint" *ngIf="getControl('endDate')?.errors?.['format']">{{ 'FORM.ERRORS.DATE_FORMAT' | translate }}</p>
+          <p class="hint" *ngIf="getControl('endDate')?.errors?.['year']">{{ 'FORM.ERRORS.YEAR' | translate: { currentYear: currentYear } }}</p>
+          <p class="hint" *ngIf="getControl('endDate')?.errors?.['month']">{{ 'FORM.ERRORS.MONTH' | translate }}</p>
+          <p class="hint" *ngIf="getControl('endDate')?.errors?.['day']">{{ 'FORM.ERRORS.REAL_DATE' | translate }}</p>
+          <p class="hint" *ngIf="mustShowDifferenceError()">{{ 'FORM.ERRORS.DIFFERENCE' | translate }}</p>
+        </div>
+        <button type="button" class="arrow-button" [ngClass]="{ open: calendarOpen === 'end' }" 
+          (click)="setCalendarOpen(calendarOpen === 'end' ? null : 'end')">
+        </button>
+        <app-calendar class="calendar" *ngIf="calendarOpen === 'end'"
+          (dateSelected)="setDate('endDate', $event); setCalendarOpen(null)" [selectedDate]="getDate('endDate')">
+        </app-calendar>
+      </div>
+    </div>
+  </form>
+  <div class="buttons-container">
+    <button class="accent-text-button" (click)="submit()">{{ 'BUTTONS.READY' | translate }}</button>
+    <button class="secondary-button" (click)="cancel()">{{ 'BUTTONS.CANCEL' | translate }}</button>
+  </div>
+</div>

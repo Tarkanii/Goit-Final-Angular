@@ -1,0 +1,14 @@
+.question {
+  font-size: 18px;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.button:last-child {
+  margin-left: 10px;
+}

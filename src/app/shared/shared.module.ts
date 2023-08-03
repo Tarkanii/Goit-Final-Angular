@@ -1,14 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { TranslateModule } from '@ngx-translate/core';
 import { TaskComponent } from './components/task/task.component';
 import { SprintComponent } from './components/sprint/sprint.component';
 import { ProjectComponent } from './components/project/project.component';
 import { AddButtonComponent } from './components/add-button/add-button.component';
-import { ChartTableComponent } from './dialogs/chart-table/chart-table.component';
 import { InputDirective } from './directives/custom-input.directive';
-import { TranslateModule } from '@ngx-translate/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from '../routing/app-routing.module';
+import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
+import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { AutofocusDirective } from './directives/autofocus.directive';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { TextareaDirective } from './directives/textarea.directive';
+import { FilterPipe } from './pipes/filter.pipe';
+import { TruncatePipe } from './pipes/truncate.pipe';
+import { VisibilitySwitcherDirective } from './directives/visibility-switcher.directive';
 
 
 @NgModule({
@@ -17,20 +27,41 @@ import { AppRoutingModule } from '../routing/app-routing.module';
     SprintComponent,
     ProjectComponent,
     AddButtonComponent,
-    ChartTableComponent,
-    InputDirective
+    InputDirective,
+    InfoDialogComponent,
+    ConfirmationDialogComponent,
+    SidebarComponent,
+    AutofocusDirective,
+    CalendarComponent,
+    TextareaDirective,
+    FilterPipe,
+    TruncatePipe,
+    VisibilitySwitcherDirective
   ],
   exports: [
     InputDirective,
     TranslateModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AddButtonComponent,
+    ProjectComponent,
+    SidebarComponent,
+    SprintComponent,
+    AutofocusDirective,
+    CalendarComponent,
+    TaskComponent,
+    TextareaDirective,
+    FilterPipe,
+    TruncatePipe,
+    VisibilitySwitcherDirective
   ],
   imports: [
     CommonModule,
     TranslateModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatDialogModule,
+    BrowserAnimationsModule
   ]
 })
 export class SharedModule { }
