@@ -89,7 +89,7 @@ export class CreateSprintComponent implements OnInit, OnDestroy {
 
   // Returns whether we must show error about the difference between the start date and the end date of sprint or not 
   public mustShowDifferenceError(): boolean {
-    return this.getControl('endDate')?.errors?.['difference'] && Object.keys(this.getControl('endDate')?.errors || {}).length;
+    return this.getControl('endDate')?.errors?.['difference'] && Object.keys(this.getControl('endDate')?.errors || {}).length === 1;
   }
 
   // Submitting create sprint form
