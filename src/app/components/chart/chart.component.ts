@@ -128,11 +128,11 @@ export class ChartComponent implements OnInit, OnDestroy {
 
     for (let i = 0; i < dates.length; i++) {
       if (!i) {
-        actualData.push(this.sprint.duration - hoursSpentArr[i]);
+        actualData.push(Number((this.sprint.duration - hoursSpentArr[i]).toFixed(3)));
         continue;
       }
 
-      actualData.push(actualData[i-1] - hoursSpentArr[i]);
+      actualData.push(Number((actualData[i-1] - hoursSpentArr[i]).toFixed(3)));
     }
 
     let indexOfLastChanges = 0;
