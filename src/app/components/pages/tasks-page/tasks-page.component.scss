@@ -97,7 +97,6 @@
   align-items: center;
 
   .index-container {
-    margin: 0 20px;
 
     & .index {
       font-size: 18px;
@@ -111,22 +110,6 @@
     & .divider {
       margin: 0 4px;
     }
-  }
-
-  .back:hover, .forward:hover {
-    transform: scale(1.2);
-  }
-
-  .back {
-    width: 10px;
-    height: 14px;
-    background: url('../../../../assets/icons/left-arrow.svg') center no-repeat;
-  }
-
-  .forward {
-    width: 10px;
-    height: 14px;
-    background: url('../../../../assets/icons/right-arrow.svg') center no-repeat;
   }
 }
 

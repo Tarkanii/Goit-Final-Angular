@@ -20,7 +20,7 @@ button {
   padding: 0;
   border: none;
 
-  &:hover {
+  &:hover, &:focus {
     cursor: pointer;
     transform: scale(1.03);
     transition: transform linear 200ms;
@@ -86,22 +86,23 @@ button {
 }
 
 .visibility-button {
-  height: 16px;
-  width: 16px;
+  height: 100%;
+  width: 30px;
   background-color: var(--secondary-text-color);
-  -webkit-mask: url(../../assets/icons/blocked-eye.svg);
-  mask: url(../../assets/icons/blocked-eye.svg);
+  -webkit-mask: url(../../assets/icons/blocked-eye.svg) no-repeat center;
+  mask: url(../../assets/icons/blocked-eye.svg) no-repeat center;
 
   &.open {
     background-color: var(--accent-color);
-    -webkit-mask: url(../../assets/icons/eye.svg);
-    mask: url(../../assets/icons/eye.svg);
+    -webkit-mask: url(../../assets/icons/eye.svg) no-repeat center;
+    mask: url(../../assets/icons/eye.svg) no-repeat center;
   }
 }
 
 .arrow-button {
-  height: 12px;
-  width: 10px;
+  height: 100%;
+  min-height: 12px;
+  width: 20px;
   background: url('../../assets/icons/open-arrow.svg') center no-repeat;
 
   &.open {
@@ -113,6 +114,23 @@ button {
   height: 20px;
   width: 20px;
   background: url('../../assets/icons/redacting.svg');
+}
+
+.previous-button {
+  width: 40px;
+  height: 30px;
+  background: url('../../assets/icons/left-arrow.svg') center no-repeat;
+}
+
+.next-button {
+  width: 40px;
+  height: 30px;
+  background: url('../../assets/icons/right-arrow.svg') center no-repeat;
+}
+
+.next-button:hover, .previous-button:hover,
+.next-button:focus, .previous-button:focus {
+  transform: scale(1.2);
 }
 
 .chart-button {

@@ -28,20 +28,9 @@
     display: flex;
     flex-direction: row;
 
-    & #previous {
-      background: url('../../../../assets/icons/left-arrow.svg') center no-repeat;
-      width: 10px;
-      margin-right: 10px;
-    }
-
-    & #next {
-      background: url('../../../../assets/icons/right-arrow.svg') center no-repeat;
-      width: 10px;
-    }
-
-    & #next:hover,
-    & #previous:hover {
-      transform: scale(1.2);
+    & .previous-button, .next-button {
+      width: 30px;
+      height: 20px;
     }
   }
 }
