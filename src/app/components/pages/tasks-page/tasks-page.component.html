@@ -11,13 +11,13 @@
       <ng-container *ngIf="sprint$ | async">
         <div class="sprint-actions-container">
           <div class="sprint-switcher">
-            <button class="back" (click)="switchSprint('decrease')"></button>
+            <button class="previous-button" (click)="switchSprint('decrease')"></button>
             <p class="index-container">
               <span class="index">{{ sprintIndex$ | async }}</span>
               <span class="divider">/</span>
               <span class="amount">{{ (sprints$ | async)?.length }}</span>
             </p>
-            <button class="forward" (click)="switchSprint('increase')"></button>
+            <button class="next-button" (click)="switchSprint('increase')"></button>
           </div>
           <div class="date-picker">
             <div class="date-container" (click)="calendarOpen = !calendarOpen">
