@@ -60,7 +60,7 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 6px;
 
-  & .button {  
+  & .button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -69,7 +69,7 @@
     font-size: 14px;
     border-radius: 50%;
     transition: background-color linear 200ms, color linear 200ms;
-    background-color: transparent;
+    background-color: var(--border-color);
 
     &:hover:not(.inactive),
     &.selected {

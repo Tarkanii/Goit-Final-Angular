@@ -11,9 +11,10 @@
       <li class="week-days" *ngFor="let day of ('LABELS.WEEK_DAYS' | translate)">{{ day }}</li>
     </ul>
     <ul class="days">
-      <li class="day" *ngFor="let day of daysList">
+      <li class="day" *ngFor="let day of daysList; let i = index;" 
+        [ngStyle]="i === 0 ? {'grid-column-start': startWeekDay} : null">
         <button 
-          class="button" 
+          class="button"
           [ngClass]="{ inactive: day.inactive, selected: day.selected }"
           (mouseup)="selectDate(day)"
           (click)="selectDate(day)">
