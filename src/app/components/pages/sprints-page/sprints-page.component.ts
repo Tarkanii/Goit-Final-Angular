@@ -20,6 +20,7 @@ export class SprintsPageComponent implements OnInit, OnDestroy {
   public projects$: Observable<IProject[]> = this.store.select(projectsSelector);
   public project!: IProject | undefined;
   public changeNameControl: FormControl = this.formBuilder.control('');
+  public changeDescriptionControl: FormControl = this.formBuilder.control('');
   private projectId!: string;
   private unsubscribe$: Subject<void> = new Subject();
 
@@ -41,6 +42,7 @@ export class SprintsPageComponent implements OnInit, OnDestroy {
       .subscribe((project: IProject | undefined) => {
         this.project = project;
         this.changeNameControl.setValue(project?.name);
+        this.changeDescriptionControl.setValue(project?.description);
       })
   }
 
@@ -58,6 +60,17 @@ export class SprintsPageComponent implements OnInit, OnDestroy {
     }
 
     this.store.dispatch(changeProjectAction({ id: this.projectId, name: newName }));
+  }
+
+  // Changes description of the project
+  public changeProjectDescription(): void {
+    const newDescription = this.changeDescriptionControl.value.trim();
+    if (newDescription === this.project?.description) {
+      this.changeDescriptionControl.setValue(this.project?.description);
+      return;
+    }
+
+    this.store.dispatch(changeProjectAction({ id: this.projectId, description: newDescription }));
   }
 
   // Opens sidebar form to create new sprint
