@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, switchMap, takeUntil } from 'rxjs';
 import { IProject } from 'src/app/shared/interfaces/project';
 import { IStore } from 'src/app/shared/interfaces/store';
 import { loadingSelector } from 'src/app/store/general/general.selectors';
@@ -18,8 +18,8 @@ export class SprintsPageComponent implements OnInit, OnDestroy {
 
   public loading$: Observable<boolean> = this.store.select(loadingSelector);
   public projects$: Observable<IProject[]> = this.store.select(projectsSelector);
-  public project$!: Observable<IProject | undefined>;
-  public changeNameForm: FormGroup | null = null;
+  public project!: IProject | undefined;
+  public changeNameControl: FormControl = this.formBuilder.control('');
   private projectId!: string;
   private unsubscribe$: Subject<void> = new Subject();
 
@@ -31,10 +31,16 @@ export class SprintsPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.activatedRoute.params
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(({ projectId }) => {
-        this.projectId = projectId;
-        this.project$ = this.store.select(projectSelector(projectId));
+      .pipe(
+        switchMap(({ projectId }) => {
+          this.projectId = projectId;
+          return this.store.select(projectSelector(projectId));
+        }),
+        takeUntil(this.unsubscribe$)
+        )
+      .subscribe((project: IProject | undefined) => {
+        this.project = project;
+        this.changeNameControl.setValue(project?.name);
       })
   }
 
@@ -43,24 +49,15 @@ export class SprintsPageComponent implements OnInit, OnDestroy {
     this.unsubscribe$.complete();
   }
 
-  public initializeChangeNameForm(): void {
-    this.changeNameForm = this.formBuilder.group({
-      name: ''
-    })
-  }
-
-  public destroyChangeNameForm(): void {
-    this.changeNameForm = null;
-  }
-
   // Changes name of the project
-  public submitChangeNameForm(event: Event): void {
-    event.preventDefault();
-    const { name } = this.changeNameForm?.value;
-    if (name.trim()?.length) {
-      this.store.dispatch(changeProjectAction({ id: this.projectId, name: String(name.trim()) }));
+  public changeProjectName(): void {
+    const newName = this.changeNameControl.value.trim();
+    if (!newName.length || newName === this.project?.name) {
+      this.changeNameControl.setValue(this.project?.name);
+      return;
     }
-    this.destroyChangeNameForm();
+
+    this.store.dispatch(changeProjectAction({ id: this.projectId, name: newName }));
   }
 
   // Opens sidebar form to create new sprint

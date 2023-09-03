@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, Observable, Subject, filter, takeUntil } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, filter, switchMap, takeUntil } from 'rxjs';
 import { ISprint } from 'src/app/shared/interfaces/project';
 import { IStore } from 'src/app/shared/interfaces/store';
 import { loadingSelector } from 'src/app/store/general/general.selectors';
@@ -18,12 +18,12 @@ import { sprintSelector, sprintsSelector } from 'src/app/store/projects/sprint/s
 export class TasksPageComponent implements OnInit {
 
   public loading$: Observable<boolean> = this.store.select(loadingSelector);
-  public sprint$!: Observable<ISprint | null>;
+  public sprint!: ISprint | null;
   public sprints$!: Observable<ISprint[]>;
   public sprintIndex$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public sprintId: string = '';
   public sprintDate: Date | null = null;
-  public changeNameForm: FormGroup | null = null;
+  public changeNameControl: FormControl = this.formBuilder.control('');
   public searchControl: FormControl = this.formBuilder.control(''); 
   public calendarOpen: boolean = false;
 
@@ -39,12 +39,18 @@ export class TasksPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(({ projectId, sprintId }) => {
-        this.sprints$ = this.store.select(sprintsSelector(projectId));
-        this.sprint$ = this.store.select(sprintSelector(projectId, sprintId));
-        this.sprintId = sprintId;
-        this.sprintIndex$.next(this.getSprintIndex(this.sprintId))
+      .pipe(
+        switchMap(({ projectId, sprintId }) => {
+          this.sprints$ = this.store.select(sprintsSelector(projectId));
+          this.sprintId = sprintId;
+          this.sprintIndex$.next(this.getSprintIndex(this.sprintId));
+          return this.store.select(sprintSelector(projectId, sprintId));
+        }),
+        takeUntil(this.unsubscribe$)
+        )
+      .subscribe((sprint: ISprint | null) => {
+        this.sprint = sprint;
+        this.changeNameControl.setValue(sprint?.name);
       })
 
     this.sprints$
@@ -71,16 +77,6 @@ export class TasksPageComponent implements OnInit {
         const { startDate, endDate } = this.sprints[index - 1];
         this.setInitialSprintDate(startDate, endDate);
       })
-  }
-
-  public initializeChangeNameForm(): void {
-    this.changeNameForm = this.formBuilder.group({
-      name: ''
-    })
-  }
-
-  public destroyChangeNameForm(): void {
-    this.changeNameForm = null;
   }
 
   // Gets sprint index of current sprint
@@ -141,13 +137,13 @@ export class TasksPageComponent implements OnInit {
   }
 
   // Changes name of sprint
-  public submitChangeNameForm(event: Event): void {
-    event.preventDefault();
-    const { name } = this.changeNameForm?.value;
-    if (name.trim()?.length) {
-      this.store.dispatch(changeSprintAction({ id: this.sprintId, name: String(name.trim()) }));
+  public changeSprintName(): void {
+    const newName = this.changeNameControl.value?.trim();
+    if (!newName.length || newName === this.sprint?.name) {
+      this.changeNameControl.setValue(this.sprint?.name);
+      return;
     }
-    this.destroyChangeNameForm();
+    this.store.dispatch(changeSprintAction({ id: this.sprintId, name: newName }));
   }
 
 }
