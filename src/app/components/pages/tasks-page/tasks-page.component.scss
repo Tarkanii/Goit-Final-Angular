@@ -48,32 +48,13 @@
     max-height: 100%;
     overflow: auto;
   }
-  
+
   & .name {
     font-size: 26px;
     font-weight: 500;
 
     @include tablet {
       font-size: 36px;
-    }
-  }
-
-  & .redacting-button {
-    margin-left: 20px;
-    min-width: 20px;
-  }
-
-  & .description {
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 30px;
-    
-    @include tablet {
-      font-size: 18px;
-    }
-
-    @include desktop {
-      max-width: 400px;
     }
   }
 
@@ -85,8 +66,10 @@
 
     @include tablet {
       position: relative;
+      top: 6px;
       bottom: unset;
       right: unset;
+      align-self: flex-start;
     }
   }
 }
@@ -162,16 +145,6 @@
 
   @include tablet {
     margin-bottom: 35px; 
-  }
-
-  & .name-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    
-    @include tablet {
-      margin-right: 20px;
-    }
   }
 }
 
@@ -261,5 +234,16 @@
     border-radius: 5px;
     overflow: hidden;
     box-shadow: 0 1px 10px var(--border-color);
+  }
+}
+
+.textarea {
+  height: 35px;
+  font-size: 26px;
+  font-weight: 500;
+
+  @include tablet {
+    font-size: 36px;
+    max-width: 80%;
   }
 }

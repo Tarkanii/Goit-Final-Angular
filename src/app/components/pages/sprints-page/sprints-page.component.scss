@@ -53,7 +53,7 @@
   @include desktop {
     padding-left: 70px;
   }
-  
+
   & .name {
     font-size: 26px;
     font-weight: 500;
@@ -61,11 +61,6 @@
     @include tablet {
       font-size: 36px;
     }
-  }
-
-  & .redacting-button {
-    margin-left: 20px;
-    min-width: 20px;
   }
 
   & .description {
@@ -90,8 +85,10 @@
 
     @include tablet {
       position: relative;
+      top: 6px;
       bottom: unset;
       right: unset;
+      align-self: flex-start;
     }
   }
 }
@@ -102,20 +99,6 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-
-  & .name-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    
-    @include tablet {
-      margin-right: 20px;
-    }
-  }
-}
-
-.form {
-  max-width: 80%;
 }
 
 .sprints-grid {
@@ -163,5 +146,16 @@
     font-size: 18px;
     font-weight: 500;
     text-decoration: underline;
+  }
+}
+
+.textarea {
+  height: 35px;
+  font-size: 26px;
+  font-weight: 500;
+  
+  @include tablet {
+    font-size: 36px;
+    max-width: 80%;
   }
 }

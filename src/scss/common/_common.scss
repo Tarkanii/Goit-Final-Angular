@@ -24,6 +24,7 @@ button {
     cursor: pointer;
     transform: scale(1.03);
     transition: transform linear 200ms;
+    outline: none;
   }
 }
 
@@ -107,6 +108,14 @@ button {
 
   &.open {
     transform: rotate(180deg);
+  }
+
+  &:focus, &:hover {
+    transform: scale(1.2);
+  }
+
+  &.open:focus, &.open:hover {
+    transform: rotate(180deg) scale(1.2);
   }
 }
 

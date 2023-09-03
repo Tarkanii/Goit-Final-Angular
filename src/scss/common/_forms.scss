@@ -82,3 +82,18 @@
     font-size: 18px;
   }
 }
+
+.textarea {
+  cursor: pointer;
+  background-color: transparent;
+  resize: none;
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  padding: 5px 10px;
+
+  &:focus {
+    cursor: text;
+    background-color: var(--dialog-background-color);
+  }
+}
