@@ -43,6 +43,7 @@
     "START_DATE": "Start date",
     "END_DATE": "End date",
     "SCHEDULED_HOURS": "Scheduled hours",
+    "ADD_DESCRIPTION": "Add Description",
     "ERRORS": {
       "REQUIRED_FIELD": "Required field",
       "INVALID_EMAIL": "Invalid e-mail",

@@ -63,13 +63,26 @@
     }
   }
 
+  .textarea {
+    height: 35px;
+    font-size: 26px;
+    font-weight: 500;
+    
+    @include tablet {
+      font-size: 36px;
+      max-width: 80%;
+    }
+  }
+
   & .description {
     font-size: 14px;
     font-weight: 500;
     margin-bottom: 30px;
+    width: 100%;
     
     @include tablet {
       font-size: 18px;
+      max-width: unset;
     }
 
     @include desktop {
@@ -105,7 +118,6 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 10px;
-  margin-top: 30px;
 
   @include tablet {
     grid-template-columns: 1fr 1fr;
@@ -146,16 +158,5 @@
     font-size: 18px;
     font-weight: 500;
     text-decoration: underline;
-  }
-}
-
-.textarea {
-  height: 35px;
-  font-size: 26px;
-  font-weight: 500;
-  
-  @include tablet {
-    font-size: 36px;
-    max-width: 80%;
   }
 }

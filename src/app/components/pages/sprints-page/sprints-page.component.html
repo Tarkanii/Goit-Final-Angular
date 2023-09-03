@@ -12,7 +12,10 @@
         <textarea class="textarea" [id]="project._id" appTextarea [formControl]="changeNameControl" (blur)="changeProjectName()"></textarea>
         <app-add-button class="add-button" addType="sprint" [mainButton]="true" (buttonClick)="openSidebarForm()"></app-add-button>
       </div>
-      <p class="description" *ngIf="project?.description">{{ project.description }}</p>
+      <textarea class="textarea description" [id]="project._id" appTextarea 
+        [placeholder]="'FORM.ADD_DESCRIPTION' | translate"
+        [formControl]="changeDescriptionControl" (blur)="changeProjectDescription()">
+      </textarea>
       <button class="add-people-button" *ngIf="false">
         <div class="icon"></div>
         <span class="text">{{ 'BUTTONS.ADD_PEOPLE' | translate }}</span>
