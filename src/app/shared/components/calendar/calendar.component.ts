@@ -9,6 +9,7 @@ import { IDay } from '../../interfaces/calendar';
 export class CalendarComponent implements OnInit {
 
   public currentDate: Date = new Date();
+  public startWeekDay: number = 0;
   @Input() public selectedDate: Date | null = null;
   @Input() public startDate: string | null = null;
   @Input() public endDate: string | null = null;
@@ -39,21 +40,12 @@ export class CalendarComponent implements OnInit {
     const lastDateOfSelectedMonth = new Date(this.currentYear, this.currentMonth + 1, 0);
     const daysList = [];
 
-    for (let i = previousMonth.getDay() - 1; i >= 0; i--) {
-      daysList.push({ inactive: true, value: previousMonth.getDate() - i, selected: false });
-    }
- 
+    this.startWeekDay = previousMonth.getDay() + 1;
     for (let i = 1; i <= lastDateOfSelectedMonth.getDate(); i++) {
       const selected = this.currentYear === this.selectedDate?.getFullYear() &&
         this.currentMonth === this.selectedDate?.getMonth() && this.selectedDate?.getDate() === i;
       const inactive = this.shouldBeInactive(i);
       daysList.push({ inactive, value: i, selected: !!selected });
-    }
-
-    if (lastDateOfSelectedMonth.getDay() === 0) return daysList;
-
-    for (let i = 0; i <= 6 - lastDateOfSelectedMonth.getDay(); i++) {
-      daysList.push({ inactive: true, value: i + 1, selected: false });
     }
 
     return daysList;
