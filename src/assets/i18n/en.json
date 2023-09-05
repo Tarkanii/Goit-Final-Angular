@@ -8,6 +8,9 @@
     "LOGIN": "Log in",
     "CREATE": "Create a {{object}}",
     "CREATING": "Creating a {{object}}",
+    "ADD_PEOPLE": "Add people",
+    "ADDED_USERS": "Added users:",
+    "NO_ADDED_USERS": "You have not added any users yet",
     "SHOW": "Show {{list}}",
     "DURATION": "Duration",
     "START_DATE": "Start date",
@@ -76,7 +79,8 @@
   "PROJECTS": {
     "DELETE_CONFIRMATION": "Do you want to delete this project?<br>All the attached information will be removed as well",
     "ERROR": {
-      "PROJECT_NOT_FOUND": "Project not found"
+      "PROJECT_NOT_FOUND": "Project not found",
+      "USER_NOT_FOUND": "User not found"
     },
     "SUCCESS": {
       "ADD":"Project {{name}} created successfully!",
@@ -95,6 +99,13 @@
     "SUCCESS": {
       "ADD":"Task {{name}} created successfully!",
       "DELETE": "Task {{name}} deleted successfully!"
+    }
+  },
+  "PARTICIPANTS": {
+    "LEAVE_CONFIRMATION": "Do you want to leave this project?",
+    "SUCCESS": {
+      "ADD":"User {{name}} was added successfully!",
+      "DELETE": "User {{name}} was deleted successfully!"
     }
   },
   "BUTTONS": {

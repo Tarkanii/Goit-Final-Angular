@@ -1,4 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable, filter, take } from 'rxjs';
+import { FormsService } from 'src/app/services/forms.service';
+import { IProject } from 'src/app/shared/interfaces/project';
+import { IStore } from 'src/app/shared/interfaces/store';
+import { addParticipantAction, setSidebarFormAction } from 'src/app/store/projects/projects.actions';
+import { projectSelector } from 'src/app/store/projects/projects.selectors';
 
 @Component({
   selector: 'app-add-people',
@@ -7,9 +16,57 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddPeopleComponent implements OnInit {
 
-  constructor() { }
+  public addPeopleForm: FormGroup | null = null;
+  public project$!: Observable<IProject | undefined>;
+  public projectId: string = '';
+
+  constructor(
+    private store: Store<IStore>,
+    private formBuilder: FormBuilder,
+    private formService: FormsService,
+    private router: Router
+  ) {
+  }
 
   ngOnInit(): void {
+    this.formService.getValidationRules();
+
+    this.formService.validationRulesObtained$
+      .pipe(filter(Boolean), take(1))
+      .subscribe(() => {
+        this.addPeopleForm = this.formBuilder.group({
+          email: ['', this.formService.emailValidator]
+        })
+      })
+    
+    this.projectId = this.router.url.split('/')[2];
+    this.project$ = this.store.select(projectSelector(this.projectId));
+  }
+
+  // Getters
+
+  public get emailControl(): AbstractControl | null {
+    return this.addPeopleForm?.get('email') || null;
+  }
+
+  // Submitting add people form
+  public submit(): void {
+    this.addPeopleForm?.markAllAsTouched();
+    this.addPeopleForm?.updateValueAndValidity();
+
+    if (this.addPeopleForm?.invalid) return;
+    this.store.dispatch(addParticipantAction({ id: this.projectId, email: this.addPeopleForm?.value.email }));
+  }
+
+  // Closes sidebar form if user clicked cancel button
+  public cancel(): void {
+    this.store.dispatch(setSidebarFormAction({ form: null }));
+  }
+
+  // Submits form if user clicked Enter
+  public onKeyUp(event: KeyboardEvent): void {
+    if (event.keyCode !== 13) return;
+    this.submit();
   }
 
 }

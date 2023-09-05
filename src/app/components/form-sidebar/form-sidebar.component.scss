@@ -36,7 +36,7 @@
     top: 0;
     right: 0;
     width: 100vw;
-    padding: 63px 0 0 0;
+    padding: 63px 0 20px 0;
     transform: translateY(0);
     background-color: var(--dialog-background-color);
     overflow-y: auto;
@@ -44,12 +44,12 @@
     @include tablet {
       position: fixed;
       width: 512px;
-      padding: 121px 50px 0 30px;
+      padding: 121px 50px 20px 30px;
     }
   
     @include desktop {
       width: 570px;
-      padding: 121px 50px 0;
+      padding: 121px 50px 20px;
     }
 
     .close-button {
