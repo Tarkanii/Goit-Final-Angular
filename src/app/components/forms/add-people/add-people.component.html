@@ -1,1 +1,22 @@
-<p>add-people works!</p>
+<div class="container">
+  <h1 class="form-title">{{ 'LABELS.ADD_PEOPLE' | translate }}</h1>
+  <form *ngIf="addPeopleForm" action="#" [formGroup]="addPeopleForm" class="form" (keyup)="onKeyUp($event)">
+    <div class="form-field">
+      <label class="form-label" for="email">{{ 'FORM.EMAIL' | translate }}</label>
+      <input class="form-input" id="email" appInput [email]="true" formControlName="email">
+      <div class="hint-container">
+        <p class="hint" *ngIf="emailControl?.errors?.['required'] && emailControl?.touched">{{ 'FORM.ERRORS.REQUIRED_FIELD' | translate }}</p>
+        <p class="hint" *ngIf="emailControl?.errors?.['invalid'] && emailControl?.touched">{{ 'FORM.ERRORS.INVALID_EMAIL' | translate }}</p>
+      </div>
+    </div>
+  </form>
+  <h3 class="title">{{ 'LABES.ADDED_USERS' | translate }}</h3>
+  <p class="message" *ngIf="!(project$ | async)">{{ 'LABELS.NO_ADDED_USERS' | translate }}</p>
+  <ul class="users-list" *ngIf="(project$ | async)">
+    <li class="user" *ngFor="let email of (project$ | async)?.participants">{{ email }}</li>
+  </ul>
+  <div class="buttons-container" *ngIf="addPeopleForm">
+    <button class="accent-text-button" (click)="submit()">{{ 'BUTTONS.READY' | translate }}</button>
+    <button class="secondary-button" (click)="cancel()">{{ 'BUTTONS.CANCEL' | translate }}</button>
+  </div>
+</div>

@@ -2,7 +2,9 @@ export interface IProject {
   _id: string,
   name: string,
   description: string,
-  sprints: ISprint[]
+  owner: boolean,
+  sprints: ISprint[],
+  participants: string[]
 }
 
 export interface ISprint {

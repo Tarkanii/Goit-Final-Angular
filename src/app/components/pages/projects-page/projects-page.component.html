@@ -8,6 +8,7 @@
       <app-project
         [name]="project.name | truncate: 22 " 
         [description]="project.description | truncate: 50"
+        [owner]="project.owner"
         [id]="project._id"
         >
       </app-project>

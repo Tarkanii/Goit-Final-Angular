@@ -16,7 +16,7 @@
         [placeholder]="'FORM.ADD_DESCRIPTION' | translate"
         [formControl]="changeDescriptionControl" (blur)="changeProjectDescription()">
       </textarea>
-      <button class="add-people-button" *ngIf="false">
+      <button class="add-people-button" *ngIf="project.owner" (click)="openAddParticipantForm()">
         <div class="icon"></div>
         <span class="text">{{ 'BUTTONS.ADD_PEOPLE' | translate }}</span>
       </button>

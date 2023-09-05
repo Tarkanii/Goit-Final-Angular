@@ -78,4 +78,9 @@ export class SprintsPageComponent implements OnInit, OnDestroy {
     this.store.dispatch(setSidebarFormAction({ form: 'sprint' }));
   }
 
+  // Opens sidebar form to add new participant
+  public openAddParticipantForm(): void {
+    this.store.dispatch(setSidebarFormAction({ form: 'participant' }));
+  }
+
 }

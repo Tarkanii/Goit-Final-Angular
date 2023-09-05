@@ -57,6 +57,14 @@ export class RequestsService {
     return this.http.delete<void>(`${environment.backend_url}/api/projects/${id}`, { headers: this.autharizationHeader });
   }
 
+  public addParticipant(id: string, email: string): Observable<{ project: IProject }> {
+    return this.http.patch<{ project: IProject }>(`${environment.backend_url}/api/projects/${id}/participants`, { email, action: 'add' }, { headers: this.autharizationHeader });
+  }
+
+  public deleteParticipant(id: string, email: string): Observable<{ project: IProject }> {
+    return this.http.patch<{ project: IProject }>(`${environment.backend_url}/api/projects/${id}/participants`, { email, action: 'delete' }, { headers: this.autharizationHeader });
+  }
+
   // Sprints requests
 
   public addSprint(body: ICreateSprintBody): Observable<{ sprint: ISprint }> {

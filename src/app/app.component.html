@@ -9,5 +9,6 @@
     <app-create-project *ngIf="(sidebarFormOpen$ | async) === 'project'"></app-create-project>
     <app-create-sprint *ngIf="(sidebarFormOpen$ | async) === 'sprint'"></app-create-sprint>
     <app-create-task *ngIf="(sidebarFormOpen$ | async) === 'task'"></app-create-task>
+    <app-add-people *ngIf="(sidebarFormOpen$ | async) === 'participant'"></app-add-people>
   </app-form-sidebar>
 </div>
