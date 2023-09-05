@@ -10,7 +10,7 @@
       </div>
     </div>
   </form>
-  <h3 class="title">{{ 'LABES.ADDED_USERS' | translate }}</h3>
+  <h3 class="title">{{ 'LABELS.ADDED_USERS' | translate }}</h3>
   <p class="message" *ngIf="!(project$ | async)">{{ 'LABELS.NO_ADDED_USERS' | translate }}</p>
   <ul class="users-list" *ngIf="(project$ | async)">
     <li class="user" *ngFor="let email of (project$ | async)?.participants">{{ email }}</li>
