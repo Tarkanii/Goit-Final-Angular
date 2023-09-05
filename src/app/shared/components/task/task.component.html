@@ -1,5 +1,5 @@
 <div class="task-container">
-  <textarea class="name form-input" appTextarea (blur)="changeName()" [formControl]="changeNameControl"></textarea>
+  <textarea class="name textarea" appTextarea (blur)="changeName()" [formControl]="changeNameControl"></textarea>
   <ul class="table">
     <li class="row">
       <span class="key">{{ 'LABELS.TASK_KEYS.SCHEDULED' | translate }}</span>
@@ -9,7 +9,7 @@
       <span class="key">{{ 'LABELS.TASK_KEYS.SPENT_DAY' | translate: { day: sprintDate | date: dateFormat } }}</span>
       <div class="value">
         <div class="form-field">
-          <input class="spent-hours form-input" appInput [numberOnly]="true" [formControl]="spentHoursDayControl" 
+          <input class="spent-hours form-input textarea" appInput [numberOnly]="true" [formControl]="spentHoursDayControl" 
             (blur)="changeHours()" (keyup)="onKeyUp($event)">
           <div class="hint-container">
             <p *ngIf="spentHoursDayControl.errors?.['min']">{{ 'FORM.ERRORS.MIN_VALUE' | translate: { min: minValue } }}</p>
