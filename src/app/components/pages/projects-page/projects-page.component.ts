@@ -11,7 +11,7 @@ import { sidebarFormOpenSelector, projectsSelector } from 'src/app/store/project
   templateUrl: './projects-page.component.html',
   styleUrls: ['./projects-page.component.scss']
 })
-export class ProjectsPageComponent implements OnInit {
+export class ProjectsPageComponent {
 
   public projects$: Observable<IProject[]> = this.store.select(projectsSelector);
   public sidebarOpen$: Observable<string | null> = this.store.select(sidebarFormOpenSelector);
@@ -19,14 +19,6 @@ export class ProjectsPageComponent implements OnInit {
   constructor(
     private store: Store<IStore>
   ) { }
-
-  ngOnInit(): void {
-    this.projects$
-      .pipe(filter((projects: IProject[]) => !projects.length), take(1))
-      .subscribe(() => {
-        this.store.dispatch(getProjectsAction());
-      })
-  }
 
   // Opens sidebar form to create new project
   public openSidebarForm(): void {

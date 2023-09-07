@@ -61,7 +61,7 @@ export class ProjectComponent implements OnInit {
     });
 
     dialogRef.afterClosed()
-      .pipe(take(1), filter(Boolean), switchMap(() => this.email$))
+      .pipe(filter(Boolean), switchMap(() => this.email$), take(1))
       .subscribe((email) => {
         this.store.dispatch(deleteParticipantAction({ id: this.id, email }));
       })

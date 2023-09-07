@@ -10,6 +10,7 @@ import { IProject } from "src/app/shared/interfaces/project";
 import { InfoDialogComponent } from "src/app/shared/dialogs/info-dialog/info-dialog.component";
 import { addSprintActionOnSuccess, changeSprintActionOnSuccess, deleteSprintActionOnSuccess } from "./sprint/sprint.actions";
 import { addTaskActionOnSuccess, changeTaskActionOnSuccess, deleteTaskActionOnSuccess } from "./task/task.actions";
+import { loginOnSuccess } from "../user/user.actions";
 
 
 @Injectable()
@@ -25,6 +26,7 @@ export class ProjectEffects {
   private getProjects$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(
+        loginOnSuccess,
         actions.getProjectsAction,
         actions.deleteProjectActionOnSuccess,
         actions.changeProjectActionOnSuccess,
