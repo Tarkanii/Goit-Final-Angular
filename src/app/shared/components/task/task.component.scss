@@ -39,6 +39,10 @@
 
 .textarea:focus {
   outline: auto;
+
+  &.ng-invalid {
+    outline-color: var(--error-color);
+  }
 }
 
 .table {
