@@ -72,6 +72,7 @@ export class AddPeopleComponent implements OnInit, OnDestroy {
 
     if (this.addPeopleForm?.invalid) return;
     this.store.dispatch(addParticipantAction({ id: this.projectId, email: this.addPeopleForm?.value.email }));
+    this.addPeopleForm?.reset();
   }
 
   // Closes sidebar form if user clicked cancel button
