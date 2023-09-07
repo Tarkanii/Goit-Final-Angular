@@ -18,6 +18,7 @@ import { TextareaDirective } from './directives/textarea.directive';
 import { FilterPipe } from './pipes/filter.pipe';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { VisibilitySwitcherDirective } from './directives/visibility-switcher.directive';
+import { ChartContainerDirective } from './directives/chart-container.directive';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { VisibilitySwitcherDirective } from './directives/visibility-switcher.di
     TextareaDirective,
     FilterPipe,
     TruncatePipe,
-    VisibilitySwitcherDirective
+    VisibilitySwitcherDirective,
+    ChartContainerDirective
   ],
   exports: [
     InputDirective,
@@ -50,7 +52,8 @@ import { VisibilitySwitcherDirective } from './directives/visibility-switcher.di
     TextareaDirective,
     FilterPipe,
     TruncatePipe,
-    VisibilitySwitcherDirective
+    VisibilitySwitcherDirective,
+    ChartContainerDirective
   ],
   imports: [
     CommonModule,
