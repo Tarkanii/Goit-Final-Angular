@@ -196,15 +196,6 @@ export class ChartComponent implements OnInit, OnDestroy {
         }
       },
       plugins: {
-        title: {
-          display: true,
-          text: this.chartLables?.['TITLE'],
-          position: 'top',
-          align: 'start',
-          font: {
-            size: 18
-          }
-        },
         subtitle: {
           display: true,
           text: this.chartLables?.['SUBTITLE'],

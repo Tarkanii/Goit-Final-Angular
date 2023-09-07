@@ -39,6 +39,11 @@ button {
   @include desktop {
     max-width: $desktop;
   }
+
+  // Set these properties to be able to use them in .ts files
+  --mobile: #{$mobile};
+  --tablet: #{$tablet};
+  --desktop: #{$desktop};
 }
 
 .accent-text-button {
