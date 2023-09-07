@@ -11,9 +11,9 @@
     </div>
   </form>
   <h3 class="title">{{ 'LABELS.ADDED_USERS' | translate }}</h3>
-  <p class="message" *ngIf="!(project$ | async)">{{ 'LABELS.NO_ADDED_USERS' | translate }}</p>
-  <ul class="users-list" *ngIf="(project$ | async)">
-    <li class="user" *ngFor="let email of (project$ | async)?.participants">{{ email }}</li>
+  <p class="message" *ngIf="!(participantsList$ | async)?.length">{{ 'LABELS.NO_ADDED_USERS' | translate }}</p>
+  <ul class="users-list" *ngIf="(participantsList$ | async)?.length">
+    <li class="user" *ngFor="let email of (participantsList$ | async)">{{ email }}</li>
   </ul>
   <div class="buttons-container" *ngIf="addPeopleForm">
     <button class="accent-text-button" (click)="submit()">{{ 'BUTTONS.READY' | translate }}</button>
