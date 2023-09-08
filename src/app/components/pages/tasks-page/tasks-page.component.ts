@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, Observable, Subject, filter, switchMap, takeUntil } from 'rxjs';
+import { Observable, Subject, switchMap, takeUntil } from 'rxjs';
 import { ISprint } from 'src/app/shared/interfaces/project';
 import { IStore } from 'src/app/shared/interfaces/store';
 import { loadingSelector } from 'src/app/store/general/general.selectors';
@@ -20,7 +20,6 @@ export class TasksPageComponent implements OnInit {
   public loading$: Observable<boolean> = this.store.select(loadingSelector);
   public sprint!: ISprint | null;
   public sprints$!: Observable<ISprint[]>;
-  public sprintIndex$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public sprintId: string = '';
   public sprintDate: Date | null = null;
   public changeNameControl: FormControl = this.formBuilder.control('');
@@ -32,7 +31,6 @@ export class TasksPageComponent implements OnInit {
 
   constructor(
     private store: Store<IStore>,
-    private router: Router,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder
   ) { }
@@ -42,60 +40,40 @@ export class TasksPageComponent implements OnInit {
       .pipe(
         switchMap(({ projectId, sprintId }) => {
           this.sprints$ = this.store.select(sprintsSelector(projectId));
-          this.sprintId = sprintId;
-          this.sprintIndex$.next(this.getSprintIndex(this.sprintId));
           return this.store.select(sprintSelector(projectId, sprintId));
         }),
         takeUntil(this.unsubscribe$)
         )
       .subscribe((sprint: ISprint | null) => {
         this.sprint = sprint;
-        this.changeNameControl.setValue(sprint?.name);
+        if (!sprint) return;
+
+        if (this.sprintId !== sprint._id) {
+          this.onSprintChange();
+        }
+        this.sprintId = sprint._id;
+        this.changeNameControl.setValue(sprint.name);
       })
 
     this.sprints$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((sprints: ISprint[]) => {
-        const mustUpdateIndex = !this.sprints.length;
+        const mustUpdate = !this.sprints.length;
         this.sprints = sprints;
-        if (mustUpdateIndex) {
-          // Must update current sprint index only if there were no sprints before
+        if (mustUpdate) {
+          // Must update current sprint values only if there were no sprints before
           // otherwise it will cause change of sprint date selected by user
-          this.sprintIndex$.next(this.getSprintIndex(this.sprintId));
+          this.onSprintChange();
         }
       })
-
-    // Updating search control and sprint date on change of current sprint
-    this.sprintIndex$
-      .pipe(
-        filter(() => !!this.sprints.length),
-        takeUntil(this.unsubscribe$)
-        )
-      .subscribe((index: number) => {
-        this.calendarOpen = false;
-        this.searchControl.setValue('');
-        const { startDate, endDate } = this.sprints[index - 1];
-        this.setInitialSprintDate(startDate, endDate);
-      })
   }
 
-  // Gets sprint index of current sprint
-  public getSprintIndex(sprintId: string): number {
-    const index = this.sprints.findIndex((sprint: ISprint) => sprint._id === sprintId);
-    return index < 0 ? 1 : index + 1;    
-  }
-
-  // Swicthes to next or previous sprint
-  public switchSprint(action: 'decrease' | 'increase'): void {
-    if (action === 'decrease' && this.sprintIndex$.value <= 1) return;
-
-    if (action === 'increase' && this.sprintIndex$.value >= this.sprints.length) return;
-
-    const index = action === 'decrease' ? this.sprintIndex$.value - 2 : this.sprintIndex$.value;
-    const sprintId = this.sprints[index]._id;
-    const urlArr = this.router.url.split('/');
-    const url = urlArr.slice(0, urlArr.length - 2).join('/') + `/${sprintId}` + '/tasks';
-    this.router.navigateByUrl(url);
+  private onSprintChange(): void {
+    this.calendarOpen = false;
+    this.searchControl.setValue('');
+    if (!this.sprint) return; 
+    const { startDate, endDate } = this.sprint;
+    this.setInitialSprintDate(startDate, endDate);
   }
 
   // Sets initial date of sprint on init or on swicthing sprints 

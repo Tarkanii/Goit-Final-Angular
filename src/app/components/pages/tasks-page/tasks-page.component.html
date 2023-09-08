@@ -9,30 +9,19 @@
   <div class="sprint-information">
     <div class="header">
       <ng-container *ngIf="sprint">
-        <div class="sprint-actions-container">
-          <div class="sprint-switcher">
-            <button class="previous-button" (click)="switchSprint('decrease')"></button>
-            <p class="index-container">
-              <span class="index">{{ sprintIndex$ | async }}</span>
-              <span class="divider">/</span>
-              <span class="amount">{{ (sprints$ | async)?.length }}</span>
-            </p>
-            <button class="next-button" (click)="switchSprint('increase')"></button>
+        <div class="date-picker">
+          <div class="date-container" (click)="calendarOpen = !calendarOpen">
+            <div class="date">{{ sprintDate| date: 'dd.MM.yyyy' }}</div>
+            <button class="arrow-button" [ngClass]="{ open: calendarOpen }">
+            </button>
           </div>
-          <div class="date-picker">
-            <div class="date-container" (click)="calendarOpen = !calendarOpen">
-              <div class="date">{{ sprintDate| date: 'dd.MM.yyyy' }}</div>
-              <button class="arrow-button" [ngClass]="{ open: calendarOpen }">
-              </button>
-            </div>
-            <app-calendar class="calendar" *ngIf="calendarOpen"
-              [selectedDate]="sprintDate"
-              [startDate]="sprint.startDate || null"
-              [endDate]="sprint.endDate || null"
-              (dateSelected)="setSprintDate($event); calendarOpen = false"
-              >
-            </app-calendar>
-          </div>
+          <app-calendar class="calendar" *ngIf="calendarOpen"
+            [selectedDate]="sprintDate"
+            [startDate]="sprint.startDate || null"
+            [endDate]="sprint.endDate || null"
+            (dateSelected)="setSprintDate($event); calendarOpen = false"
+            >
+          </app-calendar>
         </div>
         <div class="name-button-container">
           <textarea class="textarea" [id]="sprint._id" appTextarea [formControl]="changeNameControl" (blur)="changeSprintName()"></textarea>
