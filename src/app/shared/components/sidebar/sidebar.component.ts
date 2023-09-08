@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
@@ -10,12 +10,13 @@ import { setSidebarFormAction } from 'src/app/store/projects/projects.actions';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent implements OnInit, AfterViewInit {
+export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() public list: any[] | null = null;
   @Input() public type: 'project' | 'sprint' = 'project';
   @ViewChild('listTemplate') public listTemplate!: ElementRef;
   public params$: Observable<{ project: string, sprint: string }> = this.getParams();
+  private interval!: number;
 
   constructor(
     private store: Store<IStore>,
@@ -27,10 +28,17 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const currentObject = this.listTemplate.nativeElement.querySelector('.current');
-    if (currentObject) {
-      currentObject.scrollIntoView({ behavior: "smooth" });
-    }
+    this.interval = window.setInterval(() => {
+        const currentObject = this.listTemplate.nativeElement.querySelector('.current');
+        if (currentObject) {
+          clearInterval(this.interval);
+          currentObject.scrollIntoView({ behavior: "smooth", block: 'nearest' });
+        }
+    }, 100);
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.interval);
   }
 
   // Getting ids of current project and sprint 

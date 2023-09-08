@@ -1,6 +1,6 @@
 <div class="mobile-sidebar-container">
   <div class="container">
-    <app-sidebar></app-sidebar> 
+    <app-sidebar [type]="'project'" [list]="projects$ | async"></app-sidebar> 
   </div>
 </div>
 
