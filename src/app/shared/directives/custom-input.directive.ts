@@ -93,7 +93,7 @@ export class InputDirective implements OnInit, OnDestroy {
 
   // Returns control's value without symbols which match regular expression
   private getNewValue(regexp: RegExp): string {
-    return this.ngControl.control?.value.replace(regexp, '');
+    return this.ngControl.control?.value?.replace(regexp, '');
   }
 
   // Updates numberOnly value, so it has only numbers and one possible dot

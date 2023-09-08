@@ -166,6 +166,7 @@ export class ProjectEffects {
     return this.actions$.pipe(
       ofType(
         actions.addProjectActionOnSuccess,
+        actions.addParticipantActionOnSuccess,
         addSprintActionOnSuccess,
         addTaskActionOnSuccess
       ),

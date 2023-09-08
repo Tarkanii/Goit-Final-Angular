@@ -9,7 +9,7 @@
       [routerLink]="getLink(object._id)"
       >
       <div class="icon"></div>
-      <div class="name">{{ object.name }}</div>
+      <div class="name">{{ object.name | truncate: 22 }}</div>
     </a>
   </li>
 </ul>
