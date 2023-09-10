@@ -60,7 +60,7 @@
 
   & .add-button {
     position: fixed;
-    bottom: 20px;
+    bottom: 60px;
     right: 5%;
     z-index: 1;
 
@@ -144,8 +144,8 @@
 
 .chart-button {
   position: fixed;
-  left: 20px;
-  bottom: 20px;
+  left: 5%;
+  bottom: 60px;
   z-index: 1;
 
   @include tablet {

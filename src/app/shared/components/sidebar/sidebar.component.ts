@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
@@ -10,7 +10,7 @@ import { setSidebarFormAction } from 'src/app/store/projects/projects.actions';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
+export class SidebarComponent implements AfterViewInit, OnDestroy {
 
   @Input() public list: any[] | null = null;
   @Input() public type: 'project' | 'sprint' = 'project';
@@ -23,9 +23,6 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) { }
-
-  ngOnInit(): void {
-  }
 
   ngAfterViewInit(): void {
     this.interval = window.setInterval(() => {

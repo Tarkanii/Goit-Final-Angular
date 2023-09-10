@@ -14,6 +14,7 @@ import { CreateSprintComponent } from './forms/create-sprint/create-sprint.compo
 import { CreateTaskComponent } from './forms/create-task/create-task.component';
 import { ChartComponent } from './chart/chart.component';
 import { AddPeopleComponent } from './forms/add-people/add-people.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -31,7 +32,8 @@ import { AddPeopleComponent } from './forms/add-people/add-people.component';
     AuthPageComponent,
     FormSidebarComponent,
     ChartComponent,
-    AddPeopleComponent
+    AddPeopleComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +46,8 @@ import { AddPeopleComponent } from './forms/add-people/add-people.component';
     CreateTaskComponent,
     FormSidebarComponent,
     ChartComponent,
-    AddPeopleComponent
+    AddPeopleComponent,
+    FooterComponent
   ]
 })
 export class ComponentsModule { }
