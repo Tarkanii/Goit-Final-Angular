@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { IStore } from 'src/app/shared/interfaces/store';
@@ -10,7 +10,7 @@ import { emailSelector, tokenSelector } from 'src/app/store/user/user.selectors'
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   public token$: Observable<string> = this.store.select(tokenSelector);
   public username$: Observable<string>;
@@ -22,9 +22,6 @@ export class HeaderComponent implements OnInit {
     this.username$ = this.store.select(emailSelector).pipe(
       map((email: string) => email.split('@')[0])
     )
-  }
-
-  ngOnInit(): void {
   }
 
   public logout(): void {

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ScrollStrategyOptions } from '@angular/cdk/overlay';
@@ -15,7 +15,7 @@ import { IStore } from '../../interfaces/store';
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.scss']
 })
-export class ProjectComponent implements OnInit {
+export class ProjectComponent {
 
   @Input() public name: string = '';
   @Input() public description: string = '';
@@ -29,9 +29,6 @@ export class ProjectComponent implements OnInit {
     private router: Router,
     private scrollStrategyOptions: ScrollStrategyOptions
   ) { }
-
-  ngOnInit(): void {
-  }
 
   public delete(event: Event): void {
     event.stopPropagation();

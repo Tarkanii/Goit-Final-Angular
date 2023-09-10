@@ -11,7 +11,7 @@ import { loginAction } from 'src/app/store/user/user.actions';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss']
 })
-export class LoginFormComponent implements OnInit, OnDestroy {
+export class LoginFormComponent implements OnDestroy {
 
   public loginForm!: FormGroup;
 
@@ -28,10 +28,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
         this.initLoginForm();
       })
   }
-
-  ngOnInit(): void {
-  }
-
+  
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();

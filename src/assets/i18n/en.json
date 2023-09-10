@@ -127,5 +127,6 @@
     "SUBTITLE": "Man hours",
     "SCHEDULED_TIME": "Scheduled time left",
     "ACTUAL_TIME": "Actual time left"
-  }
+  },
+  "COPYRIGHT": "&copy; 2023 | Developed by <a class='copyright-link' href='https://github.com/Tarkanii' target='/blank'>Artur Tarkanii</a>" 
 }
