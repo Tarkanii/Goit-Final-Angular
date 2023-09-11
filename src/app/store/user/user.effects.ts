@@ -3,7 +3,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
 import { ScrollStrategyOptions } from '@angular/cdk/overlay';
-import { of, catchError, exhaustMap, filter, map, mergeMap } from 'rxjs';
+import { of, catchError, exhaustMap, filter, map, mergeMap, tap } from 'rxjs';
 import { createEffect, ofType, Actions} from "@ngrx/effects";
 import * as userActions from './user.actions';
 import { RequestsService } from "src/app/services/requests.service";
@@ -54,7 +54,7 @@ export class UserEffects {
       ofType(userActions.logoutAction),
       mergeMap(() => {
         this.router.navigateByUrl('/auth/login');
-        return this.requestService.logout();
+        return this.requestService.logout().pipe(tap(() => this.requestService.setToken('')));
       })
     )
   }, { dispatch: false })

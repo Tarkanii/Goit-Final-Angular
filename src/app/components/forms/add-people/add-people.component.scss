@@ -1,0 +1,67 @@
+@import '../../../../scss/mixins';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+
+  @include tablet {
+    margin-bottom: 30px;
+  }
+
+  & .form-field:not(:last-child) {
+    margin-bottom: 57px;
+  }
+
+  &-title {
+    margin-bottom: 30px;
+
+    @include tablet {
+      margin-bottom: 50px;
+    }
+  }
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & .accent-text-button {
+    margin-bottom: 20px;
+  }
+}
+
+.title {
+  font-size: 14px;
+  color: var(--secondary-text-color);
+  margin-bottom: 20px;
+}
+
+.message {
+  font-size: 16px;
+
+  @include tablet {
+    font-size: 18px;
+  }
+}
+
+.users-list, .message {
+  margin-bottom: 60px;
+}
+
+.users-list {
+  max-height: 380px;
+  overflow-y: auto;
+}
+
+.user {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+}

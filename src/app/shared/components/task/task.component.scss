@@ -13,10 +13,11 @@
   }
 }
 
-.name {
+.name.textarea {
   font-size: 18px;
   font-weight: 500;
   margin-bottom: 20px;
+  height: 30px;
   width: 100%;
 
   @include desktop {
@@ -26,19 +27,21 @@
   }
 }
 
-.name.form-input {
-  resize: none;
-  overflow: hidden;
-  height: 30px;
-}
-
-.spent-hours.form-input {
+.spent-hours.textarea {
   max-width: 100px;
   font-size: 14px;
 
   @include tablet {
     font-size: 18px;
     font-weight: 500;
+  }
+}
+
+.textarea:focus {
+  outline: auto;
+
+  &.ng-invalid {
+    outline-color: var(--error-color);
   }
 }
 

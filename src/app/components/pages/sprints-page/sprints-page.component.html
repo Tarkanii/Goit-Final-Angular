@@ -1,41 +1,31 @@
 <div class="mobile-sidebar-container">
   <div class="container">
-    <app-sidebar></app-sidebar> 
+    <app-sidebar [type]="'project'" [list]="projects$ | async"></app-sidebar> 
   </div>
 </div>
 
 <div class="main container">
   <app-sidebar class="sidebar" [type]="'project'" [list]="projects$ | async"></app-sidebar>
   <div class="project-information">
-    <ng-container *ngIf="project$ | async">
+    <ng-container *ngIf="project">
       <div class="header">
-        <div class="name-container">
-          <h1 *ngIf="!changeNameForm" class="name">{{ (project$ | async)?.name }}</h1>
-          <form action="#" class="form" *ngIf="changeNameForm"
-            (submit)="submitChangeNameForm($event)" [formGroup]="changeNameForm">
-            <div class="form-field">
-              <input 
-                type="text" class="form-input name" [autofocus]="true" appAutofocus
-                (blur)="destroyChangeNameForm()" [placeholder]="(project$ | async)?.name"
-                formControlName="name"
-              >
-            </div>
-          </form>
-          <button *ngIf="!changeNameForm" class="redacting-button" (click)="initializeChangeNameForm()"></button>
-        </div>
+        <textarea class="textarea" [id]="project._id" appTextarea [formControl]="changeNameControl" (blur)="changeProjectName()"></textarea>
         <app-add-button class="add-button" addType="sprint" [mainButton]="true" (buttonClick)="openSidebarForm()"></app-add-button>
       </div>
-      <p class="description" *ngIf="(project$ | async)?.description">{{ (project$ | async)?.description }}</p>
-      <button class="add-people-button" *ngIf="false">
+      <textarea class="textarea description" [id]="project._id" appTextarea 
+        [placeholder]="'FORM.ADD_DESCRIPTION' | translate"
+        [formControl]="changeDescriptionControl" (blur)="changeProjectDescription()">
+      </textarea>
+      <button class="add-people-button" *ngIf="project.owner" (click)="openAddParticipantForm()">
         <div class="icon"></div>
         <span class="text">{{ 'BUTTONS.ADD_PEOPLE' | translate }}</span>
       </button>
       <ul class="sprints-grid">
-        <li class="sprint-card-container" *ngFor="let sprint of (project$ | async)?.sprints">
+        <li class="sprint-card-container" *ngFor="let sprint of project?.sprints">
           <app-sprint class="sprint-card" [sprint]="sprint"></app-sprint>
         </li>
       </ul>
     </ng-container>
-    <h1 class="name" *ngIf="!(loading$ | async) && !(project$ | async)">{{ 'LABELS.NOT_FOUND' | translate: { object: 'Project' } }}</h1>
+    <h1 class="name" *ngIf="!(loading$ | async) && !project">{{ 'LABELS.NOT_FOUND' | translate: { object: 'Project' } }}</h1>
   </div>
 </div>

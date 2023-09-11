@@ -14,7 +14,7 @@ import { deleteSprintAction } from 'src/app/store/projects/sprint/sprint.actions
   templateUrl: './sprint.component.html',
   styleUrls: ['./sprint.component.scss']
 })
-export class SprintComponent implements OnInit {
+export class SprintComponent {
   
   @Input() public sprint!: ISprint;
   public dateFormat: string = 'dd MMM y';
@@ -25,9 +25,6 @@ export class SprintComponent implements OnInit {
     private router: Router,
     private scrollStrategyOptions: ScrollStrategyOptions
   ) { }
-
-  ngOnInit(): void {
-  }
 
   public navigateTo(): void { 
     this.router.navigateByUrl(`${this.router.url}/${this.sprint._id}/tasks`);

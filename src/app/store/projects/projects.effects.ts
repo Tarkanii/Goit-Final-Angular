@@ -3,13 +3,14 @@ import { MatDialog } from "@angular/material/dialog";
 import { HttpErrorResponse } from "@angular/common/http";
 import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { catchError, filter, map, of, switchMap } from "rxjs";
+import { catchError, exhaustMap, filter, map, of, switchMap } from "rxjs";
 import { RequestsService } from "src/app/services/requests.service";
 import * as actions from "./projects.actions";
 import { IProject } from "src/app/shared/interfaces/project";
 import { InfoDialogComponent } from "src/app/shared/dialogs/info-dialog/info-dialog.component";
 import { addSprintActionOnSuccess, changeSprintActionOnSuccess, deleteSprintActionOnSuccess } from "./sprint/sprint.actions";
 import { addTaskActionOnSuccess, changeTaskActionOnSuccess, deleteTaskActionOnSuccess } from "./task/task.actions";
+import { loginOnSuccess } from "../user/user.actions";
 
 
 @Injectable()
@@ -25,9 +26,12 @@ export class ProjectEffects {
   private getProjects$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(
+        loginOnSuccess,
         actions.getProjectsAction,
         actions.deleteProjectActionOnSuccess,
         actions.changeProjectActionOnSuccess,
+        actions.addParticipantActionOnSuccess,
+        actions.deleteParticipantActionOnSuccess,
         addSprintActionOnSuccess,
         deleteSprintActionOnSuccess,
         changeSprintActionOnSuccess,
@@ -74,19 +78,55 @@ export class ProjectEffects {
     )
   })
 
+  private addParticipant$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(actions.addParticipantAction),
+      exhaustMap(({ id, email }) => {
+        return this.requestService.addParticipant(id, email).pipe(
+            map(() => actions.addParticipantActionOnSuccess({ name: email })),
+            catchError((error: HttpErrorResponse) => of(actions.addParticipantActionOnError({ error })))
+          )
+      })
+    )
+  })
+
+  private deleteParticipant$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(actions.deleteParticipantAction),
+      exhaustMap(({ id, email }) => {
+        return this.requestService.deleteParticipant(id, email).pipe(
+            map(() => actions.deleteParticipantActionOnSuccess({ name: email })),
+            catchError((error: HttpErrorResponse) => of(actions.deleteParticipantActionOnError({ error })))
+          )
+      })
+    )
+  })
+
   private openDialogOnSuccess$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(
         actions.deleteProjectActionOnSuccess,
         actions.addProjectActionOnSuccess,
+        actions.addParticipantActionOnSuccess,
+        actions.deleteParticipantActionOnSuccess,
         addSprintActionOnSuccess,
         deleteSprintActionOnSuccess,
         addTaskActionOnSuccess,
-        deleteTaskActionOnSuccess
+        deleteTaskActionOnSuccess,
       ),
       map(({ type, name }) => {
         const key = type.includes('Add') ? 'ADD' : 'DELETE';
-        const message = `${ type.includes('Project') ? 'PROJECTS' : type.includes('Sprint') ? 'SPRINTS' : 'TASKS'}.SUCCESS.${key}`
+        let message;
+        if (type.includes('Project')) {
+          message = `PROJECTS.SUCCESS.${key}`;
+        } else if (type.includes('Sprint')) {
+          message = `SPRINTS.SUCCESS.${key}`;
+        } else if (type.includes('Task')) {
+          message = `TASKS.SUCCESS.${key}`;
+        } else {
+          message = `PARTICIPANTS.SUCCESS.${key}`;
+        }
+
         this.dialog.open(InfoDialogComponent, {
           data: {
             message,
@@ -103,7 +143,11 @@ export class ProjectEffects {
   private openDialogOnError$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(
-        actions.deleteProjectActionOnError
+        actions.addProjectActionOnError,
+        actions.deleteProjectActionOnError,
+        actions.addParticipantActionOnError,
+        actions.deleteParticipantActionOnError,
+        actions.changeProjectActionOnError
       ),
       filter(({ error }) => (!!error.status && error.status !== 401 && error.status < 500)), 
       map(({ error }) => {
@@ -124,6 +168,7 @@ export class ProjectEffects {
     return this.actions$.pipe(
       ofType(
         actions.addProjectActionOnSuccess,
+        actions.addParticipantActionOnSuccess,
         addSprintActionOnSuccess,
         addTaskActionOnSuccess
       ),

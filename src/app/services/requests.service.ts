@@ -57,14 +57,22 @@ export class RequestsService {
     return this.http.delete<void>(`${environment.backend_url}/api/projects/${id}`, { headers: this.autharizationHeader });
   }
 
+  public addParticipant(id: string, email: string): Observable<{ project: IProject }> {
+    return this.http.patch<{ project: IProject }>(`${environment.backend_url}/api/projects/${id}/participants`, { email, action: 'add' }, { headers: this.autharizationHeader });
+  }
+
+  public deleteParticipant(id: string, email: string): Observable<{ project: IProject }> {
+    return this.http.patch<{ project: IProject }>(`${environment.backend_url}/api/projects/${id}/participants`, { email, action: 'delete' }, { headers: this.autharizationHeader });
+  }
+
   // Sprints requests
 
   public addSprint(body: ICreateSprintBody): Observable<{ sprint: ISprint }> {
     return this.http.post<{ sprint: ISprint }>(`${environment.backend_url}/api/sprints/`, body, { headers: this.autharizationHeader });
   }
 
-  public changeSprint(id: string, name: string): Observable<{ sprint: ISprint }> {
-    return this.http.patch<{ sprint: ISprint}>(`${environment.backend_url}/api/sprints/${id}/name`, { name }, { headers: this.autharizationHeader });
+  public changeSprint(id: string, name: string, project: string): Observable<{ sprint: ISprint }> {
+    return this.http.patch<{ sprint: ISprint}>(`${environment.backend_url}/api/sprints/${id}/name`, { name, project }, { headers: this.autharizationHeader });
   }
 
   public deleteSprint(id: string): Observable<void> {
@@ -77,8 +85,8 @@ export class RequestsService {
     return this.http.post<{ task: ITask }>(`${environment.backend_url}/api/tasks`, body, { headers: this.autharizationHeader });
   }
 
-  public changeTaskName(id: string, name: string): Observable<{ task: ITask }> {
-    return this.http.patch<{ task: ITask }>(`${environment.backend_url}/api/tasks/${id}/name`, { name }, { headers: this.autharizationHeader });
+  public changeTaskName(id: string, name: string, sprint: string): Observable<{ task: ITask }> {
+    return this.http.patch<{ task: ITask }>(`${environment.backend_url}/api/tasks/${id}/name`, { name, sprint }, { headers: this.autharizationHeader });
   }
 
   public changeTaskSpentHours(id: string, body: { date: string, hours: number }): Observable<{ task: ITask }> {

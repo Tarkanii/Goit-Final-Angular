@@ -20,10 +20,11 @@ button {
   padding: 0;
   border: none;
 
-  &:hover {
+  &:hover, &:focus {
     cursor: pointer;
     transform: scale(1.03);
     transition: transform linear 200ms;
+    outline: none;
   }
 }
 
@@ -38,6 +39,11 @@ button {
   @include desktop {
     max-width: $desktop;
   }
+
+  // Set these properties to be able to use them in .ts files
+  --mobile: #{$mobile};
+  --tablet: #{$tablet};
+  --desktop: #{$desktop};
 }
 
 .accent-text-button {
@@ -79,6 +85,20 @@ button {
   }
 }
 
+.leave-button {
+  height: 30px;
+  width: 30px;
+  -webkit-mask: url('../../assets/icons/leave.svg') center/30px 30px no-repeat;
+  mask: url('../../assets/icons/leave.svg') center/30px 30px no-repeat;
+
+  @include tablet {
+    height: 34px;
+    width: 34px;
+    -webkit-mask: url('../../assets/icons/leave.svg') center/34px 34px no-repeat;
+    mask: url('../../assets/icons/leave.svg') center/34px 34px no-repeat;
+  }
+} 
+
 .secondary-delete-button {
   height: 20px;
   width: 20px;
@@ -86,33 +106,53 @@ button {
 }
 
 .visibility-button {
-  height: 16px;
-  width: 16px;
+  height: 100%;
+  width: 30px;
   background-color: var(--secondary-text-color);
-  -webkit-mask: url(../../assets/icons/blocked-eye.svg);
-  mask: url(../../assets/icons/blocked-eye.svg);
+  -webkit-mask: url(../../assets/icons/blocked-eye.svg) no-repeat center;
+  mask: url(../../assets/icons/blocked-eye.svg) no-repeat center;
 
   &.open {
     background-color: var(--accent-color);
-    -webkit-mask: url(../../assets/icons/eye.svg);
-    mask: url(../../assets/icons/eye.svg);
+    -webkit-mask: url(../../assets/icons/eye.svg) no-repeat center;
+    mask: url(../../assets/icons/eye.svg) no-repeat center;
   }
 }
 
 .arrow-button {
-  height: 12px;
-  width: 10px;
+  height: 100%;
+  min-height: 12px;
+  width: 20px;
   background: url('../../assets/icons/open-arrow.svg') center no-repeat;
 
   &.open {
     transform: rotate(180deg);
   }
+
+  &:focus, &:hover {
+    transform: scale(1.2);
+  }
+
+  &.open:focus, &.open:hover {
+    transform: rotate(180deg) scale(1.2);
+  }
 }
 
-.redacting-button {
-  height: 20px;
-  width: 20px;
-  background: url('../../assets/icons/redacting.svg');
+.previous-button {
+  width: 40px;
+  height: 30px;
+  background: url('../../assets/icons/left-arrow.svg') center no-repeat;
+}
+
+.next-button {
+  width: 40px;
+  height: 30px;
+  background: url('../../assets/icons/right-arrow.svg') center no-repeat;
+}
+
+.next-button:hover, .previous-button:hover,
+.next-button:focus, .previous-button:focus {
+  transform: scale(1.2);
 }
 
 .chart-button {
@@ -130,4 +170,8 @@ button {
 
 .secondary-text {
   color: var(--secondary-text-color);
+}
+
+.copyright-link {
+  text-decoration: underline;
 }

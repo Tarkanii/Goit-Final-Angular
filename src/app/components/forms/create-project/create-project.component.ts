@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { IStore } from 'src/app/shared/interfaces/store';
@@ -9,7 +9,7 @@ import { addProjectAction, setSidebarFormAction } from 'src/app/store/projects/p
   templateUrl: './create-project.component.html',
   styleUrls: ['./create-project.component.scss']
 })
-export class CreateProjectComponent implements OnInit {
+export class CreateProjectComponent {
 
   public createProjectForm: FormGroup;
 
@@ -21,9 +21,6 @@ export class CreateProjectComponent implements OnInit {
       name: ['', Validators.required],
       description: ''
     })
-  }
-
-  ngOnInit(): void {
   }
 
   // Getters

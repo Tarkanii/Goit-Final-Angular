@@ -53,7 +53,7 @@
   @include desktop {
     padding-left: 70px;
   }
-  
+
   & .name {
     font-size: 26px;
     font-weight: 500;
@@ -63,18 +63,26 @@
     }
   }
 
-  & .redacting-button {
-    margin-left: 20px;
-    min-width: 20px;
+  .textarea {
+    height: 35px;
+    font-size: 26px;
+    font-weight: 500;
+    
+    @include tablet {
+      font-size: 36px;
+      max-width: 80%;
+    }
   }
 
   & .description {
     font-size: 14px;
     font-weight: 500;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    width: 100%;
     
     @include tablet {
       font-size: 18px;
+      max-width: unset;
     }
 
     @include desktop {
@@ -84,14 +92,16 @@
 
   & .add-button {
     position: fixed;
-    bottom: 20px;
+    bottom: 60px;
     right: 5%;
     z-index: 1;
 
     @include tablet {
       position: relative;
+      top: 6px;
       bottom: unset;
       right: unset;
+      align-self: flex-start;
     }
   }
 }
@@ -102,27 +112,12 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-
-  & .name-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    
-    @include tablet {
-      margin-right: 20px;
-    }
-  }
-}
-
-.form {
-  max-width: 80%;
 }
 
 .sprints-grid {
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 10px;
-  margin-top: 30px;
 
   @include tablet {
     grid-template-columns: 1fr 1fr;
@@ -151,6 +146,8 @@
   display: flex;
   flex-direction: row;
   background: none;
+  padding: 10px;
+  margin-bottom: 20px;
   
   & .icon {
     height: 20px;

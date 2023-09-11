@@ -13,12 +13,12 @@ import { AppRoutingModule } from '../routing/app-routing.module';
 import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
 import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { AutofocusDirective } from './directives/autofocus.directive';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { TextareaDirective } from './directives/textarea.directive';
 import { FilterPipe } from './pipes/filter.pipe';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { VisibilitySwitcherDirective } from './directives/visibility-switcher.directive';
+import { ChartContainerDirective } from './directives/chart-container.directive';
 
 
 @NgModule({
@@ -31,12 +31,12 @@ import { VisibilitySwitcherDirective } from './directives/visibility-switcher.di
     InfoDialogComponent,
     ConfirmationDialogComponent,
     SidebarComponent,
-    AutofocusDirective,
     CalendarComponent,
     TextareaDirective,
     FilterPipe,
     TruncatePipe,
-    VisibilitySwitcherDirective
+    VisibilitySwitcherDirective,
+    ChartContainerDirective
   ],
   exports: [
     InputDirective,
@@ -47,13 +47,13 @@ import { VisibilitySwitcherDirective } from './directives/visibility-switcher.di
     ProjectComponent,
     SidebarComponent,
     SprintComponent,
-    AutofocusDirective,
     CalendarComponent,
     TaskComponent,
     TextareaDirective,
     FilterPipe,
     TruncatePipe,
-    VisibilitySwitcherDirective
+    VisibilitySwitcherDirective,
+    ChartContainerDirective
   ],
   imports: [
     CommonModule,
