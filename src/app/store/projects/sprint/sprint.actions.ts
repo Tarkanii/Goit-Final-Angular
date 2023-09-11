@@ -13,6 +13,6 @@ export const deleteSprintActionOnSuccess = createAction('[Sprint] Delete Sprint 
 export const deleteSprintActionOnError = createAction('[Sprint] Delete Sprint Error', props<{ error: HttpErrorResponse }>());
 
 // Changing sprint actions
-export const changeSprintAction = createAction('[Sprint] Change Sprint', props<{ id: string, name: string }>()); 
+export const changeSprintAction = createAction('[Sprint] Change Sprint', props<{ id: string, project: string, name: string }>()); 
 export const changeSprintActionOnSuccess = createAction('[Sprint] Change Sprint Success');
 export const changeSprintActionOnError = createAction('[Sprint] Change Sprint Error', props<{ error: HttpErrorResponse }>());

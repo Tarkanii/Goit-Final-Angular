@@ -143,9 +143,11 @@ export class ProjectEffects {
   private openDialogOnError$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(
+        actions.addProjectActionOnError,
         actions.deleteProjectActionOnError,
         actions.addParticipantActionOnError,
-        actions.deleteParticipantActionOnError
+        actions.deleteParticipantActionOnError,
+        actions.changeProjectActionOnError
       ),
       filter(({ error }) => (!!error.status && error.status !== 401 && error.status < 500)), 
       map(({ error }) => {

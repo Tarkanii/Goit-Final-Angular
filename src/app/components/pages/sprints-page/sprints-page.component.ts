@@ -60,6 +60,7 @@ export class SprintsPageComponent implements OnInit, OnDestroy {
     }
 
     this.store.dispatch(changeProjectAction({ id: this.projectId, name: newName }));
+    this.changeNameControl.setValue(this.project?.name);
   }
 
   // Changes description of the project

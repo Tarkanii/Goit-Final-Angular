@@ -82,7 +82,8 @@
       "PROJECT_NOT_FOUND": "Project not found",
       "USER_NOT_FOUND": "User not found",
       "USER_DELETE_NOT_ALLOWED": "You cannot delete user",
-      "NO_PERMISSION": "You don't have permission"
+      "NO_PERMISSION": "You don't have permission",
+      "ALREADY_EXIST": "Project with this name already exist"
     },
     "SUCCESS": {
       "ADD":"Project {{name}} created successfully!",
@@ -91,6 +92,9 @@
   },
   "SPRINTS": {
     "DELETE_CONFIRMATION": "Do you want to delete this sprint?<br>All the attached information will be removed as well",
+    "ERROR": {
+      "ALREADY_EXIST": "Sprint with this name already exist"
+    },
     "SUCCESS": {
       "ADD":"Sprint {{name}} created successfully!",
       "DELETE": "Sprint {{name}} deleted successfully!"
@@ -98,6 +102,9 @@
   },
   "TASKS": {
     "DELETE_CONFIRMATION": "Do you want to delete this task?",
+    "ERROR": {
+      "ALREADY_EXIST": "Task with this name already exist"
+    },
     "SUCCESS": {
       "ADD":"Task {{name}} created successfully!",
       "DELETE": "Task {{name}} deleted successfully!"
