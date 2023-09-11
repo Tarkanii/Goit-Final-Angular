@@ -43,7 +43,7 @@
     <ul class="tasks" *ngIf="sprint">
       <ng-container *ngFor="let task of sprint?.tasks">
         <li class="task" *ngIf="task.name | filter: filterFunc()" >
-          <app-task [task]="task" [sprintDate]="sprintDate"></app-task>
+          <app-task [task]="task" [sprintDate]="sprintDate" [sprintId]="sprintId"></app-task>
         </li>
       </ng-container>
     </ul>

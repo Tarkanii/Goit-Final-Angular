@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subject, switchMap, takeUntil } from 'rxjs';
 import { ISprint } from 'src/app/shared/interfaces/project';
@@ -20,6 +20,7 @@ export class TasksPageComponent implements OnInit {
   public loading$: Observable<boolean> = this.store.select(loadingSelector);
   public sprint!: ISprint | null;
   public sprints$!: Observable<ISprint[]>;
+  public projectId: string = '';
   public sprintId: string = '';
   public sprintDate: Date | null = null;
   public changeNameControl: FormControl = this.formBuilder.control('');
@@ -39,6 +40,7 @@ export class TasksPageComponent implements OnInit {
     this.activatedRoute.params
       .pipe(
         switchMap(({ projectId, sprintId }) => {
+          this.projectId = projectId; 
           this.sprints$ = this.store.select(sprintsSelector(projectId));
           return this.store.select(sprintSelector(projectId, sprintId));
         }),
@@ -121,7 +123,9 @@ export class TasksPageComponent implements OnInit {
       this.changeNameControl.setValue(this.sprint?.name);
       return;
     }
-    this.store.dispatch(changeSprintAction({ id: this.sprintId, name: newName }));
+ 
+    this.store.dispatch(changeSprintAction({ id: this.sprintId, project: this.projectId, name: newName }));
+    this.changeNameControl.setValue(this.sprint?.name);
   }
 
 }

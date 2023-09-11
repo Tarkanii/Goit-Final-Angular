@@ -18,6 +18,7 @@ import { changeTaskNameAction, changeTaskSpentHoursAction, deleteTaskAction } fr
 export class TaskComponent implements OnInit, OnChanges {
 
   @Input() public task!: ITask;
+  @Input() public sprintId!: string;
   @Input() public sprintDate!: Date | null;
   public dateFormat: string = 'dd.MM.yyyy';
   public changeNameControl!: FormControl;
@@ -51,7 +52,8 @@ export class TaskComponent implements OnInit, OnChanges {
       return;
     }
     
-    this.store.dispatch(changeTaskNameAction({ id: this.task._id, name: newName }));
+    this.store.dispatch(changeTaskNameAction({ id: this.task._id, name: newName, sprint: this.sprintId }));
+    this.changeNameControl.setValue(this.task.name);
   }
 
   // Changing hours spent in day provided by user

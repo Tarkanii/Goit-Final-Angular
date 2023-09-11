@@ -12,7 +12,7 @@ export const deleteTaskActionOnSuccess = createAction('[Task] Delete Task Succes
 export const deleteTaskActionOnError = createAction('[Task] Delete Task Error', props<{ error: HttpErrorResponse }>());
 
 // Changing task actions
-export const changeTaskNameAction = createAction('[Task] Change Task Name', props<{ id: string, name: string }>());
+export const changeTaskNameAction = createAction('[Task] Change Task Name', props<{ id: string, name: string, sprint: string }>());
 export const changeTaskSpentHoursAction = createAction('[Task] Change Task Spent Hours', props<{ id: string, date: string, hours: number }>());
 export const changeTaskActionOnSuccess = createAction('[Task] Change Task Success');
 export const changeTaskActionOnError = createAction('[Task] Change Task Error', props<{ error: HttpErrorResponse }>());
