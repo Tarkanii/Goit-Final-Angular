@@ -60,11 +60,33 @@ export class InputDirective implements OnInit, OnDestroy {
     this.element.nativeElement.parentElement?.classList.remove('float-label');
   }
 
-  @HostListener('keydown', ['$event']) public onKeyDown({key, keyCode}: KeyboardEvent): boolean {
-    if (!this.email) return true;
+  @HostListener('keydown', ['$event']) public onKeyDown({key, keyCode, ctrlKey, shiftKey}: KeyboardEvent): boolean {
+    if (!this.email && !this.numberOnly) return true;
 
     // 32 - code of 'space' key, we don't allow user to type space in email input
-    return keyCode !== 32;
+    if (this.email) return keyCode !== 32;
+    
+    // 8 - backspace
+    if (keyCode === 8) return true;
+    
+    // 86 - code for 'v', so we will accept 'v' if ctrl is pressed
+    if (ctrlKey && keyCode === 86) return true;
+
+    // 48-57, 96-105(Num lock) - codes for 0-9
+    if ((!shiftKey && keyCode >= 48 && keyCode <= 57) || (keyCode >= 96 && keyCode <= 105)) return true;
+    
+    // 190, 110(Num lock) - code for '.'
+    if (keyCode !== 190 && keyCode !== 110) return false;
+
+    if (this.ngControl.value && this.ngControl.value?.includes('.')) return false;
+
+    return true;
+  }
+
+  @HostListener('keydown.enter') public onEnter(): void {
+    if (!this.numberOnly) return;
+
+    this.updateNumberOnlyValue();
   }
 
   @HostListener('keyup', ['$event']) public onKeyUp({ keyCode, ctrlKey }: KeyboardEvent): void {
